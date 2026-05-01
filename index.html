@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Müzik</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.container { text-align: center; }
+.song-name {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  min-height: 2rem;
+}
+.artist-name {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  min-height: 1.2rem;
+}
+.controls {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  background: none;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn:hover { border-color: #666; background: #111; }
+.btn:active { transform: scale(0.95); }
+.btn-play { font-size: 1.8rem; }
+.status {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #444;
+}
+.skip-btn { background: none; border: none; color: #555; cursor: pointer; font-size: 0.9rem; margin-top: 1rem; }
+.skip-btn:hover { color: #888; }
+.volume-control {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.volume-control input { width: 100px; cursor: pointer; }
+#playlist { 
+  margin-top: 1.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: left;
+  width: 300px;
+}
+#playlist::-webkit-scrollbar { width: 4px; }
+#playlist::-webkit-scrollbar-track { background: #111; }
+#playlist::-webkit-scrollbar-thumb { background: #333; }
+.pl-item {
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pl-item:hover { background: #111; color: #aaa; }
+.pl-item.active { color: #fff; background: #1a1a1a; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="song-name" id="songName">🎵</div>
+  <div class="artist-name" id="artistName">müzik yükleniyor...</div>
+  
+  <div class="controls">
+    <button class="btn" id="prevBtn">⏮</button>
+    <button class="btn btn-play" id="playBtn">▶</button>
+    <button class="btn" id="nextBtn">⏭</button>
+  </div>
+
+  <button class="skip-btn" id="skipBtn">rastgele →</button>
+
+  <div class="volume-control">
+    <span style="color:#555;font-size:0.8rem">🔊</span>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
+  </div>
+
+  <div class="status" id="status"></div>
+  <div id="playlist"></div>
+</div>
+
+<audio id="audioPlayer"></audio>
+
+<script>
+const player = document.getElementById('audioPlayer');
+const playBtn = document.getElementById('playBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const skipBtn = document.getElementById('skipBtn');
+const songName = document.getElementById('songName');
+const artistName = document.getElementById('artistName');
+const statusEl = document.getElementById('status');
+const playlistEl = document.getElementById('playlist');
+const volumeSlider = document.getElementById('volumeSlider');
+
+// TELİFSİZ CC MÜZİKLER
+// Kaynak: freemusicarchive.org, ccmixter.org, jamendo - geçici liste
+const SONGS = [
+  { name: "Airport Lounge", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+  { name: "Going Higher", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+  { name: "Tumbling Squares", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+  { name: "Hypnotic Puzzle", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
+  { name: "Sunshine", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" },
+  { name: "Berlin", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" },
+  { name: "Indie Rock", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" },
+  { name: "Dub Step", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" },
+  { name: "Cool Breeze", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" },
+  { name: "Slow Motion", artist: "Kevin MacLeod", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" }
+];
+
+let currentIndex = -1;
+let isPlaying = false;
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function loadSong(index) {
+  const song = SONGS[index];
+  currentIndex = index;
+  player.src = song.url;
+  songName.textContent = song.name;
+  artistName.textContent = song.artist;
+  statusEl.textContent = `${index + 1} / ${SONGS.length}`;
+  updatePlaylist();
+}
+
+function play() {
+  player.play().then(() => {
+    isPlaying = true;
+    playBtn.textContent = '⏸';
+  }).catch(e => {
+    console.log('Oynatma hatası:', e);
+    statusEl.textContent = '⛔ yüklenemedi, atlıyorum...';
+    setTimeout(nextSong, 1000);
+  });
+}
+
+function pause() {
+  player.pause();
+  isPlaying = false;
+  playBtn.textContent = '▶';
+}
+
+function togglePlay() {
+  if (!player.src) return;
+  if (isPlaying) { pause(); }
+  else { play(); }
+}
+
+function nextSong() {
+  let next = currentIndex + 1;
+  if (next >= SONGS.length) next = 0;
+  loadSong(next);
+  play();
+}
+
+function prevSong() {
+  let prev = currentIndex - 1;
+  if (prev < 0) prev = SONGS.length - 1;
+  loadSong(prev);
+  play();
+}
+
+function randomSong() {
+  const idx = Math.floor(Math.random() * SONGS.length);
+  loadSong(idx);
+  play();
+}
+
+player.addEventListener('ended', nextSong);
+player.addEventListener('error', () => {
+  statusEl.textContent = '⚠️ hata, sonraki şarkı...';
+  setTimeout(nextSong, 1500);
+});
+
+playBtn.addEventListener('click', togglePlay);
+nextBtn.addEventListener('click', nextSong);
+prevBtn.addEventListener('click', prevSong);
+skipBtn.addEventListener('click', randomSong);
+
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+  if (e.code === 'ArrowRight') nextSong();
+  if (e.code === 'ArrowLeft') prevSong();
+});
+
+volumeSlider.addEventListener('input', () => {
+  player.volume = volumeSlider.value;
+});
+
+function updatePlaylist() {
+  playlistEl.innerHTML = '';
+  SONGS.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'pl-item' + (i === currentIndex ? ' active' : '');
+    div.textContent = `${s.artist} — ${s.name}`;
+    div.addEventListener('click', () => { loadSong(i); play(); });
+    playlistEl.appendChild(div);
+  });
+}
+
+// BAŞLANGIÇ
+player.volume = volumeSlider.value;
+shuffle(SONGS);
+randomSong();
+</script>
+</body>
+</html>
