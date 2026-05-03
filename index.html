@@ -1,479 +1,38 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>rad-io</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --bg: #0f0a1a;
-  --surface: rgba(255,255,255,0.04);
-  --surface2: rgba(255,255,255,0.07);
-  --text: #e8e0f0;
-  --text2: #9890aa;
-  --g1: #f472b6;
-  --g2: #c084fc;
-  --g3: #818cf8;
-  --g4: #67e8f9;
-  --gradient: linear-gradient(135deg, #f472b6 0%, #c084fc 30%, #818cf8 60%, #67e8f9 100%);
-  --shadow: 0 8px 40px rgba(0,0,0,0.5);
-  --radius: 16px;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  min-height: 100vh;
-  min-height: 100dvh;
-  overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Animated background */
-.bg-glow {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse at 15% 40%, rgba(244,114,182,0.10) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 30%, rgba(192,132,252,0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(129,140,248,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 30% 70%, rgba(103,232,249,0.04) 0%, transparent 50%);
-  animation: breathe 20s ease-in-out infinite alternate;
-}
-
-@keyframes breathe {
-  0% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-  100% { opacity: 0.5; transform: scale(1); }
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 24px 20px;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Header */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0 24px;
-}
-
-.logo {
-  font-size: 1.6rem;
-  font-weight: 700;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.5px;
-}
-
-.logo span { font-weight: 300; }
-
-.now-playing {
-  font-size: 0.75rem;
-  color: var(--text2);
-  text-align: right;
-  line-height: 1.3;
-}
-.now-playing strong {
-  display: block;
-  color: var(--text);
-  font-weight: 500;
-  font-size: 0.8rem;
-}
-
-/* Mode Grid */
-.mode-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-.mode-card {
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius);
-  padding: 16px 14px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.mode-card:active { transform: scale(0.97); }
-
-.mode-card.active {
-  background: var(--surface2);
-  border-color: rgba(192,132,252,0.3);
-  box-shadow: 0 0 24px rgba(192,132,252,0.1);
-}
-
-.mode-card .icon { font-size: 1.5rem; margin-bottom: 6px; }
-.mode-card .label { font-size: 0.82rem; font-weight: 600; margin-bottom: 2px; }
-.mode-card .desc { font-size: 0.68rem; color: var(--text2); }
-
-.mode-card .playing-indicator {
-  display: none;
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--g2);
-  animation: pulse-dot 1.2s ease-in-out infinite;
-}
-
-.mode-card.active .playing-indicator { display: block; }
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.5); }
-}
-
-/* Player Card */
-.player-card {
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.song-info {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.song-name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 4px;
-  min-height: 1.5rem;
-  transition: opacity 0.3s;
-}
-
-.song-artist {
-  font-size: 0.85rem;
-  color: var(--text2);
-  min-height: 1.2rem;
-}
-
-/* Progress */
-.progress-container { margin-bottom: 16px; }
-
-.progress-bar {
-  width: 100%;
-  height: 4px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-  transition: height 0.15s;
-}
-
-.progress-bar:hover { height: 6px; }
-
-.progress-fill {
-  height: 100%;
-  background: var(--gradient);
-  border-radius: 4px;
-  width: 0%;
-  transition: width 0.3s linear;
-}
-
-.time-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.7rem;
-  color: var(--text2);
-  margin-top: 6px;
-}
-
-/* Controls */
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  margin-bottom: 20px;
-}
-
-.ctrl-btn {
-  background: none;
-  border: none;
-  color: var(--text2);
-  font-size: 1.3rem;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.ctrl-btn:active { transform: scale(0.9); }
-.ctrl-btn:hover { color: var(--text); }
-
-.ctrl-btn.play-btn {
-  width: 64px;
-  height: 64px;
-  background: var(--gradient);
-  color: #fff;
-  font-size: 1.6rem;
-  box-shadow: 0 4px 24px rgba(192,132,252,0.3);
-}
-
-.ctrl-btn.play-btn:active {
-  transform: scale(0.92);
-  box-shadow: 0 2px 12px rgba(192,132,252,0.2);
-}
-
-.ctrl-btn.shuffle { font-size: 1rem; }
-.ctrl-btn.shuffle.active { color: var(--g2); }
-
-/* Volume */
-.volume-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-}
-
-.volume-row .icon { font-size: 0.8rem; color: var(--text2); }
-
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 140px;
-  height: 4px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 4px;
-  outline: none;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--gradient);
-  cursor: pointer;
-  border: 2px solid #0f0a1a;
-}
-
-/* Queue */
-.queue-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  cursor: pointer;
-  color: var(--text2);
-  font-size: 0.78rem;
-  user-select: none;
-}
-
-.queue-toggle:hover { color: var(--text); }
-
-.queue-list {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.queue-list.open { max-height: 400px; overflow-y: auto; }
-
-.queue-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.78rem;
-  transition: all 0.15s;
-  color: var(--text2);
-}
-
-.queue-item:hover {
-  background: rgba(255,255,255,0.04);
-  color: var(--text);
-}
-
-.queue-item.active {
-  background: rgba(192,132,252,0.1);
-  color: var(--g2);
-}
-
-.queue-item.active::before {
-  content: '▶';
-  font-size: 0.6rem;
-  color: var(--g2);
-}
-
-.queue-item .qi-title { font-weight: 500; }
-.queue-item .qi-artist { font-size: 0.68rem; color: var(--text2); }
-
-/* Bottom nav */
-.bottom-nav {
-  margin-top: auto;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 16px 0 8px;
-  flex-wrap: wrap;
-}
-
-.badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.65rem;
-  color: var(--text2);
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.04);
-}
-
-/* Toast */
-.toast {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: rgba(244,114,182,0.12);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(244,114,182,0.15);
-  color: var(--g1);
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-size: 0.78rem;
-  opacity: 0;
-  transition: all 0.3s;
-  pointer-events: none;
-  z-index: 100;
-  white-space: nowrap;
-}
-
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* Responsive */
-@media (max-width: 380px) {
-  .container { padding: 16px 14px; }
-  .mode-grid { gap: 8px; }
-  .mode-card { padding: 12px; }
-  .mode-card .icon { font-size: 1.2rem; }
-  .mode-card .label { font-size: 0.75rem; }
-  .player-card { padding: 20px 16px; }
-}
-
-@media (min-width: 600px) {
-  .container { max-width: 520px; padding-top: 40px; }
-  .mode-grid { gap: 12px; }
-  .mode-card { padding: 20px; }
-}
-</style>
-</head>
-<body>
-
 <div class="bg-glow"></div>
 <div class="toast" id="toast"></div>
 
 <div class="container">
+
+  <!-- HEADER -->
   <header>
-    <div class="logo">rad<span>-io</span></div>
-    <div class="now-playing" id="nowPlaying">
+    <div class="logo">
+      <span class="dot"></span>
+      rad<span>-io</span>
+    </div>
+    <div class="now-playing">
       <strong id="npSong">bir mod seç</strong>
       <span id="npMode">dinlemeye başla 🎧</span>
     </div>
   </header>
 
-  <!-- MODES -->
-  <div class="mode-grid" id="modeGrid">
-    <div class="mode-card" data-mode="calisma" onclick="selectMode('calisma')">
-      <div class="playing-indicator"></div>
-      <div class="icon">🧠</div>
-      <div class="label">Çalışma</div>
-      <div class="desc">derin odak</div>
+  <!-- MODE GRID -->
+  <div class="mode-grid" id="modeGrid"></div>
+
+  <!-- NOW PLAYING BAR -->
+  <div class="np-bar">
+    <div class="np-visual">
+      <div class="eq" id="eqBars">
+        <span></span><span></span><span></span><span></span>
+      </div>
     </div>
-    <div class="mode-card" data-mode="surus" onclick="selectMode('surus')">
-      <div class="playing-indicator"></div>
-      <div class="icon">🚗</div>
-      <div class="label">Sürüş</div>
-      <div class="desc">yola çık</div>
-    </div>
-    <div class="mode-card" data-mode="kafe" onclick="selectMode('kafe')">
-      <div class="playing-indicator"></div>
-      <div class="icon">☕</div>
-      <div class="label">Kafe</div>
-      <div class="desc">birer kahve içelim</div>
-    </div>
-    <div class="mode-card" data-mode="kosu" onclick="selectMode('kosu')">
-      <div class="playing-indicator"></div>
-      <div class="icon">🏃</div>
-      <div class="label">Koşu</div>
-      <div class="desc">hadi terleyelim</div>
-    </div>
-    <div class="mode-card" data-mode="uyku" onclick="selectMode('uyku')">
-      <div class="playing-indicator"></div>
-      <div class="icon">🌙</div>
-      <div class="label">Uyku</div>
-      <div class="desc">derin bir nefes</div>
-    </div>
-    <div class="mode-card" data-mode="sifa" onclick="selectMode('sifa')">
-      <div class="playing-indicator"></div>
-      <div class="icon">🧘</div>
-      <div class="label">Şifa</div>
-      <div class="desc">iyileşme frekansları</div>
-    </div>
-    <div class="mode-card" data-mode="lofi" onclick="selectMode('lofi')">
-      <div class="playing-indicator"></div>
-      <div class="icon">📖</div>
-      <div class="label">Lo-fi</div>
-      <div class="desc">melankolik ritimler</div>
-    </div>
-    <div class="mode-card" data-mode="sarkilar" onclick="selectMode('sarkilar')">
-      <div class="playing-indicator"></div>
-      <div class="icon">🎵</div>
-      <div class="label">Şarkılar</div>
-      <div class="desc">tınılar</div>
+    <div class="np-info">
+      <div class="np-title" id="npBarTitle">Bir mod seç</div>
+      <div class="np-sub" id="npBarSub">sonsuz keşif ✦</div>
     </div>
   </div>
 
   <!-- PLAYER -->
   <div class="player-card">
-    <div class="song-info">
-      <div class="song-name" id="songName">—</div>
-      <div class="song-artist" id="songArtist">bir mod seç ve dinlemeye başla</div>
-    </div>
-
     <div class="progress-container">
       <div class="progress-bar" id="progressBar" onclick="seek(event)">
         <div class="progress-fill" id="progressFill"></div>
@@ -485,10 +44,10 @@ input[type="range"]::-webkit-slider-thumb {
     </div>
 
     <div class="controls">
-      <button class="ctrl-btn" onclick="prevTrack()" title="Önceki">⏮</button>
+      <button class="ctrl-btn skip" onclick="prevTrack()" title="Önceki">⏮</button>
       <button class="ctrl-btn play-btn" id="playBtn" onclick="playPause()">▶</button>
-      <button class="ctrl-btn" onclick="nextTrack()" title="Sonraki">⏭</button>
-      <button class="ctrl-btn shuffle" id="shuffleBtn" onclick="toggleShuffle()" title="Karışık">🔀</button>
+      <button class="ctrl-btn skip" onclick="nextTrack()" title="Sonraki">⏭</button>
+      <button class="ctrl-btn shuffle" id="shuffleBtn" onclick="toggleShuffle()" title="Karıştır">🔀</button>
     </div>
 
     <div class="volume-row">
@@ -496,267 +55,328 @@ input[type="range"]::-webkit-slider-thumb {
       <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.7" oninput="setVolume(this.value)">
       <span class="icon">🔊</span>
     </div>
-
-    <div class="queue-toggle" onclick="toggleQueue()">
-      <span>Sıradakiler</span>
-      <span id="queueArrow">▾</span>
-    </div>
-    <div class="queue-list" id="queueList"></div>
   </div>
 
-  <div class="bottom-nav">
-    <span class="badge">rad-io v2</span>
-    <span class="badge">sonsuz döngü</span>
+  <!-- BOTTOM ACTIONS -->
+  <div class="bottom-actions">
+    <div class="action-btn" onclick="openDiscover()">
+      <span class="badge-dot"></span> Keşfet
+    </div>
+    <div class="action-btn" onclick="toggleQueue()">
+      📋 Sıra <span id="queueCount"></span>
+    </div>
+    <div class="action-btn" onclick="refreshStations()">
+      🔄 Tazele
+    </div>
+  </div>
+
+  <!-- QUEUE (hidden by default) -->
+  <div class="queue-list" id="queueList" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0 6px;border-bottom:1px solid var(--border);margin-bottom:6px">
+      <span style="font-size:.75rem;font-weight:600">Sıradaki istasyonlar</span>
+      <span style="font-size:.68rem;color:var(--text2);cursor:pointer" onclick="toggleQueue()">✕ kapat</span>
+    </div>
+    <div id="queueItems"></div>
+  </div>
+
+</div>
+
+<!-- DISCOVER MODAL -->
+<div class="modal-overlay" id="discoverModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">🔍 Keşfet</div>
+    <div class="modal-sub">Yeni radyo istasyonları bul, rastgele keşfet</div>
+    <div id="discoverContent">
+      <div class="discover-loading">
+        <div class="spinner"></div>
+        <div>istasyonlar taranıyor...</div>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-// ========== MUSIC DATA ==========
+// ===== CONFIG =====
+const RADIO_API = 'https://de1.api.radio-browser.info/json';
+
 const MODES = {
-  calisma: { icon: '🧠', name: 'Çalışma', songs: [
-    { file: 'Okean_Elzy_-_Rendez-Vous.mp3', title: 'Rendez-Vous', artist: 'Okean Elzy' },
-    { file: 'Yseult_Corps.mp3', title: 'Corps', artist: 'Yseult' },
-    { file: 'Marie_Plassard_Ivre.mp3', title: 'Ivre', artist: 'Marie Plassard' },
-  ]},
-  surus: { icon: '🚗', name: 'Sürüş', songs: [
-    { file: 'Flunk_Down.mp3', title: 'Down', artist: 'Flunk' },
-    { file: 'Shawn_James_Through_The_Valley.mp3', title: 'Through The Valley', artist: 'Shawn James' },
-    { file: 'Yseult_Corps.mp3', title: 'Corps', artist: 'Yseult' },
-  ]},
-  kafe: { icon: '☕', name: 'Kafe', songs: [
-    { file: 'Brazzaville_-_Sleep_On_My_Shoulder.mp3', title: 'Sleep On My Shoulder', artist: 'Brazzaville' },
-    { file: 'Pomme_-_Vide.mp3', title: 'Vide', artist: 'Pomme' },
-    { file: 'Marie_Plassard_Ivre.mp3', title: 'Ivre', artist: 'Marie Plassard' },
-  ]},
-  kosu: { icon: '🏃', name: 'Koşu', songs: [
-    { file: 'Katatonia_Day.mp3', title: 'Day', artist: 'Katatonia' },
-    { file: 'Flunk_Down.mp3', title: 'Down', artist: 'Flunk' },
-    { file: 'Shawn_James_Through_The_Valley.mp3', title: 'Through The Valley', artist: 'Shawn James' },
-  ]},
-  uyku: { icon: '🌙', name: 'Uyku', songs: [
-    { file: 'Pomme_-_Vide.mp3', title: 'Vide', artist: 'Pomme' },
-    { file: 'Peder_Daylight.mp3', title: 'Daylight', artist: 'Peder' },
-    { file: 'Brazzaville_-_Sleep_On_My_Shoulder.mp3', title: 'Sleep On My Shoulder', artist: 'Brazzaville' },
-  ]},
-  sifa: { icon: '🧘', name: 'Şifa', songs: [
-    { file: 'Brazzaville_-_Sleep_On_My_Shoulder.mp3', title: 'Sleep On My Shoulder', artist: 'Brazzaville' },
-    { file: 'Peder_Daylight.mp3', title: 'Daylight', artist: 'Peder' },
-    { file: 'Pomme_-_Vide.mp3', title: 'Vide', artist: 'Pomme' },
-  ]},
-  lofi: { icon: '📖', name: 'Lo-fi', songs: [
-    { file: 'Ghostly_Kisses_Where_Do_Lovers_Go.mp3', title: 'Where Do Lovers Go', artist: 'Ghostly Kisses' },
-    { file: 'hate_to_ask_vast.mp3', title: 'hate to ask', artist: 'vast' },
-    { file: 'Peder_Daylight.mp3', title: 'Daylight', artist: 'Peder' },
-  ]},
-  sarkilar: { icon: '🎵', name: 'Şarkılar', songs: [
-    { file: 'Okean_Elzy_-_Rendez-Vous.mp3', title: 'Rendez-Vous', artist: 'Okean Elzy' },
-    { file: 'Ghostly_Kisses_Where_Do_Lovers_Go.mp3', title: 'Where Do Lovers Go', artist: 'Ghostly Kisses' },
-    { file: 'hate_to_ask_vast.mp3', title: 'hate to ask', artist: 'vast' },
-    { file: 'Katatonia_Day.mp3', title: 'Day', artist: 'Katatonia' },
-    { file: 'Flunk_Down.mp3', title: 'Down', artist: 'Flunk' },
-    { file: 'Yseult_Corps.mp3', title: 'Corps', artist: 'Yseult' },
-    { file: 'Shawn_James_Through_The_Valley.mp3', title: 'Through The Valley', artist: 'Shawn James' },
-    { file: 'Marie_Plassard_Ivre.mp3', title: 'Ivre', artist: 'Marie Plassard' },
-    { file: 'Pomme_-_Vide.mp3', title: 'Vide', artist: 'Pomme' },
-    { file: 'Brazzaville_-_Sleep_On_My_Shoulder.mp3', title: 'Sleep On My Shoulder', artist: 'Brazzaville' },
-    { file: 'Peder_Daylight.mp3', title: 'Daylight', artist: 'Peder' },
-  ]}
+  calisma: { icon:'🧠', name:'Çalışma', desc:'derin odak', tags:['lofi','chillhop','study'] },
+  surus:   { icon:'🚗', name:'Sürüş', desc:'yola çık', tags:['driving','electronic','rock'] },
+  kafe:    { icon:'☕', name:'Kafe', desc:'birer kahve', tags:['jazz','cafe','bossa'] },
+  kosu:    { icon:'🏃', name:'Koşu', desc:'terleyelim', tags:['running','dance','energetic'] },
+  uyku:    { icon:'🌙', name:'Uyku', desc:'derin nefes', tags:['sleep','ambient','chillout'] },
+  sifa:    { icon:'🧘', name:'Şifa', desc:'iyileşme', tags:['meditation','healing','newage'] },
+  lofi:    { icon:'📖', name:'Lo-fi', desc:'melankolik', tags:['lofi','chillhop'] },
+  sarkilar:{ icon:'🎵', name:'Şarkılar', desc:'tınılar', tags:['indie','pop','alternative'] }
 };
 
-// ========== STATE ==========
+// ===== STATE =====
 let currentMode = null;
 let currentIndex = 0;
 let isShuffle = false;
-let shuffledOrder = [];
+let stations = {};      // mode -> station listesi
+let currentStationList = [];
 let queueOpen = false;
-let audioCtx = null;
-let gainNode = null;
+let queueItems = [];
+let isPlaying = false;
 
 const audio = new Audio();
 audio.volume = 0.7;
 
-// ========== CROSSFADE SETUP ==========
-function initAudioContext() {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    gainNode = audioCtx.createGain();
-    gainNode.gain.value = 1;
-    const source = audioCtx.createMediaElementSource(audio);
-    source.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
+// ===== RADIO BROWSER API =====
+async function fetchStationsForMode(modeKey) {
+  const mode = MODES[modeKey];
+  const tag = mode.tags[Math.floor(Math.random() * mode.tags.length)];
+  try {
+    const res = await fetch(`${RADIO_API}/stations/bytag/${encodeURIComponent(tag)}?limit=15&hidebroken=true`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.filter(s => s.url_resolved && s.url_resolved.startsWith('http')).slice(0, 10);
+  } catch(e) {
+    return [];
   }
 }
 
-// ========== MODE SELECT ==========
-function selectMode(mode) {
+async function ensureStations(modeKey) {
+  if (stations[modeKey] && stations[modeKey].length >= 3) return stations[modeKey];
+  const s = await fetchStationsForMode(modeKey);
+  // fallback için birkaç sabit istasyon
+  const fallbacks = {
+    lofi:      [{name:'Nightwave Plaza',url:'https://radio.plaza.one/ogg'}],
+    calisma:   [{name:'lofi radyo',url:'https://stream.laut.fm/lofi'}],
+    surus:     [{name:'Truckers Radio',url:'http://streamer.radio.co/s81d30349a/low'}],
+    kafe:      [{name:'Smooth Jazz',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/ACIR22_s01AAC.aac'}],
+    kosu:      [{name:'Positively Running',url:'https://streaming.positivity.radio/pr/running/icecast.audio'}],
+    uyku:      [{name:'Ambient Sleeping Pill',url:'http://radio.stereoscenic.com/asp-h'}],
+    sifa:      [{name:'Spa Lounge',url:'https://0nlineradio.radioho.st/lounge-spa-lounge?ref=radio-browser26'}],
+    sarkilar:  [{name:'100hitz Indie',url:'http://206.217.213.236:8360/;stream'}]
+  };
+  const fallback = fallbacks[modeKey] || [];
+  const merged = s.length > 0 ? s : fallback;
+  stations[modeKey] = merged;
+  return merged;
+}
+
+async function getShuffledStations(modeKey) {
+  const list = await ensureStations(modeKey);
+  const shuffled = [...list];
+  for (let i = shuffled.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// ===== UI BUILD =====
+function buildModeGrid() {
+  const grid = document.getElementById('modeGrid');
+  grid.innerHTML = Object.entries(MODES).map(([key, m]) => `
+    <div class="mode-card" data-mode="${key}" onclick="selectMode('${key}')">
+      <div class="playing-indicator"></div>
+      <div class="icon">${m.icon}</div>
+      <div class="label">${m.name}</div>
+      <div class="desc">${m.desc}</div>
+    </div>
+  `).join('');
+}
+buildModeGrid();
+
+// ===== MODE SELECT =====
+async function selectMode(mode) {
   document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
   document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
 
   currentMode = mode;
   currentIndex = 0;
 
-  if (isShuffle) shufflePlaylist();
+  document.getElementById('npSong').textContent = `${MODES[mode].icon} ${MODES[mode].name}`;
+  document.getElementById('npMode').textContent = 'yükleniyor...';
+  document.getElementById('npBarTitle').textContent = `${MODES[mode].icon} ${MODES[mode].name}`;
+  document.getElementById('npBarSub').textContent = 'istasyonlar aranıyor...';
+
+  const shuffled = await getShuffledStations(mode);
+  currentStationList = shuffled;
+  if (isShuffle) {
+    // tekrar karıştır
+    const reShuffled = [...shuffled];
+    for (let i = reShuffled.length-1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i+1));
+      [reShuffled[i], reShuffled[j]] = [reShuffled[j], reShuffled[i]];
+    }
+    currentStationList = reShuffled;
+  }
+  currentIndex = 0;
   updateQueue();
   loadTrack();
   play();
 }
 
-// ========== TRACK LOADING ==========
+// ===== TRACK LOADING =====
 function loadTrack() {
-  if (!currentMode) return;
-  const songs = getCurrentSongs();
-  if (songs.length === 0) return;
-  const song = songs[currentIndex];
-  if (!song) return;
+  if (!currentMode || currentStationList.length === 0) return;
+  const station = currentStationList[currentIndex];
+  if (!station) return;
 
-  audio.src = song.file;
-  document.getElementById('songName').textContent = song.title;
-  document.getElementById('songArtist').textContent = song.artist;
-  updateNowPlaying();
+  const name = station.name || station.station ? station.station : 'Bilinmeyen İstasyon';
+  audio.src = station.url_resolved || station.url;
+  document.getElementById('npBarTitle').textContent = name;
+  document.getElementById('npBarSub').textContent = `${MODES[currentMode].name} • ${currentIndex+1}/${currentStationList.length}`;
+  document.getElementById('npSong').textContent = name.substring(0, 30);
+  document.getElementById('npMode').textContent = `${MODES[currentMode].icon} ${MODES[currentMode].name}`;
+
+  // Media Session API
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: name,
+      artist: MODES[currentMode].name,
+      album: 'rad-io'
+    });
+    navigator.mediaSession.setActionHandler('play', () => play());
+    navigator.mediaSession.setActionHandler('pause', () => pause());
+    navigator.mediaSession.setActionHandler('previoustrack', () => prevTrack());
+    navigator.mediaSession.setActionHandler('nexttrack', () => nextTrack());
+  }
+
+  document.title = `🎵 ${name.substring(0, 20)} — rad-io`;
+
   updateQueueHighlight();
 }
 
-function getCurrentSongs() {
-  if (!currentMode) return [];
-  return isShuffle && shuffledOrder.length > 0
-    ? shuffledOrder
-    : MODES[currentMode].songs;
-}
-
-// ========== PLAY / PAUSE ==========
+// ===== PLAY / PAUSE =====
 function play() {
   audio.play().catch(() => {});
   document.getElementById('playBtn').textContent = '⏸';
+  isPlaying = true;
+  document.getElementById('eqBars').style.opacity = '1';
 }
 
 function pause() {
   audio.pause();
   document.getElementById('playBtn').textContent = '▶';
+  isPlaying = false;
+  document.getElementById('eqBars').style.opacity = '.3';
 }
 
 function playPause() {
-  if (!currentMode) { selectMode('calisma'); return; }
+  if (!currentMode) { selectMode('lofi'); return; }
   if (audio.paused) { play(); } else { pause(); }
 }
 
-// ========== NAVIGATION ==========
-function nextTrack() {
-  if (!currentMode) return;
-  const songs = getCurrentSongs();
-  if (songs.length === 0) return;
-  currentIndex = (currentIndex + 1) % songs.length;
+// ===== NAVIGATION =====
+async function nextTrack() {
+  if (!currentMode || currentStationList.length === 0) return;
+  currentIndex = (currentIndex + 1) % currentStationList.length;
   loadTrack();
   play();
 }
 
-function prevTrack() {
-  if (!currentMode) return;
+async function prevTrack() {
+  if (!currentMode || currentStationList.length === 0) return;
   if (audio.currentTime > 3) { audio.currentTime = 0; return; }
-  const songs = getCurrentSongs();
-  if (songs.length === 0) return;
-  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+  currentIndex = (currentIndex - 1 + currentStationList.length) % currentStationList.length;
   loadTrack();
   play();
 }
 
-// ========== SHUFFLE ==========
+// ===== SHUFFLE =====
 function toggleShuffle() {
   isShuffle = !isShuffle;
   document.getElementById('shuffleBtn').classList.toggle('active');
-  if (isShuffle && currentMode) {
-    shufflePlaylist();
+  if (isShuffle && currentMode && currentStationList.length > 0) {
+    reshuffleStations();
+  }
+}
+
+async function reshuffleStations() {
+  if (!currentMode) return;
+  const newList = await getShuffledStations(currentMode);
+  if (newList.length > 0) {
+    currentStationList = newList;
+    currentIndex = 0;
+    loadTrack();
+    play();
     updateQueue();
   }
 }
 
-function shufflePlaylist() {
-  const songs = [...MODES[currentMode].songs];
-  for (let i = songs.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [songs[i], songs[j]] = [songs[j], songs[i]];
+// ===== REFRESH =====
+async function refreshStations() {
+  if (!currentMode) { showToast('önce bir mod seç'); return; }
+  showToast('🔄 yeni istasyonlar taranıyor...');
+  stations[currentMode] = []; // cache'i temizle
+  const newList = await getShuffledStations(currentMode);
+  if (newList.length > 0) {
+    currentStationList = newList;
+    currentIndex = 0;
+    loadTrack();
+    play();
+    updateQueue();
+    showToast(`✨ ${newList.length} yeni istasyon yüklendi`);
+  } else {
+    showToast('maalesef istasyon bulunamadı');
   }
-  // Keep current track at current position
-  if (currentMode && songs.length > 0) {
-    const currentSong = MODES[currentMode].songs[currentIndex];
-    const idx = songs.findIndex(s => s.file === currentSong.file);
-    if (idx >= 0) {
-      songs.splice(idx, 1);
-      songs.unshift(currentSong);
-    }
-  }
-  shuffledOrder = songs;
-  currentIndex = 0;
 }
 
-// ========== PROGRESS ==========
+// ===== PROGRESS =====
 audio.addEventListener('timeupdate', () => {
   if (!audio.duration) return;
   const pct = (audio.currentTime / audio.duration) * 100;
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('currentTime').textContent = formatTime(audio.currentTime);
 });
-
 audio.addEventListener('loadedmetadata', () => {
   document.getElementById('totalTime').textContent = formatTime(audio.duration);
 });
-
-audio.addEventListener('ended', () => {
-  nextTrack();
+audio.addEventListener('ended', () => { nextTrack(); });
+audio.addEventListener('error', () => {
+  // stream bozuksa sonraki geç
+  setTimeout(() => { nextTrack(); }, 2000);
 });
 
 function seek(e) {
   const bar = document.getElementById('progressBar');
   const rect = bar.getBoundingClientRect();
   const pct = (e.clientX - rect.left) / rect.width;
-  if (audio.duration) {
-    audio.currentTime = pct * audio.duration;
-  }
+  if (audio.duration) audio.currentTime = pct * audio.duration;
 }
-
 function formatTime(s) {
-  if (isNaN(s)) return '0:00';
-  const m = Math.floor(s / 60);
-  const sec = Math.floor(s % 60);
+  if (isNaN(s) || !isFinite(s)) return '0:00';
+  if (s > 3600) {
+    const h = Math.floor(s/3600);
+    const m = Math.floor((s%3600)/60);
+    return `${h}:${m<10?'0':''}${m}:${Math.floor(s%60)<10?'0':''}${Math.floor(s%60)}`;
+  }
+  const m = Math.floor(s/60);
+  const sec = Math.floor(s%60);
   return m + ':' + (sec < 10 ? '0' : '') + sec;
 }
+function setVolume(v) { audio.volume = parseFloat(v); }
 
-// ========== VOLUME ==========
-function setVolume(v) {
-  audio.volume = parseFloat(v);
-}
-
-// ========== QUEUE ==========
+// ===== QUEUE =====
 function toggleQueue() {
   queueOpen = !queueOpen;
-  document.getElementById('queueList').classList.toggle('open');
-  document.getElementById('queueArrow').textContent = queueOpen ? '▴' : '▾';
+  document.getElementById('queueList').style.display = queueOpen ? 'block' : 'none';
 }
 
 function updateQueue() {
-  const songs = getCurrentSongs();
-  const ql = document.getElementById('queueList');
-  ql.innerHTML = songs.map((s, i) =>
-    `<div class="queue-item ${i === currentIndex ? 'active' : ''}" onclick="playIndex(${i})">
+  const container = document.getElementById('queueItems');
+  if (!currentStationList || currentStationList.length === 0) {
+    container.innerHTML = '<div style="font-size:.72rem;color:var(--text2);padding:8px 0">istasyon yok</div>';
+    document.getElementById('queueCount').textContent = '';
+    return;
+  }
+  document.getElementById('queueCount').textContent = `(${currentStationList.length})`;
+  container.innerHTML = currentStationList.map((s, i) => {
+    const name = s.name || s.station || 'İstasyon';
+    const active = i === currentIndex ? 'active' : '';
+    return `<div class="queue-item ${active}" onclick="playIndex(${i})">
       <div>
-        <div class="qi-title">${s.title}</div>
-        <div class="qi-artist">${s.artist}</div>
+        <div class="qi-title">${i === currentIndex ? '▶ ' : ''}${name.substring(0, 35)}</div>
+        <div class="qi-artist">${i+1}/${currentStationList.length}</div>
       </div>
-    </div>`
-  ).join('');
-}
-
-function updateNowPlaying() {
-  if (!currentMode) return;
-  const mode = MODES[currentMode];
-  const song = getCurrentSongs()[currentIndex];
-  document.getElementById('npSong').textContent = song ? `${mode.icon} ${song.title}` : 'boş';
-  document.getElementById('npMode').textContent = mode.name;
-}
-
-function updateQueueHighlight() {
-  document.querySelectorAll('.queue-item').forEach((el, i) => {
-    el.classList.toggle('active', i === currentIndex);
-  });
+    </div>`;
+  }).join('');
 }
 
 function playIndex(i) {
@@ -765,84 +385,128 @@ function playIndex(i) {
   play();
 }
 
-// ========== CROSSFADE ==========
-let isCrossfading = false;
+function updateQueueHighlight() {
+  document.querySelectorAll('.queue-item').forEach((el, i) => {
+    el.classList.toggle('active', i === currentIndex);
+  });
+}
 
-audio.addEventListener('play', () => {
-  document.getElementById('playBtn').textContent = '⏸';
-});
+// Queue CSS (dynamic)
+const qStyle = document.createElement('style');
+qStyle.textContent = `
+.queue-list {
+  background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 14px;margin-top:8px;max-height:300px;overflow-y:auto;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.queue-item {
+  display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;
+  cursor:pointer;font-size:.75rem;transition:all .15s;color:var(--text2)
+}
+.queue-item:hover{background:rgba(255,255,255,.04);color:var(--text)}
+.queue-item.active{background:rgba(167,139,250,.08);color:var(--g2)}
+.queue-item.active::before{content:'▶';font-size:.55rem;color:var(--g2)}
+.qi-title{font-weight:500;font-size:.75rem}
+.qi-artist{font-size:.65rem;color:var(--text2)}
+`;
+document.head.appendChild(qStyle);
 
-audio.addEventListener('pause', () => {
-  if (!isCrossfading) {
-    document.getElementById('playBtn').textContent = '▶';
+// ===== DISCOVER =====
+async function openDiscover() {
+  const modal = document.getElementById('discoverModal');
+  modal.classList.add('open');
+  document.getElementById('discoverContent').innerHTML = `
+    <div class="discover-loading">
+      <div class="spinner"></div>
+      <div>istasyonlar taranıyor...</div>
+    </div>
+  `;
+
+  // Random tag'lerden istasyon çek
+  const allTags = ['lofi','chillhop','jazz','ambient','electronic','indie','rock','pop','classical','reggae','blues','folk','soul','rnb','hiphop','dance','techno','house','driving','study','sleep','meditation','healing','nature','instrumental','piano','guitar','world','latin','funk','disco','vaporwave','synthwave','downtempo','trip-hop','dub','minimal'];
+  const randTags = [];
+  for (let i = 0; i < 6; i++) {
+    const t = allTags[Math.floor(Math.random() * allTags.length)];
+    if (!randTags.includes(t)) randTags.push(t);
   }
-});
 
-// Override nextTrack with crossfade
-const origNextTrack = nextTrack;
-nextTrack = function() {
-  if (!currentMode || isCrossfading) return;
-  const songs = getCurrentSongs();
-  if (songs.length === 0) return;
-
-  isCrossfading = true;
-
-  // Fade out
-  const fadeDuration = 1.5;
-  const fadeSteps = 15;
-  const stepDuration = (fadeDuration * 1000) / fadeSteps;
-
-  if (gainNode) {
-    const currentGain = gainNode.gain.value;
-    for (let i = 0; i <= fadeSteps; i++) {
-      const t = i / fadeSteps;
-      const val = currentGain * (1 - t);
-      setTimeout(() => {
-        if (gainNode) gainNode.gain.value = Math.max(0, val);
-      }, i * stepDuration);
-    }
-  }
-
-  setTimeout(() => {
-    currentIndex = (currentIndex + 1) % songs.length;
-    loadTrack();
-    audio.currentTime = 0;
-
-    // Fade in
-    if (gainNode) gainNode.gain.value = 0;
-    play();
-
-    if (gainNode) {
-      for (let i = 0; i <= fadeSteps; i++) {
-        const t = i / fadeSteps;
-        const val = currentGain * t;
-        setTimeout(() => {
-          if (gainNode) gainNode.gain.value = val;
-        }, i * stepDuration + 100);
+  try {
+    let allStations = [];
+    for (const tag of randTags.slice(0, 3)) { // max 3 tag
+      const res = await fetch(`${RADIO_API}/stations/bytag/${encodeURIComponent(tag)}?limit=6&hidebroken=true`);
+      if (res.ok) {
+        const data = await res.json();
+        allStations = allStations.concat(data.filter(s => s.url_resolved).slice(0, 5));
       }
     }
+    // karıştır
+    for (let i = allStations.length-1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i+1));
+      [allStations[i], allStations[j]] = [allStations[j], allStations[i]];
+    }
 
-    setTimeout(() => {
-      isCrossfading = false;
-    }, fadeDuration * 1000 + 200);
-  }, fadeDuration * 1000);
-};
+    if (allStations.length === 0) {
+      document.getElementById('discoverContent').innerHTML = '<div style="text-align:center;padding:24px;color:var(--text2);font-size:.8rem">😕 istasyon bulunamadı, tekrar dene</div>';
+      return;
+    }
 
-// Keyboard shortcuts
-document.addEventListener('keydown', (e) => {
-  if (e.target.tagName === 'INPUT') return;
-  if (e.code === 'Space') { e.preventDefault(); playPause(); }
-  if (e.code === 'ArrowRight') nextTrack();
-  if (e.code === 'ArrowLeft') prevTrack();
+    document.getElementById('discoverContent').innerHTML = `
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <div class="action-btn" onclick="reshuffleDiscover()" style="flex:1;justify-content:center">
+          🔀 Rastgele
+        </div>
+        <div class="action-btn" onclick="closeDiscover()" style="flex:1;justify-content:center">
+          ✕ Kapat
+        </div>
+      </div>
+      <div class="discover-grid">
+        ${allStations.map(s => {
+          const name = (s.name || s.station || 'İstasyon').substring(0, 40);
+          const tags = (s.tags || '').split(',').slice(0, 3).map(t => t.trim()).filter(t => t).join(', ');
+          return `<div class="discover-item" onclick="quickPlay('${encodeURIComponent(s.url_resolved)}','${encodeURIComponent(name)}')">
+            <div style="flex:1">
+              <div class="discover-name">${name}</div>
+              <div class="discover-meta">${tags || 'çeşitli'}</div>
+            </div>
+            <div class="discover-tag">▶ dinle</div>
+          </div>`;
+        }).join('')}
+      </div>
+    `;
+  } catch(e) {
+    document.getElementById('discoverContent').innerHTML = '<div style="text-align:center;padding:24px;color:var(--text2);font-size:.8rem">bağlantı hatası, tekrar dene</div>';
+  }
+}
+
+async function reshuffleDiscover() {
+  // reset the discover cache and reopen
+  openDiscover();
+}
+
+function closeDiscover() {
+  document.getElementById('discoverModal').classList.remove('open');
+}
+
+// Click outside to close
+document.getElementById('discoverModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeDiscover();
 });
 
-// Audio context init on first click
-document.addEventListener('click', () => {
-  initAudioContext();
-  if (audio.paused && currentMode) play();
-}, { once: true });
+function quickPlay(encodedUrl, encodedName) {
+  closeDiscover();
+  const url = decodeURIComponent(encodedUrl);
+  const name = decodeURIComponent(encodedName);
+  // Create a temporary mode
+  if (!currentMode) currentMode = 'lofi';
+  currentStationList = [{ name: name, url_resolved: url }];
+  currentIndex = 0;
+  loadTrack();
+  play();
+  updateQueue();
+  showToast(`▶ ${name.substring(0, 25)}`);
+}
 
-// Show toast
+// ===== TOAST =====
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -850,7 +514,24 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-console.log('🎵 rad-io loaded — choose a mode and vibe out');
+// ===== KEYBOARD =====
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.code === 'Space') { e.preventDefault(); playPause(); }
+  if (e.code === 'ArrowRight') nextTrack();
+  if (e.code === 'ArrowLeft') prevTrack();
+  if (e.code === 'Escape') closeDiscover();
+});
+
+// ===== AUTO START =====
+document.addEventListener('click', () => {
+  if (audio.paused && currentMode) play();
+}, { once: true });
+
+// Auto-select lofi on load
+setTimeout(() => { selectMode('lofi'); }, 500);
+
+console.log('🎵 rad-io 🚀 — canlı radyo akışı aktif');
 </script>
 </body>
 </html>
