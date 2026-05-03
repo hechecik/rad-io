@@ -109,7 +109,7 @@ font-size:11.5px;letter-spacing:.03em;color:var(--ink2);
 .mode-item.active .mode-icon{color:var(--accent);}
 .mode-icon{font-size:13px;width:16px;text-align:center;flex-shrink:0;}
 .mode-lbl{flex:1;}
-.mode-jp{font-size:9px;color:var(--ink3);font-family:var(--serif);}
+
 .mode-cnt{font-size:9px;color:var(--ink3);}
 .sb-div{height:1px;background:var(--line);margin:14px 0;}
 .fav-empty{padding:8px 18px 14px;font-size:10px;color:var(--ink3);line-height:1.7;}
@@ -282,7 +282,7 @@ border-left:none;border-bottom:2px solid transparent;
 white-space:nowrap;font-size:10px;align-items:center;
 }
 .mode-item.active{border-bottom-color:var(--accent);border-left:none;}
-.mode-jp,.mode-cnt{display:none;}
+.mode-cnt{display:none;}
 .player-bar{grid-template-columns:1fr;padding:8px 14px;gap:6px;}
 .np-right{display:none;}
 .np-ctr{gap:5px;}
@@ -332,7 +332,7 @@ white-space:nowrap;font-size:10px;align-items:center;
     <div class="view active" id="viewStations">
       <div class="vh">
         <div>
-          <div class="vh-title" id="vhTitle">mod seç <span class="vh-jp" id="vhJp"></span></div>
+          <div class="vh-title" id="vhTitle">mod seç </div>
           <div class="vh-sub" id="vhSub">sol panelden bir mod seç</div>
         </div>
         <div class="vh-acts">
@@ -410,17 +410,17 @@ white-space:nowrap;font-size:10px;align-items:center;
 <div class="toast" id="toast"></div>
 <script>
 const MODES = {
-  calisma: { icon:'✦', name:'Çalışma',  jp:'集中', desc:'derin odak',       tags:['lofi','chillhop','study'] },
-  kafe:    { icon:'◎', name:'Kafe',     jp:'喫茶', desc:'birer kahve',      tags:['jazz','cafe','bossanova'] },
-  surus:   { icon:'→', name:'Sürüş',    jp:'運転', desc:'yola çık',         tags:['rock','driving','electronic'] },
-  kosu:    { icon:'▲', name:'Koşu',     jp:'走る', desc:'terleyelim',       tags:['dance','energetic','house'] },
-  uyku:    { icon:'◇', name:'Uyku',     jp:'眠り', desc:'derin nefes',      tags:['ambient','sleep','drone'] },
-  sifa:    { icon:'○', name:'Şifa',     jp:'癒し', desc:'iyileşme',         tags:['meditation','healing','newage'] },
-  klasik:  { icon:'♩', name:'Klasik',   jp:'古典', desc:'zamansız',         tags:['classical','baroque','opera'] },
-  turkce:  { icon:'🌙', name:'Türkçe',  jp:'土耳', desc:'türkçe radyo',     tags:['turkish','türkçe','turkce'] },
-  kurtce:  { icon:'✿', name:'Kürtçe',  jp:'庫德', desc:'kürtçe yayın',     tags:['kurdish','kürtçe'] },
-  doksan:  { icon:'◈', name:"90'lar",   jp:'九十', desc:'nostalji türkçe',  tags:['90s','oldies','90sturkish','90lar'] },
-  indie:   { icon:'◉', name:'Indie',    jp:'自由', desc:'bağımsız ses',     tags:['indie','alternative','folk'] },
+  calisma: { icon:'✦', name:'Çalışma', desc:'derin odak',       tags:['lofi','chillhop','study'] },
+  kafe:    { icon:'◎', name:'Kafe',desc:'birer kahve',      tags:['jazz','cafe','bossanova'] },
+  surus:   { icon:'→', name:'Sürüş',desc:'yola çık',         tags:['rock','driving','electronic'] },
+  kosu:    { icon:'▲', name:'Koşu',desc:'terleyelim',       tags:['dance','energetic','house'] },
+  uyku:    { icon:'◇', name:'Uyku',desc:'derin nefes',      tags:['ambient','sleep','drone'] },
+  sifa:    { icon:'○', name:'Şifa',desc:'iyileşme',         tags:['meditation','healing','newage'] },
+  klasik:  { icon:'♩', name:'Klasik',desc:'zamansız',         tags:['classical','baroque','opera'] },
+  turkce:  { icon:'🌙', name:'Türkçe', desc:'türkçe radyo',     tags:['turkish','türkçe','turkce'] },
+  kurtce:  { icon:'✿', name:'Kürtçe', desc:'kürtçe yayın',     tags:['kurdish','kürtçe'] },
+  doksan:  { icon:'◈', name:"90'lar",desc:'nostalji türkçe',  tags:['90s','oldies','90sturkish','90lar'] },
+  indie:   { icon:'◉', name:'Indie',desc:'bağımsız ses',     tags:['indie','alternative','folk'] },
 };
 const DISC_TAGS = [
   {l:'türkçe',  t:'turkish',   k:'lang'},
@@ -463,7 +463,7 @@ async function fetchName(q, limit=20) {
   const d = await rbFetch(`/json/stations/search?name=${encodeURIComponent(q)}&limit=${limit}&hidebroken=true&order=votes&reverse=true`);
   return Array.isArray(d) ? d.filter(s=>s.url_resolved&&s.url_resolved.startsWith('http')) : [];
 }
-async function fetchRandom(limit=22) {
+async function fetchRandom(limit) { if(!limit) limit=10+Math.floor(Math.random()*11);
   const d = await rbFetch(`/json/stations/search?limit=${limit}&hidebroken=true&order=random`);
   return Array.isArray(d) ? d.filter(s=>s.url_resolved) : [];
 }
@@ -522,7 +522,7 @@ function buildSidebar() {
       <div class="mode-item" data-mode="${k}" onclick="selectMode('${k}')">
         <span class="mode-icon">${m.icon}</span>
         <span class="mode-lbl">${m.name}</span>
-        <span class="mode-jp">${m.jp}</span>
+        
         <span class="mode-cnt" id="mc_${k}"></span>
       </div>
     `).join('');
@@ -550,8 +550,8 @@ async function selectMode(key) {
   const mEl = document.querySelector(`[data-mode="${key}"]`);
   if (mEl) mEl.classList.add('active');
   const titleEl = document.getElementById('vhTitle');
-  titleEl.innerHTML = `${m.name} <span class="vh-jp">${m.jp}</span>`;
-  document.getElementById('vhSub').textContent = `${m.jp} — ${m.desc}`;
+  titleEl.textContent = m.name;
+  document.getElementById('vhSub').textContent = m.desc;
   switchView('stations');
   showLdg();
   setStatus('yükleniyor...');
@@ -827,7 +827,7 @@ async function doSearch() {
 async function doRandom() {
   document.querySelectorAll('.tag-pill').forEach(p=>p.classList.remove('active'));
   showDiscLdg();
-  const list=await fetchRandom(22);
+  const list=await fetchRandom();
   _dList=list; renderDiscRes(list);
 }
 function showDiscLdg() {
