@@ -2,920 +2,1342 @@
 <html lang="tr" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#fafaf8" id="themeMetaColor">
-<title>rad-io</title>
+<title>rad—io · binlerce canlı radyo</title>
+<meta name="description" content="Dünyanın dört bir yanından binlerce canlı radyo. Mod seç, çevir, keşfet.">
+<meta property="og:title" content="rad—io · binlerce canlı radyo">
+<meta property="og:description" content="Dünyanın dört bir yanından binlerce canlı radyo. Mod seç, çevir, keşfet.">
+<meta property="og:type" content="website">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="//fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
-:root {
---bg:#fafaf8; --bg2:#f2f1ec; --bg3:#e9e7e1;
---line:#e4e2db; --line2:#ccc9c0;
---ink:#1a1915; --ink2:#6b6860; --ink3:#aba89f;
---accent:#b8935a; --accentL:#e8d8b8;
---sakura:#e8b4c0; --sakura2:#f5dde4;
---r:2px;
+:root{
+--bg:#fafaf8;--bg2:#f2f1ec;--bg3:#e9e7e1;
+--line:#e4e2db;--line2:#ccc9c0;
+--ink:#1a1915;--ink2:#6b6860;--ink3:#aba89f;
+--accent:#b8935a;--accentL:#f1e6d2;
+--sakura:#d998a8;--sakura2:#f7e3e9;
+--monoL:85%;--monoS:35%;
+--r:3px;
 --serif:'Noto Serif JP',serif;
---mono:'DM Mono',monospace;
---ph:76px;
+--mono:'DM Mono',ui-monospace,monospace;
+--ph:78px;
 }
-[data-theme="dark"] {
---bg:#121210; --bg2:#1b1a18; --bg3:#252320;
---line:#272522; --line2:#38352f;
---ink:#e6e3dc; --ink2:#8a8780; --ink3:#4e4c48;
---accent:#c8a96e; --accentL:#2a2015;
---sakura:#c47a8a; --sakura2:#2a181e;
+[data-theme="dark"]{
+--bg:#121210;--bg2:#1b1a18;--bg3:#252320;
+--line:#272522;--line2:#38352f;
+--ink:#e6e3dc;--ink2:#8a8780;--ink3:#5a5852;
+--accent:#c8a96e;--accentL:#2a2015;
+--sakura:#c47a8a;--sakura2:#2a181e;
+--monoL:22%;--monoS:25%;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{
-font-family:var(--mono);background:var(--bg);color:var(--ink);
-min-height:100vh;overflow-x:hidden;
-transition:background .25s,color .25s;
-}
-.sakura-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.petal{animation:fall linear infinite;opacity:0;}
-@keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:.65}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
-.shell{
-position:relative;z-index:1;
-display:grid;
-grid-template-columns:210px 1fr;
-grid-template-rows:52px 1fr var(--ph);
-min-height:100vh;
-}
-.topbar{
-grid-column:1/-1;
-display:flex;align-items:center;justify-content:space-between;
-padding:0 24px;border-bottom:1px solid var(--line);
-background:var(--bg);position:sticky;top:0;z-index:10;
-}
-.logo{
-font-family:var(--serif);font-size:17px;font-weight:300;
-letter-spacing:.14em;color:var(--ink);
-display:flex;align-items:center;gap:8px;
-}
-.logo-accent{color:var(--accent);}
-.logo-by{
-font-size:9px;font-family:var(--mono);color:var(--ink3);
-letter-spacing:.05em;border-left:1px solid var(--line2);padding-left:8px;
-}
-.logo-by a{color:var(--ink3);text-decoration:none;transition:color .15s;}
-.logo-by a:hover{color:var(--accent);}
-.topbar-mid{
-display:flex;align-items:center;gap:7px;
-font-size:11px;color:var(--ink3);letter-spacing:.07em;
-}
-.live-dot{
-width:5px;height:5px;border-radius:50%;
-background:var(--ink3);transition:background .4s;flex-shrink:0;
-}
-.live-dot.on{background:var(--accent);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-#statusText{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.topbar-right{display:flex;align-items:center;gap:7px;}
-.top-btn{
-font-family:var(--mono);font-size:10px;letter-spacing:.09em;
-color:var(--ink2);background:none;
-border:1px solid var(--line2);padding:4px 11px;
-cursor:pointer;transition:all .15s;border-radius:var(--r);
-}
-.top-btn:hover{border-color:var(--ink2);color:var(--ink);}
-.theme-btn{
-width:29px;height:29px;border-radius:50%;
-border:1px solid var(--line2);background:none;
-cursor:pointer;font-size:13px;
-display:flex;align-items:center;justify-content:center;
-transition:all .15s;color:var(--ink2);
-}
-.theme-btn:hover{border-color:var(--ink2);}
-.sidebar{
-border-right:1px solid var(--line);
-display:flex;flex-direction:column;
-overflow-y:auto;background:var(--bg);
-scrollbar-width:none;
-}
-.sidebar::-webkit-scrollbar{display:none;}
-.sb-sec{padding:18px 0 0;}
-.sb-lbl{font-size:9px;letter-spacing:.18em;color:var(--ink3);padding:0 18px 8px;text-transform:uppercase;}
-.mode-item{
-display:flex;align-items:center;gap:9px;
-padding:9px 18px;cursor:pointer;transition:background .12s;
-border-left:2px solid transparent;
-font-size:11.5px;letter-spacing:.03em;color:var(--ink2);
-}
-.mode-item:hover{background:var(--bg2);color:var(--ink);}
-.mode-item.active{border-left-color:var(--accent);background:var(--bg2);color:var(--ink);}
-.mode-item.active .mode-icon{color:var(--accent);}
-.mode-icon{font-size:13px;width:16px;text-align:center;flex-shrink:0;}
-.mode-lbl{flex:1;}
+body{font-family:var(--mono);background:var(--bg);color:var(--ink);overflow:hidden;transition:background .25s,color .25s;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
 
-.mode-cnt{font-size:9px;color:var(--ink3);}
-.sb-div{height:1px;background:var(--line);margin:14px 0;}
-.fav-empty{padding:8px 18px 14px;font-size:10px;color:var(--ink3);line-height:1.7;}
-.fav-item{
-display:flex;align-items:center;gap:7px;
-padding:7px 18px;cursor:pointer;font-size:11px;color:var(--ink2);transition:background .12s;
-}
-.fav-item:hover{background:var(--bg2);color:var(--ink);}
-.fav-n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.fav-rm{opacity:0;font-size:10px;color:var(--ink3);background:none;border:none;cursor:pointer;padding:0 2px;transition:opacity .15s;}
-.fav-item:hover .fav-rm{opacity:1;}
-.sb-sakura{padding:14px 18px 10px;font-size:10px;color:var(--sakura);letter-spacing:.06em;font-family:var(--serif);}
-.main{overflow-y:auto;background:var(--bg);scrollbar-width:thin;scrollbar-color:var(--line2) transparent;}
-.view{display:none;}
-.view.active{display:block;}
-.vh{
-padding:22px 28px 16px;border-bottom:1px solid var(--line);
-display:flex;align-items:flex-end;justify-content:space-between;
-position:sticky;top:0;background:var(--bg);z-index:5;
-}
-.vh-title{
-font-family:var(--serif);font-size:20px;font-weight:300;color:var(--ink);
-display:flex;align-items:baseline;gap:8px;
-}
-.vh-jp{font-size:12px;color:var(--ink3);}
-.vh-sub{font-size:10px;color:var(--ink3);letter-spacing:.07em;margin-top:3px;}
-.vh-acts{display:flex;gap:7px;}
-.sm-btn{
-font-family:var(--mono);font-size:10px;letter-spacing:.07em;
-color:var(--ink2);background:none;border:1px solid var(--line2);
-padding:5px 10px;cursor:pointer;border-radius:var(--r);transition:all .15s;
-}
-.sm-btn:hover{border-color:var(--ink2);color:var(--ink);}
-.sm-btn.active{border-color:var(--accent);color:var(--accent);}
-.st-grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
-gap:1px;background:var(--line);
-}
-.st-card{
-background:var(--bg);padding:14px 18px;cursor:pointer;
-transition:background .12s;display:flex;align-items:center;gap:13px;
-}
-.st-card:hover{background:var(--bg2);}
-.st-card.playing{background:var(--bg2);}
-.st-art{
-width:42px;height:42px;border-radius:var(--r);
-background:var(--bg3);border:1px solid var(--line);flex-shrink:0;
-display:flex;align-items:center;justify-content:center;
-font-size:16px;overflow:hidden;color:var(--ink3);
-}
-.st-art img{width:100%;height:100%;object-fit:cover;}
-.st-info{flex:1;min-width:0;}
-.st-name{font-size:11.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
-.st-meta{font-size:10px;color:var(--ink3);display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
-.st-tag{font-size:9px;background:var(--bg3);border:1px solid var(--line);padding:1px 6px;border-radius:var(--r);color:var(--ink2);}
-.st-acts{display:flex;gap:5px;align-items:center;opacity:0;transition:opacity .15s;flex-shrink:0;}
-.st-card:hover .st-acts,.st-card.playing .st-acts{opacity:1;}
-.ic-btn{
-width:26px;height:26px;border-radius:var(--r);
-border:1px solid var(--line2);background:var(--bg);
-cursor:pointer;display:flex;align-items:center;justify-content:center;
-font-size:12px;color:var(--ink2);transition:all .15s;
-}
-.ic-btn:hover{border-color:var(--ink);color:var(--ink);}
-.ic-btn.faved{border-color:var(--accent);color:var(--accent);}
-.ldg{
-padding:52px 28px;display:flex;flex-direction:column;
-align-items:center;gap:14px;color:var(--ink3);font-size:11px;letter-spacing:.09em;
-}
-.ldg-kanji{font-family:var(--serif);font-size:40px;font-weight:300;color:var(--line2);line-height:1;}
-.spin{width:18px;height:18px;border:1px solid var(--line2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;}
+/* sakura */
+.sakura-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.petal{position:absolute;top:-20px;animation:fall linear infinite;opacity:0}
+@keyframes fall{0%{transform:translate(0,-20px) rotate(0);opacity:.6}100%{transform:translate(60px,110vh) rotate(720deg);opacity:0}}
+
+/* shell */
+.shell{position:relative;z-index:1;display:grid;grid-template-columns:220px 1fr;grid-template-rows:54px 1fr var(--ph);height:100vh;height:100dvh}
+.topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 22px;border-bottom:1px solid var(--line);background:var(--bg)}
+.logo{font-family:var(--serif);font-size:17px;font-weight:300;letter-spacing:.14em;display:flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer;background:none;border:none}
+.logo-accent{color:var(--accent)}
+.brand{display:flex;align-items:center;gap:8px;min-width:0}
+.logo-by{font-size:9px;font-family:var(--mono);color:var(--ink3);letter-spacing:.05em;border-left:1px solid var(--line2);padding-left:8px;white-space:nowrap}
+.logo-by a{text-decoration:none;transition:color .15s}
+.logo-by a:hover{color:var(--accent)}
+.counter{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--ink3);letter-spacing:.06em;white-space:nowrap;overflow:hidden}
+.counter b{color:var(--ink2);font-weight:400}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#d0574a;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.topbar-right{display:flex;align-items:center;gap:6px}
+.top-btn{font-size:10px;letter-spacing:.09em;color:var(--ink2);background:none;border:1px solid var(--line2);padding:5px 11px;cursor:pointer;transition:all .15s;border-radius:var(--r);white-space:nowrap}
+.top-btn:hover{border-color:var(--ink2);color:var(--ink)}
+.top-btn.active{border-color:var(--accent);color:var(--accent)}
+.round-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--line2);background:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;color:var(--ink2);transition:all .15s;flex-shrink:0}
+.round-btn:hover{border-color:var(--ink2);color:var(--ink)}
+
+/* sidebar */
+.sidebar{border-right:1px solid var(--line);overflow-y:auto;background:var(--bg);scrollbar-width:none;padding-bottom:20px}
+.sidebar::-webkit-scrollbar{display:none}
+.sb-sec{padding:16px 0 0}
+.sb-lbl{font-size:9px;letter-spacing:.18em;color:var(--ink3);padding:0 18px 7px;text-transform:uppercase;display:flex;justify-content:space-between}
+.sb-item{display:flex;align-items:center;gap:9px;width:100%;padding:8px 18px;cursor:pointer;transition:background .12s;border:none;border-left:2px solid transparent;background:none;text-align:left;font-size:11.5px;letter-spacing:.03em;color:var(--ink2)}
+.sb-item:hover{background:var(--bg2);color:var(--ink)}
+.sb-item.active{border-left-color:var(--accent);background:var(--bg2);color:var(--ink)}
+.sb-item.active .sb-icon{color:var(--accent)}
+.sb-icon{font-size:12px;width:16px;text-align:center;flex-shrink:0}
+.sb-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-sub{font-size:9px;color:var(--ink3)}
+.sb-div{height:1px;background:var(--line);margin:14px 0 0}
+.sb-empty{padding:4px 18px 6px;font-size:10px;color:var(--ink3);line-height:1.7}
+
+/* main */
+.main{overflow-y:auto;background:var(--bg);scrollbar-width:thin;scrollbar-color:var(--line2) transparent;position:relative}
+.view{display:none;padding-bottom:30px}
+.view.active{display:block}
+
+/* stage */
+.stage{display:flex;gap:26px;align-items:center;padding:30px 30px 26px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--bg2),var(--bg))}
+.stage-art{width:132px;height:132px;flex-shrink:0;border-radius:var(--r);border:1px solid var(--line);overflow:hidden;position:relative;box-shadow:0 10px 30px -18px rgba(0,0,0,.35)}
+.stage-info{min-width:0;flex:1}
+.kicker{display:flex;align-items:center;gap:9px;font-size:10px;letter-spacing:.14em;color:var(--ink3);text-transform:uppercase}
+.stage-name{font-family:var(--serif);font-weight:300;font-size:30px;line-height:1.2;margin:8px 0 8px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.stage-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:10.5px;color:var(--ink2);min-height:20px}
+.stage-meta a{text-decoration:none;border-bottom:1px dotted var(--ink3)}
+.stage-acts{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.big-btn{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.08em;padding:9px 16px;border-radius:var(--r);border:1px solid var(--line2);background:var(--bg);cursor:pointer;transition:all .15s;color:var(--ink)}
+.big-btn:hover{border-color:var(--ink)}
+.big-btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.big-btn.primary:hover{opacity:.85}
+.big-btn.faved{color:var(--accent);border-color:var(--accent)}
+.tag{font-size:9.5px;background:var(--bg3);border:1px solid var(--line);padding:1px 7px;border-radius:20px;color:var(--ink2)}
+
+/* eq */
+.eq{display:inline-flex;gap:2px;align-items:flex-end;height:11px}
+.eq i{width:2px;height:3px;background:var(--ink3);border-radius:1px}
+body.is-playing .eq i{background:var(--accent);animation:eq .9s ease-in-out infinite}
+body.is-playing .eq i:nth-child(2){animation-delay:-.3s}
+body.is-playing .eq i:nth-child(3){animation-delay:-.6s}
+body.is-playing .eq i:nth-child(4){animation-delay:-.15s}
+@keyframes eq{0%,100%{height:3px}50%{height:11px}}
+
+/* art */
+.art{position:relative;overflow:hidden;background:hsl(var(--h,40) var(--monoS) var(--monoL));display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--ink2)}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--bg)}
+.st-art{width:44px;height:44px;border-radius:var(--r);border:1px solid var(--line);flex-shrink:0;font-size:17px}
+.stage-art.art{font-size:52px}
+
+/* section headers */
+.vh{padding:20px 30px 14px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.vh-title{font-family:var(--serif);font-size:20px;font-weight:300;display:flex;align-items:baseline;gap:8px}
+.vh-jp{font-size:12px;color:var(--ink3)}
+.vh-sub{font-size:10px;color:var(--ink3);letter-spacing:.07em;margin-top:3px}
+.vh-acts{display:flex;gap:7px}
+.sm-btn{font-size:10px;letter-spacing:.07em;color:var(--ink2);background:none;border:1px solid var(--line2);padding:5px 10px;cursor:pointer;border-radius:var(--r);transition:all .15s}
+.sm-btn:hover{border-color:var(--ink2);color:var(--ink)}
+
+/* grid */
+.st-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.st-card{background:var(--bg);padding:13px 18px;cursor:pointer;transition:background .12s;display:flex;align-items:center;gap:13px;min-width:0}
+.st-card:hover{background:var(--bg2)}
+.st-card.playing{background:var(--bg2);box-shadow:inset 2px 0 0 var(--accent)}
+.st-card.bad{opacity:.4}
+.st-info{flex:1;min-width:0}
+.st-name{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.st-card.playing .st-name{color:var(--accent)}
+.st-meta{font-size:9.5px;color:var(--ink3);display:flex;gap:7px;align-items:center;overflow:hidden;white-space:nowrap}
+.ic-btn{width:28px;height:28px;border-radius:50%;border:1px solid transparent;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink3);transition:all .15s;flex-shrink:0}
+.st-card:hover .ic-btn,.ic-btn.faved{border-color:var(--line2)}
+.ic-btn:hover{color:var(--ink);border-color:var(--ink2)}
+.ic-btn.faved{color:var(--accent);border-color:var(--accent)}
+.more-row{display:flex;justify-content:center;padding:18px}
+
+/* loading */
+.ldg{padding:50px 28px;display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--ink3);font-size:11px;letter-spacing:.09em;text-align:center}
+.ldg-kanji{font-family:var(--serif);font-size:40px;font-weight:300;color:var(--line2);line-height:1}
+.spin{width:18px;height:18px;border:1px solid var(--line2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.disc-hd{
-padding:20px 28px 16px;border-bottom:1px solid var(--line);
-position:sticky;top:0;background:var(--bg);z-index:5;
+.skel{height:70px;background:var(--bg);position:relative;overflow:hidden}
+.skel::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--bg2),transparent);animation:sh 1.2s infinite}
+@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+/* discover */
+.disc-hd{padding:22px 30px 6px}
+.search-row{display:flex;gap:7px;margin-top:14px}
+.search-in{flex:1;min-width:0;font-family:var(--mono);font-size:12px;background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r);padding:9px 13px;color:var(--ink);outline:none;transition:border .15s;letter-spacing:.04em}
+.search-in:focus{border-color:var(--ink2)}
+.search-in::placeholder{color:var(--ink3)}
+.chip-lbl{font-size:9px;letter-spacing:.18em;color:var(--ink3);text-transform:uppercase;padding:14px 30px 6px}
+.chip-row{display:flex;flex-wrap:wrap;gap:5px;padding:0 30px}
+.chip{font-size:10px;letter-spacing:.05em;padding:4px 11px;border:1px solid var(--line2);border-radius:20px;cursor:pointer;color:var(--ink2);background:var(--bg);transition:all .15s;white-space:nowrap}
+.chip:hover{border-color:var(--ink2);color:var(--ink)}
+.chip.active{border-color:var(--accent);color:var(--accent);background:var(--accentL)}
+.chip.lang{border-color:var(--sakura);color:var(--sakura)}
+.chip.lang.active{background:var(--sakura2)}
+.disc-res-hd{padding:20px 30px 10px;font-size:10px;color:var(--ink3);letter-spacing:.08em}
+
+/* queue */
+.q-list{padding:6px 30px}
+.q-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding-left .1s;width:100%;background:none;border-left:none;border-right:none;border-top:none;text-align:left}
+.q-item:hover{padding-left:6px}
+.q-num{font-size:10px;color:var(--ink3);width:22px;text-align:right;flex-shrink:0}
+.q-name{flex:1;font-size:11.5px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.q-cc{font-size:10px;color:var(--ink3)}
+.q-item.active .q-name{color:var(--accent)}
+
+/* player bar */
+.player-bar{grid-column:1/-1;border-top:1px solid var(--line);background:var(--bg);display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;padding:0 22px;gap:18px;position:relative}
+.load-line{position:absolute;top:-1px;left:0;height:1px;width:0;background:var(--accent)}
+body.is-loading .load-line{animation:ll 1.4s ease-in-out infinite}
+@keyframes ll{0%{left:0;width:0}50%{left:20%;width:50%}100%{left:100%;width:0}}
+.np-left{display:flex;align-items:center;gap:12px;min-width:0;cursor:pointer;background:none;border:none;text-align:left}
+.np-art{width:44px;height:44px;border-radius:var(--r);border:1px solid var(--line);flex-shrink:0;font-size:17px}
+.np-txt{min-width:0}
+.np-name{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np-sub{font-size:10px;color:var(--ink3);margin-top:3px;display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden}
+.np-ctr{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ctrls{display:flex;align-items:center;gap:8px}
+.ctrl{width:32px;height:32px;border-radius:50%;background:none;border:1px solid var(--line2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink2);transition:all .15s}
+.ctrl:hover{border-color:var(--ink);color:var(--ink)}
+.ctrl.play{width:40px;height:40px;border-color:var(--ink2);font-size:13px;color:var(--ink)}
+.ctrl.play:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ctrl.zap{width:auto;padding:0 12px;border-radius:20px;font-size:10px;letter-spacing:.08em;gap:6px}
+.live-row{font-size:9.5px;color:var(--ink3);letter-spacing:.08em;display:flex;gap:6px;align-items:center}
+.live-row .on{color:#d0574a}
+.np-right{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.ctrl.active{border-color:var(--accent);color:var(--accent)}
+.ctrl.sleep{width:auto;min-width:32px;padding:0 9px;border-radius:16px;font-size:10px}
+.vol-row{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3)}
+.vol-row button{background:none;border:none;cursor:pointer;color:var(--ink3);font-size:12px;width:18px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:84px;height:2px;background:var(--line2);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--ink2);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--ink2);border:none;cursor:pointer}
+
+/* toast & modal */
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--ink);color:var(--bg);font-size:10.5px;letter-spacing:.06em;padding:8px 15px;border-radius:var(--r);opacity:0;pointer-events:none;transition:all .22s;white-space:nowrap;z-index:99;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal.show{display:flex}
+.modal-box{background:var(--bg);border:1px solid var(--line2);border-radius:var(--r);padding:24px 26px;max-width:360px;width:100%;font-size:11px;color:var(--ink2)}
+.modal-box h3{font-family:var(--serif);font-weight:300;font-size:18px;color:var(--ink);margin-bottom:14px}
+.kb{display:grid;grid-template-columns:auto 1fr;gap:8px 14px}
+kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line2);border-radius:3px;padding:1px 6px;color:var(--ink)}
+
+.m-only{display:none}
+
+/* map */
+#view-map.active{height:100%;padding:0}
+.map-wrap{position:relative;height:100%;min-height:360px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,var(--bg2),var(--bg) 75%)}
+#mapCv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#mapCv.grabbing{cursor:grabbing}
+.map-hud{position:absolute;top:16px;left:18px;right:18px;display:flex;flex-direction:column;gap:4px;pointer-events:none}
+.map-hud > *{pointer-events:auto;width:max-content;max-width:100%}
+.map-title{font-family:var(--serif);font-size:20px;font-weight:300;display:flex;align-items:baseline;gap:8px}
+.map-acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.map-acts .sm-btn{background:var(--bg)}
+.sm-btn.active,.big-btn.active{border-color:var(--accent);color:var(--accent)}
+.map-tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:10.5px;padding:6px 10px;border-radius:var(--r);white-space:nowrap;opacity:0;transform:translate(-50%,-130%);transition:opacity .12s;z-index:3}
+.map-tip.show{opacity:1}
+.map-tip small{display:block;opacity:.65;font-size:9.5px;margin-top:2px}
+.map-zoom{position:absolute;right:18px;bottom:18px;display:flex;flex-direction:column;gap:6px}
+.map-zoom button{width:32px;height:32px;border-radius:50%;border:1px solid var(--line2);background:var(--bg);cursor:pointer;font-size:15px;color:var(--ink2)}
+.map-zoom button:hover{border-color:var(--ink);color:var(--ink)}
+.map-legend{position:absolute;left:18px;bottom:16px;font-size:9.5px;color:var(--ink3);letter-spacing:.06em;display:flex;gap:12px;align-items:center}
+.map-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.form-row{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.form-row label{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.form-row input,.form-row select{font-family:var(--mono);font-size:13px;padding:8px 10px;background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r);color:var(--ink)}
+.modal-note{font-size:10px;color:var(--ink3);line-height:1.6;margin-top:8px}
+.modal-acts{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+
+@media(max-width:760px){
+.map-legend{display:none}
+.map-hud{top:10px;left:12px;right:12px}
+.map-title{font-size:17px}
+.shell{grid-template-columns:minmax(0,1fr);grid-template-rows:50px auto 1fr auto}
+.topbar{padding:0 12px;gap:8px}
+.logo-by,.counter .c-extra,.counter .c-word{display:none}
+.counter{font-size:9.5px}
+.top-btn{padding:5px 8px}
+.top-btn .t-full{display:none}
+.sidebar{border-right:none;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;overflow-y:hidden;padding:6px 6px}
+.sb-sec{display:flex;padding:0;flex-shrink:0}
+.sb-lbl,.sb-div,.sb-lib,.sb-sub{display:none}
+.sb-item{width:auto;flex-direction:column;padding:5px 10px;gap:3px;border-left:none;border-bottom:2px solid transparent;white-space:nowrap;font-size:10px;align-items:center}
+.sb-item.active{border-bottom-color:var(--accent);border-left:none}
+.sb-sec.countries .sb-item .sb-name{display:none}
+.stage{padding:20px 16px 18px;gap:16px}
+.stage-art{width:88px;height:88px}
+.stage-art.art{font-size:34px}
+.stage-name{font-size:21px;margin:6px 0}
+.big-btn{padding:8px 12px;font-size:10.5px}
+.vh,.disc-hd{padding-left:16px;padding-right:16px}
+.chip-lbl,.chip-row,.disc-res-hd,.q-list{padding-left:16px;padding-right:16px}
+.chip-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.st-grid{grid-template-columns:1fr}
+.player-bar{grid-template-columns:minmax(0,1fr) auto;padding:8px 12px calc(8px + env(safe-area-inset-bottom));gap:10px}
+.np-right{display:none}
+.live-row{display:none}
+.ctrl.prev,.ctrl.zap .z-txt{display:none}
+.ctrl.zap{padding:0;width:32px;border-radius:50%}
+.m-only{display:flex}
+.toast{bottom:150px}
 }
-.disc-row{display:flex;gap:7px;margin-top:14px;}
-.search-in{
-flex:1;font-family:var(--mono);font-size:12px;
-background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r);
-padding:8px 13px;color:var(--ink);outline:none;transition:border .15s;letter-spacing:.04em;
-}
-.search-in:focus{border-color:var(--ink2);}
-.search-in::placeholder{color:var(--ink3);}
-.tag-row{display:flex;flex-wrap:wrap;gap:5px;padding:12px 28px;border-bottom:1px solid var(--line);}
-.tag-pill{
-font-family:var(--mono);font-size:10px;letter-spacing:.05em;
-padding:3px 10px;border:1px solid var(--line2);border-radius:20px;
-cursor:pointer;color:var(--ink2);background:var(--bg);transition:all .15s;
-}
-.tag-pill:hover{border-color:var(--ink2);color:var(--ink);}
-.tag-pill.active{border-color:var(--accent);color:var(--accent);background:var(--accentL);}
-.tag-pill.lang{border-color:var(--sakura);color:var(--sakura);}
-.tag-pill.lang.active{background:var(--sakura2);}
-.q-list{padding:16px 28px;}
-.q-item{
-display:flex;align-items:center;gap:10px;
-padding:9px 0;border-bottom:1px solid var(--line);
-cursor:pointer;transition:padding-left .1s;
-}
-.q-item:hover{padding-left:6px;}
-.q-num{font-size:10px;color:var(--ink3);width:22px;text-align:right;flex-shrink:0;}
-.q-name{flex:1;font-size:11.5px;color:var(--ink2);}
-.q-item.active .q-name{color:var(--ink);}
-.q-item.active .q-num{color:var(--accent);}
-.player-bar{
-grid-column:1/-1;border-top:1px solid var(--line);background:var(--bg);
-display:grid;grid-template-columns:240px 1fr 240px;
-align-items:center;padding:0 22px;gap:16px;
-}
-.np-left{display:flex;align-items:center;gap:11px;min-width:0;}
-.np-art{
-width:40px;height:40px;border-radius:var(--r);
-background:var(--bg3);border:1px solid var(--line);flex-shrink:0;
-display:flex;align-items:center;justify-content:center;
-font-size:15px;overflow:hidden;color:var(--ink3);
-}
-.np-art img{width:100%;height:100%;object-fit:cover;}
-.np-txt{min-width:0;}
-.np-name{font-size:11px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.np-mode{font-size:10px;color:var(--ink3);margin-top:2px;}
-.np-ctr{display:flex;flex-direction:column;align-items:center;gap:7px;}
-.ctrls{display:flex;align-items:center;gap:7px;}
-.ctrl{
-width:30px;height:30px;border-radius:var(--r);
-background:none;border:1px solid var(--line2);
-cursor:pointer;display:flex;align-items:center;justify-content:center;
-font-size:12px;color:var(--ink2);transition:all .15s;
-}
-.ctrl:hover{border-color:var(--ink);color:var(--ink);}
-.ctrl.play{width:36px;height:36px;border-color:var(--ink2);font-size:13px;}
-.ctrl.play:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);}
-.ctrl.active{border-color:var(--accent);color:var(--accent);}
-.prog-row{width:100%;display:flex;align-items:center;gap:7px;}
-.p-time{font-size:9px;color:var(--ink3);min-width:28px;}
-.p-time.r{text-align:right;}
-.p-bar{flex:1;height:2px;background:var(--line2);cursor:pointer;position:relative;}
-.p-fill{height:100%;background:var(--ink3);transition:width .5s linear;max-width:100%;}
-.p-bar:hover .p-fill{background:var(--accent);}
-.np-right{display:flex;align-items:center;justify-content:flex-end;gap:10px;}
-.vol-row{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink3);}
-input[type=range]{-webkit-appearance:none;width:78px;height:2px;background:var(--line2);outline:none;cursor:pointer;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--ink2);cursor:pointer;transition:background .15s;}
-input[type=range]:hover::-webkit-slider-thumb{background:var(--ink);}
-.toast{
-position:fixed;bottom:90px;left:50%;
-transform:translateX(-50%) translateY(8px);
-background:var(--ink);color:var(--bg);
-font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
-padding:7px 15px;border-radius:var(--r);
-opacity:0;pointer-events:none;transition:all .22s;
-white-space:nowrap;z-index:99;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-@media(max-width:680px){
-.shell{grid-template-columns:1fr;grid-template-rows:52px auto 1fr 72px;}
-.sidebar{
-border-right:none;border-bottom:1px solid var(--line);
-flex-direction:row;overflow-x:auto;overflow-y:hidden;
-padding:6px 0;scrollbar-width:none;
-}
-.sidebar::-webkit-scrollbar{display:none;}
-.sb-sec{display:flex;padding:0;flex-shrink:0;}
-.sb-lbl,.sb-div,.sb-sakura{display:none;}
-.sb-sec.fav-sec{display:none;}
-.mode-item{
-flex-direction:column;padding:5px 10px;gap:3px;
-border-left:none;border-bottom:2px solid transparent;
-white-space:nowrap;font-size:10px;align-items:center;
-}
-.mode-item.active{border-bottom-color:var(--accent);border-left:none;}
-.mode-cnt{display:none;}
-.player-bar{grid-template-columns:1fr;padding:8px 14px;gap:6px;}
-.np-right{display:none;}
-.np-ctr{gap:5px;}
-.vh{padding:14px 14px 10px;}
-.vh-title{font-size:16px;}
-.st-grid{grid-template-columns:1fr;}
-.tag-row,.disc-hd{padding:10px 14px;}
-.q-list{padding:10px 14px;}
-#statusText{max-width:110px;}
-.topbar{padding:0 12px;}
+@media(prefers-reduced-motion:reduce){
+.sakura-bg{display:none}
+*{animation-duration:.001s!important;animation-iteration-count:1!important;transition:none!important}
 }
 </style>
 </head>
 <body>
-<div class="sakura-bg" id="sakuraBg"></div>
+<div class="sakura-bg" id="sakuraBg" aria-hidden="true"></div>
 <div class="shell">
-  <!-- TOPBAR -->
   <header class="topbar">
-    <div class="logo">
-      rad<span class="logo-accent">—</span>io
-      <div class="logo-by">by <a href="https://github.com/hechecik" target="_blank" rel="noopener">@hechecik</a> · <a href="https://github.com/hechecik/rad-io" target="_blank" rel="noopener">repo</a></div>
+    <div class="brand">
+      <button class="logo" data-act="home" aria-label="ana sayfa">rad<span class="logo-accent">—</span>io</button>
+      <span class="logo-by">by <a href="https://github.com/hechecik" target="_blank" rel="noopener">@hechecik</a> · <a href="https://github.com/hechecik/rad-io" target="_blank" rel="noopener">repo</a></span>
     </div>
-    <div class="topbar-mid">
-      <div class="live-dot" id="liveDot"></div>
-      <span id="statusText">mod seç</span>
+    <div class="counter" id="counter" aria-live="polite">
+      <span class="live-dot"></span><span><b>binlerce</b> canlı radyo</span>
     </div>
-    <div class="topbar-right">
-      <button class="top-btn" onclick="switchView('stations')">istasyonlar</button>
-      <button class="top-btn" onclick="switchView('discover')">keşfet</button>
-      <button class="top-btn" onclick="switchView('queue')">sıra</button>
-      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="tema (T)">☽</button>
-    </div>
+    <nav class="topbar-right">
+      <button class="top-btn active" data-act="view" data-v="stations">◎<span class="t-full"> radyolar</span></button>
+      <button class="top-btn" data-act="view" data-v="map">◍<span class="t-full"> harita</span></button>
+      <button class="top-btn" data-act="view" data-v="discover">⌕<span class="t-full"> keşfet</span></button>
+      <button class="top-btn" data-act="view" data-v="library">♡<span class="t-full"> kitaplık</span></button>
+      <button class="top-btn" data-act="view" data-v="queue">≡<span class="t-full"> sıra</span></button>
+      <button class="round-btn" id="themeBtn" data-act="theme" title="tema (T)" aria-label="tema değiştir">☽</button>
+    </nav>
   </header>
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sb-sec" id="modeList"></div>
-    <div class="sb-div"></div>
-    <div class="sb-sec fav-sec">
-      <div class="sb-lbl">favoriler</div>
-      <div id="favList"><div class="fav-empty">henüz yok<br>♡ ile ekle</div></div>
-    </div>
-    <div class="sb-sakura">✿ &nbsp; sakura &nbsp; ✿</div>
-  </aside>
-  <!-- MAIN -->
-  <main class="main">
-    <!-- STATIONS VIEW -->
-    <div class="view active" id="viewStations">
+
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main" id="main">
+    <!-- STATIONS -->
+    <div class="view active" id="view-stations">
+      <section class="stage" id="stage">
+        <div class="stage-art art" id="stArt">桜</div>
+        <div class="stage-info">
+          <div class="kicker"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="stKicker">binlerce canlı radyo</span></div>
+          <h1 class="stage-name" id="stName">dünyayı dinle</h1>
+          <div class="stage-meta" id="stMeta">bir mod seç ya da frekansı çevir — her açılışta başka bir istasyon.</div>
+          <div class="stage-acts">
+            <button class="big-btn primary" data-act="play" id="stPlay">▶ dinle</button>
+            <button class="big-btn" data-act="zap">📻 çevir</button>
+            <button class="big-btn" data-act="fav-cur" id="stFav">♡ favori</button>
+            <button class="big-btn" data-act="share">⤴ paylaş</button>
+            <button class="big-btn tour-btn" data-act="tour">🌍 dünya turu</button>
+          </div>
+        </div>
+      </section>
       <div class="vh">
         <div>
-          <div class="vh-title" id="vhTitle">mod seç </div>
-          <div class="vh-sub" id="vhSub">sol panelden bir mod seç</div>
+          <div class="vh-title" id="vhTitle">—</div>
+          <div class="vh-sub" id="vhSub"></div>
         </div>
         <div class="vh-acts">
-          <button class="sm-btn" id="shuffleBtn" onclick="toggleShuffle()">⇌ karıştır</button>
-          <button class="sm-btn" onclick="refreshMode()">↻ yenile</button>
+          <button class="sm-btn" data-act="refresh">↻ başka istasyonlar</button>
         </div>
       </div>
-      <div id="stCon">
-        <div class="ldg">
-          <div class="ldg-kanji">桜</div>
-          <div>bir mod seç — dinlemeye başla</div>
+      <div id="collRes"></div>
+    </div>
+
+    <!-- MAP -->
+    <div class="view" id="view-map">
+      <div class="map-wrap" id="mapWrap">
+        <canvas id="mapCv" aria-label="canlı radyo haritası"></canvas>
+        <div class="map-hud">
+          <div class="map-title">dünya haritası <span class="vh-jp">地図</span></div>
+          <div class="vh-sub" id="mapSub">her nokta canlı bir radyo</div>
+          <div class="map-acts">
+            <button class="sm-btn" data-act="near">📍 yakınımdakiler</button>
+            <button class="sm-btn tour-btn" data-act="tour">🌍 dünya turu</button>
+            <button class="sm-btn" data-act="map-center">◎ çalana git</button>
+            <button class="sm-btn" data-act="map-reset">⤢ tüm dünya</button>
+          </div>
         </div>
+        <div class="map-tip" id="mapTip"></div>
+        <div class="map-legend"><span><i style="background:var(--accent)"></i>yayında</span><span><i style="background:var(--sakura)"></i>favorin</span><span>sürükle · yakınlaştır · dokun</span></div>
+        <div class="map-zoom"><button data-act="zoom-in" aria-label="yakınlaştır">+</button><button data-act="zoom-out" aria-label="uzaklaştır">−</button></div>
       </div>
     </div>
-    <!-- DISCOVER VIEW -->
-    <div class="view" id="viewDiscover">
+
+    <!-- DISCOVER -->
+    <div class="view" id="view-discover">
       <div class="disc-hd">
         <div class="vh-title">keşfet <span class="vh-jp">発見</span></div>
-        <div class="vh-sub">40.000+ arasında keşfet</div>
-        <div class="disc-row">
-          <input class="search-in" id="searchIn" type="text"
-            placeholder="istasyon adı veya tür..."
-            onkeydown="if(event.key==='Enter')doSearch()">
-          <button class="sm-btn" onclick="doSearch()">ara →</button>
-          <button class="sm-btn" onclick="doRandom()">rastgele</button>
-        </div>
+        <div class="vh-sub" id="discSub">binlerce canlı istasyon arasında ara</div>
+        <form class="search-row" id="searchForm">
+          <input class="search-in" id="searchIn" type="search" placeholder="istasyon adı, tür, şehir…  ( / )" autocomplete="off">
+          <button class="sm-btn" type="submit">ara →</button>
+        </form>
       </div>
-      <div class="tag-row" id="discTags"></div>
-      <div id="discRes">
-        <div class="ldg"><div>bir tür seç veya arama yap</div></div>
-      </div>
+      <div class="chip-lbl">sırala</div>
+      <div class="chip-row" id="sortChips"></div>
+      <div class="chip-lbl">tür &amp; dil</div>
+      <div class="chip-row" id="tagChips"></div>
+      <div class="chip-lbl">ülke</div>
+      <div class="chip-row" id="ccChips"></div>
+      <div class="disc-res-hd" id="discHd"></div>
+      <div id="discRes"></div>
     </div>
-    <!-- QUEUE VIEW -->
-    <div class="view" id="viewQueue">
-      <div class="vh">
-        <div>
-          <div class="vh-title">çalma sırası <span class="vh-jp">順番</span></div>
-          <div class="vh-sub" id="qSub">—</div>
-        </div>
-      </div>
+
+    <!-- LIBRARY -->
+    <div class="view" id="view-library">
+      <div class="vh"><div><div class="vh-title">favoriler <span class="vh-jp">お気に入り</span></div><div class="vh-sub" id="favSub"></div></div>
+        <div class="vh-acts"><button class="sm-btn" data-act="export">⇣ dışa aktar</button><button class="sm-btn" data-act="import">⇡ içe aktar</button></div></div>
+      <div id="favRes"></div>
+      <div class="vh"><div><div class="vh-title">son dinlenenler <span class="vh-jp">履歴</span></div></div>
+        <div class="vh-acts"><button class="sm-btn" data-act="clear-recent">temizle</button></div></div>
+      <div id="recRes"></div>
+      <input type="file" id="importIn" accept="application/json" hidden>
+    </div>
+
+    <!-- QUEUE -->
+    <div class="view" id="view-queue">
+      <div class="vh"><div><div class="vh-title">çalma sırası <span class="vh-jp">順番</span></div><div class="vh-sub" id="qSub">—</div></div></div>
       <div class="q-list" id="qItems"></div>
     </div>
   </main>
-  <!-- PLAYER BAR -->
+
   <footer class="player-bar">
-    <div class="np-left">
-      <div class="np-art" id="npArt">♪</div>
+    <div class="load-line"></div>
+    <button class="np-left" data-act="view" data-v="stations" aria-label="şimdi çalan">
+      <div class="np-art art" id="npArt">♪</div>
       <div class="np-txt">
-        <div class="np-name" id="npName">—</div>
-        <div class="np-mode" id="npMode">dinlemeye başla</div>
+        <div class="np-name" id="npName">rad—io</div>
+        <div class="np-sub"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="npSub">binlerce canlı radyo</span></div>
       </div>
-    </div>
+    </button>
     <div class="np-ctr">
       <div class="ctrls">
-        <button class="ctrl" onclick="prevTrack()">⏮</button>
-        <button class="ctrl play" id="playBtn" onclick="playPause()">▶</button>
-        <button class="ctrl" onclick="nextTrack()">⏭</button>
+        <button class="ctrl m-only" data-act="fav-cur" id="npFavM" aria-label="favori">♡</button>
+        <button class="ctrl prev" data-act="prev" aria-label="önceki (←)">⏮</button>
+        <button class="ctrl play" id="playBtn" data-act="play" aria-label="oynat / duraklat (boşluk)">▶</button>
+        <button class="ctrl" data-act="next" aria-label="sonraki (→)">⏭</button>
+        <button class="ctrl zap" data-act="zap" aria-label="rastgele istasyon (R)">📻<span class="z-txt">çevir</span></button>
       </div>
-      <div class="prog-row">
-        <span class="p-time" id="curT">—</span>
-        <div class="p-bar" id="pBar" onclick="seek(event)"><div class="p-fill" id="pFill" style="width:0%"></div></div>
-        <span class="p-time r" id="totT">∞</span>
-      </div>
+      <div class="live-row"><span class="on">●</span><span id="liveTxt">canlı</span></div>
     </div>
     <div class="np-right">
+      <button class="ctrl" data-act="fav-cur" id="npFav" aria-label="favori (F)">♡</button>
+      <button class="ctrl sleep" data-act="sleep" id="sleepBtn" aria-label="uyku zamanlayıcı">☾</button>
+      <button class="ctrl sleep" data-act="alarm" id="alarmBtn" aria-label="radyolu çalar saat">⏰</button>
+      <button class="ctrl" data-act="static" id="staticBtn" aria-label="parazit efekti" title="frekans paraziti">∿</button>
       <div class="vol-row">
-        <span>♩</span>
-        <input type="range" id="volSlider" min="0" max="1" step="0.05" value="0.7"
-          oninput="audio.volume=parseFloat(this.value)">
-        <span>♪</span>
+        <button data-act="mute" id="muteBtn" aria-label="sessiz (M)">♪</button>
+        <input type="range" id="volSlider" min="0" max="1" step="0.02" value="0.7" aria-label="ses">
       </div>
+      <button class="ctrl" data-act="help" aria-label="kısayollar (?)">?</button>
     </div>
   </footer>
 </div>
-<div class="toast" id="toast"></div>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="modal" id="helpModal" data-act="close-modal">
+  <div class="modal-box">
+    <h3>kısayollar</h3>
+    <div class="kb">
+      <kbd>boşluk</kbd><span>oynat / duraklat</span>
+      <kbd>R</kbd><span>frekansı çevir (rastgele)</span>
+      <kbd>G</kbd><span>dünya haritası</span>
+      <kbd>W</kbd><span>dünya turu aç / kapat</span>
+      <kbd>← →</kbd><span>önceki / sonraki</span>
+      <kbd>↑ ↓</kbd><span>ses</span>
+      <kbd>F</kbd><span>favorilere ekle</span>
+      <kbd>M</kbd><span>sessiz</span>
+      <kbd>/</kbd><span>ara</span>
+      <kbd>D L Q</kbd><span>keşfet / kitaplık / sıra</span>
+      <kbd>T</kbd><span>tema</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="alarmModal" data-act="close-modal">
+  <div class="modal-box">
+    <h3>radyolu çalar saat ⏰</h3>
+    <div class="form-row"><label for="alarmTime">saat</label><input type="time" id="alarmTime" value="07:30"></div>
+    <div class="form-row"><label for="alarmSrc">ne çalsın</label>
+      <select id="alarmSrc">
+        <option value="cur">şu an çalan / en son dinlediğim</option>
+        <option value="fav">favorilerimden biri</option>
+        <option value="kafe">kafe modu (rastgele)</option>
+        <option value="zap">sürpriz — dünyadan rastgele</option>
+      </select></div>
+    <div class="modal-note">ses 60 saniyede yavaşça açılır. bu sekme açık kalmalı; telefonda ekran kilitliyken tarayıcı uyuyabilir.</div>
+    <div class="modal-acts"><button class="sm-btn" data-act="alarm-off">kapat</button><button class="big-btn primary" data-act="alarm-set">kur</button></div>
+  </div>
+</div>
+
 <script>
+'use strict';
+/* ---------- data ---------- */
 const MODES = {
-  calisma: { icon:'✦', name:'Çalışma', desc:'derin odak',       tags:['lofi','chillhop','study'] },
-  kafe:    { icon:'◎', name:'Kafe',desc:'birer kahve',      tags:['jazz','cafe','bossanova'] },
-  surus:   { icon:'→', name:'Sürüş',desc:'yola çık',         tags:['rock','driving','electronic'] },
-  kosu:    { icon:'▲', name:'Koşu',desc:'terleyelim',       tags:['dance','energetic','house'] },
-  uyku:    { icon:'◇', name:'Uyku',desc:'derin nefes',      tags:['ambient','sleep','drone'] },
-  sifa:    { icon:'○', name:'Şifa',desc:'iyileşme',         tags:['meditation','healing','newage'] },
-  klasik:  { icon:'♩', name:'Klasik',desc:'zamansız',         tags:['classical','baroque','opera'] },
-  turkce:  { icon:'🌙', name:'Türkçe', desc:'türkçe radyo',     tags:['turkish','türkçe','turkce'] },
-  kurtce:  { icon:'✿', name:'Kürtçe', desc:'kürtçe yayın',     tags:['kurdish','kürtçe'] },
-  doksan:  { icon:'◈', name:"90'lar",desc:'nostalji türkçe',  tags:['90s','oldies','90sturkish','90lar'] },
-  indie:   { icon:'◉', name:'Indie',desc:'bağımsız ses',     tags:['indie','alternative','folk'] },
+  calisma:{icon:'✦',name:'Çalışma',desc:'derin odak',tags:['lofi','chillhop','study','downtempo']},
+  kafe:{icon:'◎',name:'Kafe',desc:'birer kahve',tags:['jazz','bossa nova','lounge','cafe']},
+  surus:{icon:'→',name:'Sürüş',desc:'yola çık',tags:['rock','classic rock','driving','synthwave']},
+  kosu:{icon:'▲',name:'Koşu',desc:'terleyelim',tags:['dance','house','edm','energetic']},
+  uyku:{icon:'◇',name:'Uyku',desc:'derin nefes',tags:['ambient','sleep','drone','relax']},
+  sifa:{icon:'○',name:'Şifa',desc:'iyileşme',tags:['meditation','healing','new age','nature']},
+  klasik:{icon:'♩',name:'Klasik',desc:'zamansız',tags:['classical','baroque','opera','piano']},
+  turkce:{icon:'☾',name:'Türkçe',desc:'türkçe radyo',cc:'TR'},
+  kurtce:{icon:'✿',name:'Kürtçe',desc:'kürtçe yayın',tags:['kurdish','kurdi','kurmanci']},
+  doksan:{icon:'◈',name:"90'lar",desc:'nostalji',tags:['90s','90er','eurodance','oldies']},
+  indie:{icon:'◉',name:'Indie',desc:'bağımsız ses',tags:['indie','alternative','indie rock','folk']},
+  dunya:{icon:'◍',name:'Dünya',desc:'sınır yok',tags:['world music','world','ethnic','afrobeat']},
 };
-const DISC_TAGS = [
-  {l:'türkçe',  t:'turkish',   k:'lang'},
-  {l:'kürtçe',  t:'kurdish',   k:'lang'},
-  {l:'arapça',  t:'arabic',    k:'lang'},
-  {l:'farsça',  t:'persian',   k:'lang'},
-  {l:'jazz',    t:'jazz',      k:'g'},
-  {l:'lo-fi',   t:'lofi',      k:'g'},
-  {l:'ambient', t:'ambient',   k:'g'},
-  {l:'klasik',  t:'classical', k:'g'},
-  {l:'elektronik',t:'electronic',k:'g'},
-  {l:'rock',    t:'rock',      k:'g'},
-  {l:'pop',     t:'pop',       k:'g'},
-  {l:'soul',    t:'soul',      k:'g'},
-  {l:'reggae',  t:'reggae',    k:'g'},
-  {l:'blues',   t:'blues',     k:'g'},
-  {l:'hiphop',  t:'hiphop',    k:'g'},
-  {l:'house',   t:'house',     k:'g'},
-  {l:'90s',     t:'90s',       k:'g'},
-  {l:'90s tr',  t:'90sturkish',k:'g'},
-  {l:'dünya',   t:'world',     k:'g'},
-  {l:'folk',    t:'folk',      k:'g'},
-  {l:'drone',   t:'drone',     k:'g'},
+const TIME_MODES = [ // [startHour, modes]
+  [5,['kafe','klasik','turkce','sifa']],
+  [10,['calisma','indie','kafe','dunya']],
+  [18,['indie','surus','turkce','doksan','kosu','dunya']],
+  [22,['uyku','sifa','klasik','calisma']],
 ];
-const RB = ['https://de1.api.radio-browser.info','https://nl1.api.radio-browser.info','https://at1.api.radio-browser.info'];
-async function rbFetch(path) {
-  for (const base of RB) {
-    try {
-      const r = await fetch(base + path, {headers:{'User-Agent':'rad-io/3.0'}});
-      if (r.ok) return await r.json();
-    } catch(e) {}
-  }
-  return [];
-}
-async function fetchTag(tag, limit=14) {
-  const d = await rbFetch(`/json/stations/search?tag=${encodeURIComponent(tag)}&limit=${limit}&hidebroken=true&order=votes&reverse=true`);
-  return Array.isArray(d) ? d.filter(s=>s.url_resolved&&s.url_resolved.startsWith('http')) : [];
-}
-async function fetchName(q, limit=20) {
-  const d = await rbFetch(`/json/stations/search?name=${encodeURIComponent(q)}&limit=${limit}&hidebroken=true&order=votes&reverse=true`);
-  return Array.isArray(d) ? d.filter(s=>s.url_resolved&&s.url_resolved.startsWith('http')) : [];
-}
-async function fetchRandom(limit) { if(!limit) limit=10+Math.floor(Math.random()*11);
-  const d = await rbFetch(`/json/stations/search?limit=${limit}&hidebroken=true&order=random`);
-  return Array.isArray(d) ? d.filter(s=>s.url_resolved) : [];
-}
-const _cc = {};
-async function getCover(name) {
-  if (!name) return null;
-  const k = name.toLowerCase().replace(/radio|fm|am|internet|\d+/gi,'').trim().slice(0,30);
-  if (k in _cc) return _cc[k];
-  _cc[k] = null;
-  try {
-    const r = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(k)}&entity=musicArtist&limit=1`);
-    if (!r.ok) return null;
-    const d = await r.json();
-    const u = d?.results?.[0]?.artworkUrl100?.replace('100x100','300x300')||null;
-    _cc[k] = u; return u;
-  } catch(e){ return null; }
-}
-const audio = new Audio();
-audio.volume = 0.7;
-const S = {
-  mode:null, stCache:{}, queue:[], qi:0,
-  playing:false, shuffle:false, favs:[],
+const COUNTRIES = [['TR','Türkiye'],['DE','Almanya'],['GB','İngiltere'],['US','ABD'],['FR','Fransa'],['IT','İtalya'],['ES','İspanya'],['GR','Yunanistan'],['NL','Hollanda'],['JP','Japonya'],['KR','Kore'],['BR','Brezilya'],['MX','Meksika'],['IN','Hindistan'],['EG','Mısır'],['RU','Rusya'],['AZ','Azerbaycan'],['IR','İran']];
+const SORTS = [
+  {l:'🔥 trend',q:'order=clicktrend&reverse=true'},
+  {l:'★ popüler',q:'order=votes&reverse=true'},
+  {l:'▶ çok dinlenen',q:'order=clickcount&reverse=true'},
+  {l:'✧ yeni',q:'order=changetimestamp&reverse=true'},
+  {l:'⚄ rastgele',q:'order=random'},
+];
+const TAGS = [
+  ['türkçe','turkish','lang'],['kürtçe','kurdish','lang'],['arapça','arabic','lang'],['farsça','persian','lang'],['ingilizce','english','lang'],
+  ['jazz','jazz'],['lo-fi','lofi'],['ambient','ambient'],['klasik','classical'],['elektronik','electronic'],['rock','rock'],['pop','pop'],['soul','soul'],
+  ['reggae','reggae'],['blues','blues'],['hiphop','hip-hop'],['house','house'],['techno','techno'],['metal','metal'],['80s','80s'],['90s','90s'],
+  ['arabesk','arabesk'],['türk halk','turkish folk'],['dünya','world music'],['folk','folk'],['haber','news'],['talk','talk'],['drone','drone'],
+];
+
+/* ---------- utils ---------- */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const flag = cc => /^[A-Z]{2}$/.test(cc||'') ? String.fromCodePoint(...[...cc].map(c=>127397+c.charCodeAt(0))) : '';
+const fmtN = n => new Intl.NumberFormat('tr-TR').format(n);
+const fmtT = s => { s=Math.floor(s||0); const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60; return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0'); };
+const hue = s => { let h=0; for (const c of String(s)) h=(h*31+c.charCodeAt(0))|0; return Math.abs(h)%360; };
+const LS = {
+  get(k,d){ try{ const v=localStorage.getItem('radio.'+k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem('radio.'+k, JSON.stringify(v)); }catch(e){} },
 };
-function save() {} 
-(function(){ const sys = window.matchMedia('(prefers-color-scheme:dark)').matches; applyTheme(sys?'dark':'light', false); })();
-function applyTheme(t, sv=true) {
+const canHls = !!document.createElement('audio').canPlayType('application/vnd.apple.mpegurl');
+
+/* ---------- api ---------- */
+let SERVERS = shuffle(['de1','de2','nl1','at1','fi1'].map(h=>`https://${h}.api.radio-browser.info`));
+async function api(path, timeout=9000) {
+  for (const base of SERVERS) {
+    const ac = new AbortController(); const t = setTimeout(()=>ac.abort(), timeout);
+    try {
+      const r = await fetch(base+path, {signal:ac.signal});
+      clearTimeout(t);
+      if (r.ok) { SERVERS = [base, ...SERVERS.filter(x=>x!==base)]; return await r.json(); }
+    } catch(e) { clearTimeout(t); }
+  }
+  return null;
+}
+const BASEQ = 'hidebroken=true&is_https=true';
+const LIB = new Map();
+function norm(s) {
+  if (!s || !s.stationuuid) return null;
+  const url = s.url_resolved || s.url || '';
+  if (!/^https:\/\//i.test(url)) return null;
+  if (+s.hls && !canHls) return null;
+  const st = {
+    uuid:s.stationuuid, name:(s.name||'İstasyon').replace(/\s+/g,' ').trim().slice(0,80), url,
+    favicon:/^https:\/\//i.test(s.favicon||'') ? s.favicon : '',
+    cc:(s.countrycode||'').toUpperCase(), country:s.country||'',
+    tags:(s.tags||'').split(',').map(t=>t.trim().toLowerCase()).filter(t=>t&&t.length<24).slice(0,4),
+    codec:(s.codec||'').toLowerCase(), bitrate:+s.bitrate||0,
+    homepage:/^https?:\/\//i.test(s.homepage||'') ? s.homepage : '', votes:+s.votes||0,
+    lat: Number.isFinite(+s.geo_lat) && s.geo_lat!==null && s.geo_lat!=='' ? +s.geo_lat : (Number.isFinite(s.lat)?s.lat:null),
+    lon: Number.isFinite(+s.geo_long) && s.geo_long!==null && s.geo_long!=='' ? +s.geo_long : (Number.isFinite(s.lon)?s.lon:null),
+  };
+  if (st.lat===0 && st.lon===0) { st.lat=null; st.lon=null; }
+  LIB.set(st.uuid, st); return st;
+}
+function normList(arr, exclude=new Set()) {
+  const seen = new Set(), out = [];
+  for (const s of arr||[]) {
+    const n = norm(s); if (!n) continue;
+    const k = n.name.toLowerCase().replace(/[^a-z0-9ğüşıöç]/g,'');
+    if (seen.has(k) || exclude.has(n.uuid)) continue;
+    seen.add(k); out.push(n);
+  }
+  return out;
+}
+const search = (q, limit=40, offset=0) => api(`/json/stations/search?${q}&limit=${limit}&offset=${offset}&${BASEQ}`);
+
+/* ---------- state ---------- */
+const S = {
+  coll:null, collList:[], queue:[], qi:-1, cur:null,
+  state:'idle', errs:0, bad:new Set(),
+  favs:LS.get('favs',[]), recents:LS.get('recents',[]),
+  staticFx:LS.get('static',true), sleepEnd:0, startedAt:0,
+};
+S.favs.forEach(s=>LIB.set(s.uuid,s)); S.recents.forEach(s=>LIB.set(s.uuid,s));
+const favSet = () => new Set(S.favs.map(f=>f.uuid));
+const isFav = u => S.favs.some(f=>f.uuid===u);
+const audio = new Audio();
+audio.preload = 'none';
+audio.volume = LS.get('vol',0.7);
+
+/* ---------- theme ---------- */
+function applyTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('themeBtn').textContent = t==='dark'?'☀':'☽';
-  document.getElementById('themeMetaColor').content = t==='dark'?'#121210':'#fafaf8';
+  $('#themeBtn').textContent = t==='dark' ? '☀' : '☽';
+  $('#themeMetaColor').content = t==='dark' ? '#121210' : '#fafaf8';
 }
-function toggleTheme() {
-  applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
-}
+applyTheme(LS.get('theme', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+function toggleTheme(){ const t = document.documentElement.dataset.theme==='dark'?'light':'dark'; applyTheme(t); LS.set('theme',t); }
+
+/* ---------- sakura ---------- */
 (function(){
-  const bg = document.getElementById('sakuraBg');
-  const ns = 'http://www.w3.org/2000/svg';
-  const pp = 'M0,-8 C4,-8 7,-4 6,0 C5,4 2,7 0,8 C-2,7 -5,4 -6,0 C-7,-4 -4,-8 0,-8Z';
-  const colors = ['#e8b4c0','#f5dde4','#dba8b8','#f0ccd4'];
-  for (let i=0;i<16;i++) {
-    const svg = document.createElementNS(ns,'svg');
-    svg.setAttribute('viewBox','-8 -8 16 16');
-    const path = document.createElementNS(ns,'path');
-    path.setAttribute('d',pp);
-    path.setAttribute('fill', colors[i%colors.length]);
-    svg.appendChild(path);
-    svg.classList.add('petal');
-    const sz = 10+Math.random()*9;
-    svg.style.cssText = `position:absolute;left:${Math.random()*100}%;top:-20px;width:${sz}px;height:${sz}px;animation-duration:${9+Math.random()*13}s;animation-delay:${Math.random()*22}s;`;
+  const bg=$('#sakuraBg'), ns='http://www.w3.org/2000/svg';
+  const pp='M0,-8 C4,-8 7,-4 6,0 C5,4 2,7 0,8 C-2,7 -5,4 -6,0 C-7,-4 -4,-8 0,-8Z';
+  const colors=['#e8b4c0','#f5dde4','#dba8b8','#f0ccd4'];
+  for (let i=0;i<14;i++){
+    const svg=document.createElementNS(ns,'svg'); svg.setAttribute('viewBox','-8 -8 16 16');
+    const p=document.createElementNS(ns,'path'); p.setAttribute('d',pp); p.setAttribute('fill',colors[i%4]);
+    svg.appendChild(p); svg.classList.add('petal');
+    const sz=9+Math.random()*9;
+    svg.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${10+Math.random()*14}s;animation-delay:${Math.random()*24}s`;
     bg.appendChild(svg);
   }
 })();
-function buildSidebar() {
-  document.getElementById('modeList').innerHTML =
-    '<div class="sb-lbl">modlar</div>' +
-    Object.entries(MODES).map(([k,m])=>`
-      <div class="mode-item" data-mode="${k}" onclick="selectMode('${k}')">
-        <span class="mode-icon">${m.icon}</span>
-        <span class="mode-lbl">${m.name}</span>
-        
-        <span class="mode-cnt" id="mc_${k}"></span>
-      </div>
-    `).join('');
+
+/* ---------- static noise (radyo paraziti) ---------- */
+let actx=null, noiseBuf=null, noise=null;
+function ensureCtx(){
+  if (!actx) { try { actx = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){ return; } }
+  if (actx.state==='suspended') actx.resume().catch(()=>{});
 }
-function buildDiscTags() {
-  document.getElementById('discTags').innerHTML = DISC_TAGS.map(t=>
-    `<div class="tag-pill ${t.k==='lang'?'lang':''}" onclick="discByTag('${t.t}',this)">${t.l}</div>`
-  ).join('');
-}
-function renderFavs() {
-  const el = document.getElementById('favList');
-  if (!S.favs.length) { el.innerHTML = '<div class="fav-empty">henüz yok<br>♡ ile ekle</div>'; return; }
-  el.innerHTML = S.favs.map((f,i)=>`
-    <div class="fav-item" onclick="playFav(${i})">
-      <span style="font-size:10px;color:var(--accent)">♡</span>
-      <span class="fav-n" title="${f.name}">${f.name}</span>
-      <button class="fav-rm" onclick="rmFav(event,${i})">✕</button>
-    </div>
-  `).join('');
-}
-async function selectMode(key) {
-  S.mode = key;
-  const m = MODES[key];
-  document.querySelectorAll('.mode-item').forEach(el=>el.classList.remove('active'));
-  const mEl = document.querySelector(`[data-mode="${key}"]`);
-  if (mEl) mEl.classList.add('active');
-  const titleEl = document.getElementById('vhTitle');
-  titleEl.textContent = m.name;
-  document.getElementById('vhSub').textContent = m.desc;
-  switchView('stations');
-  showLdg();
-  setStatus('yükleniyor...');
-  if (!S.stCache[key] || S.stCache[key].length < 2) {
-    let list = [];
-    for (const tag of m.tags) {
-      const res = await fetchTag(tag, 14);
-      for (const s of res) {
-        if (!list.find(x=>x.stationuuid===s.stationuuid)) list.push(s);
-        if (list.length >= 18) break;
-      }
-      if (list.length >= 18) break;
-    }
-    S.stCache[key] = list;
+function staticOn(){
+  if (!S.staticFx || !actx || actx.state!=='running') return;
+  staticOff(true);
+  if (!noiseBuf) {
+    const len = actx.sampleRate*2; noiseBuf = actx.createBuffer(1,len,actx.sampleRate);
+    const d = noiseBuf.getChannelData(0); for (let i=0;i<len;i++) d[i]=Math.random()*2-1;
   }
-  S.queue = [...S.stCache[key]];
-  S.qi = 0;
-  if (S.shuffle) shuffleArr(S.queue);
-  const mc = document.getElementById(`mc_${key}`);
-  if (mc) mc.textContent = S.queue.length || '';
-  renderStations(S.queue, key);
-  renderQueue();
-  if (S.queue.length > 0) loadAndPlay(S.queue[0]);
-  else { setStatus('istasyon bulunamadı — yenile'); showToast('istasyon yok, yenile dene'); }
+  const src=actx.createBufferSource(); src.buffer=noiseBuf; src.loop=true;
+  const bp=actx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=2200; bp.Q.value=.5;
+  const g=actx.createGain(); g.gain.value=0.05*audio.volume*(audio.muted?0:1);
+  src.connect(bp).connect(g).connect(actx.destination); src.start();
+  noise={src,g};
+  clearTimeout(staticOn._t); staticOn._t=setTimeout(staticOff,7000);
 }
-function renderStations(list, key) {
-  const c = document.getElementById('stCon');
-  if (!list||!list.length) {
-    c.innerHTML = '<div class="ldg"><div>istasyon bulunamadı</div><button class="sm-btn" style="margin-top:10px" onclick="refreshMode()">↻ tekrar dene</button></div>';
-    return;
-  }
-  c.innerHTML = `<div class="st-grid">${list.map((s,i)=>stCard(s,i,key)).join('')}</div>`;
-  list.forEach((s,i)=>lazyArt(s,i,'art'));
+function staticOff(now){
+  if (!noise) return;
+  const {src,g}=noise; noise=null;
+  try { if (now) src.stop(); else { g.gain.setTargetAtTime(0,actx.currentTime,.12); setTimeout(()=>{try{src.stop()}catch(e){}},500); } } catch(e){}
 }
-function stCard(s, i, key) {
-  const name = (s.name||'İstasyon').substring(0,46);
-  const tag  = (s.tags||'').split(',').map(t=>t.trim()).filter(Boolean)[0]||'';
-  const bc   = s.bitrate?`${s.bitrate}k`:'';
-  const cc   = s.countrycode||'';
-  const uid   = s.stationuuid||'';
-  return `<div class="st-card" onclick="playUid('${uid}')" data-uid="${uid}">
-    <div class="st-art" id="art_${i}">${MODES[key]?.icon||'♪'}</div>
-    <div class="st-info">
-      <div class="st-name">${name}</div>
-      <div class="st-meta">${cc?`<span>${cc}</span>`:''}${bc?`<span>${bc}</span>`:''}${tag?`<span class="st-tag">${tag}</span>`:''}</div>
-    </div>
-    <div class="st-acts">
-      <div class="ic-btn ${isFav(s)?'faved':''}" id="fb_${i}" onclick="event.stopPropagation();toggleFav(event,${i})" title="favori">♡</div>
-    </div>
+
+/* ---------- art ---------- */
+function art(st, cls, fallback) {
+  const ch = fallback || (st?.name||'♪').replace(/^[^\p{L}\p{N}]+/u,'').charAt(0).toUpperCase() || '♪';
+  const img = st?.favicon ? `<img src="${esc(st.favicon)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
+  return `<div class="${cls} art" style="--h:${hue(st?.name||'')}">${esc(ch)}${img}</div>`;
+}
+function setArt(el, st, fallback) {
+  const tmp=document.createElement('div'); tmp.innerHTML=art(st,'x',fallback);
+  const n=tmp.firstChild; el.style.cssText=n.style.cssText; el.innerHTML=n.innerHTML;
+}
+
+/* ---------- sidebar ---------- */
+function buildSidebar(){
+  const modes = Object.entries(MODES).map(([k,m])=>`<button class="sb-item" data-act="coll" data-type="mode" data-key="${k}"><span class="sb-icon">${m.icon}</span><span class="sb-name">${esc(m.name)}</span><span class="sb-sub">${esc(m.desc)}</span></button>`).join('');
+  const ccs = COUNTRIES.slice(0,12).map(([cc,n])=>`<button class="sb-item" data-act="coll" data-type="country" data-key="${cc}"><span class="sb-icon">${flag(cc)}</span><span class="sb-name">${esc(n)}</span></button>`).join('');
+  $('#sidebar').innerHTML = `
+    <div class="sb-sec"><div class="sb-lbl">modlar</div>${modes}</div>
+    <div class="sb-div"></div>
+    <div class="sb-sec countries"><div class="sb-lbl">ülkeler</div>${ccs}</div>
+    <div class="sb-div"></div>
+    <div class="sb-sec sb-lib"><div class="sb-lbl"><span>favoriler</span><span id="favCnt"></span></div><div id="sbFavs"></div></div>
+    <div class="sb-sec sb-lib"><div class="sb-lbl">son dinlenenler</div><div id="sbRecs"></div></div>`;
+}
+function renderSideLib(){
+  const item = (s,ctx) => `<button class="sb-item" data-act="play-uid" data-ctx="${ctx}" data-uid="${esc(s.uuid)}"><span class="sb-icon">${flag(s.cc)||'♪'}</span><span class="sb-name">${esc(s.name)}</span></button>`;
+  $('#sbFavs').innerHTML = S.favs.length ? S.favs.slice(0,12).map(s=>item(s,'fav')).join('') : '<div class="sb-empty">henüz yok — ♡ ile ekle</div>';
+  $('#favCnt').textContent = S.favs.length || '';
+  $('#sbRecs').innerHTML = S.recents.length ? S.recents.slice(0,6).map(s=>item(s,'rec')).join('') : '<div class="sb-empty">burada son dinlediklerin görünecek</div>';
+}
+
+/* ---------- cards ---------- */
+function card(st, ctx, fs) {
+  const on = st.uuid===S.cur, fv = fs.has(st.uuid);
+  const meta = [
+    st.cc ? `<span title="${esc(st.country)}">${flag(st.cc)} ${esc(st.cc)}</span>` : '',
+    st.bitrate ? `<span>${st.bitrate}k</span>` : '',
+    st.codec && st.codec!=='unknown' ? `<span>${esc(st.codec)}</span>` : '',
+    st.tags[0] ? `<span class="tag">${esc(st.tags[0])}</span>` : '',
+  ].join('');
+  return `<div class="st-card${on?' playing':''}${S.bad.has(st.uuid)?' bad':''}" role="button" tabindex="0" data-ctx="${ctx}" data-uid="${esc(st.uuid)}">
+    ${art(st,'st-art')}
+    <div class="st-info"><div class="st-name">${esc(st.name)}</div><div class="st-meta">${meta}</div></div>
+    <button class="ic-btn${fv?' faved':''}" data-act="fav" aria-label="favori">${fv?'♥':'♡'}</button>
   </div>`;
 }
-function showLdg() {
-  document.getElementById('stCon').innerHTML = '<div class="ldg"><div class="spin"></div><div>istasyonlar yükleniyor</div></div>';
+function grid(list, ctx){ const fs=favSet(); return `<div class="st-grid">${list.map(s=>card(s,ctx,fs)).join('')}</div>`; }
+const skeleton = n => `<div class="st-grid">${'<div class="skel"></div>'.repeat(n)}</div>`;
+function listFor(ctx){
+  if (ctx==='coll') return S.collList;
+  if (ctx==='disc') return D.list;
+  if (ctx==='fav') return S.favs;
+  if (ctx==='rec') return S.recents;
+  if (ctx==='queue') return S.queue;
+  return [];
 }
-async function refreshMode() {
-  if (!S.mode) return;
-  delete S.stCache[S.mode];
-  showToast('↻ yeni istasyonlar aranıyor...');
-  await selectMode(S.mode);
+function refreshCards(){
+  const fs=favSet();
+  $$('.st-card').forEach(c=>{
+    const u=c.dataset.uid;
+    c.classList.toggle('playing', u===S.cur);
+    c.classList.toggle('bad', S.bad.has(u));
+    const b=c.querySelector('.ic-btn'); if (b){ const f=fs.has(u); b.classList.toggle('faved',f); b.textContent=f?'♥':'♡'; }
+  });
+  $$('.sb-item[data-act="coll"]').forEach(b=>b.classList.toggle('active', S.coll && b.dataset.type===S.coll.type && b.dataset.key===S.coll.key));
 }
-async function lazyArt(s, i, pfx) {
-  const get = ()=>document.getElementById(`${pfx}_${i}`);
-  const set = url=>{ const el=get(); if(el) el.innerHTML=`<img src="${url}" alt="" loading="lazy">`; };
-  if (s.favicon&&s.favicon.startsWith('http')) {
-    const img=new Image();
-    img.onload=()=>set(s.favicon);
-    img.onerror=async()=>{ const u=await getCover(s.name); if(u)set(u); };
-    img.src=s.favicon;
+
+/* ---------- collections (mod / ülke) ---------- */
+let collToken = 0;
+async function loadColl(type, key, {autoplay=true, random=true}={}) {
+  const tok = ++collToken;
+  S.coll = {type,key};
+  switchView('stations');
+  let title, sub;
+  if (type==='mode') { const m=MODES[key]; title=`${m.icon} ${m.name}`; sub=m.desc; }
+  else { const c=COUNTRIES.find(x=>x[0]===key); title=`${flag(key)} ${c?c[1]:key}`; sub='bu ülkeden canlı yayınlar'; }
+  $('#vhTitle').textContent = title; $('#vhSub').textContent = sub+' · yükleniyor…';
+  $('#collRes').innerHTML = skeleton(8);
+  refreshCards();
+  let raw = [];
+  const m = MODES[key];
+  if (type==='country' || m?.cc) {
+    const cc = type==='country' ? key : m.cc;
+    const off = random ? Math.floor(Math.random()*3)*40 : 0;
+    const [a,b] = await Promise.all([search(`countrycode=${cc}&order=votes&reverse=true`,60,0), search(`countrycode=${cc}&order=clicktrend&reverse=true`,40,off)]);
+    raw = [...(a||[]),...(b||[])];
   } else {
-    const u=await getCover(s.name); if(u)set(u);
+    const res = await Promise.allSettled(m.tags.map(t=>search(`tag=${encodeURIComponent(t)}&order=votes&reverse=true`,40,0)));
+    res.forEach(r=>{ if (r.status==='fulfilled' && r.value) raw.push(...r.value); });
   }
+  if (tok!==collToken) return;
+  // havuzdan rastgele seçim: her açılışta farklı istasyonlar
+  let list = normList(raw);
+  list = random ? shuffle(list).slice(0,30) : list.slice(0,30);
+  S.collList = list;
+  $('#vhSub').textContent = `${sub} · ${list.length} istasyon`;
+  if (!list.length) {
+    $('#collRes').innerHTML = `<div class="ldg"><div class="ldg-kanji">静</div><div>şu an istasyon bulunamadı</div><button class="sm-btn" data-act="refresh">↻ tekrar dene</button></div>`;
+    return;
+  }
+  $('#collRes').innerHTML = grid(list,'coll');
+  refreshCards();
+  if (autoplay) playFrom('coll', list[0].uuid);
 }
-let _eTimer=null, _eCnt=0, _eSrc='';
-function loadAndPlay(st) {
-  if (!st) return;
-  clearTimeout(_eTimer); _eTimer=null; _eCnt=0; _eSrc='';
-  const src = st.url_resolved||st.url;
-  if (!src) { nextTrack(); return; }
-  audio.src = src;
-  audio.play().catch(()=>{});
+function refreshColl(){ if (S.coll) loadColl(S.coll.type, S.coll.key); else zap(); }
+
+/* ---------- discover ---------- */
+const D = {q:'', label:'', offset:0, list:[], more:false, loading:false};
+async function discover(q, label) {
+  Object.assign(D,{q,label,offset:0,list:[],more:false});
+  switchView('discover');
+  $('#discHd').textContent = label;
+  $('#discRes').innerHTML = skeleton(6);
+  await discMore();
+}
+async function discMore(){
+  if (D.loading) return; D.loading = true;
+  const btn = $('#discMoreBtn'); if (btn) btn.textContent='yükleniyor…';
+  const q = D.q;
+  let d;
+  if (q.startsWith('__search:')) {
+    const term = encodeURIComponent(q.slice(9));
+    const [a,b] = await Promise.all([search(`name=${term}&order=votes&reverse=true`,30,D.offset), search(`tag=${term}&order=votes&reverse=true`,30,D.offset)]);
+    d = [...(a||[]),...(b||[])]; D.more = (a||[]).length===30 || (b||[]).length===30;
+  } else {
+    d = await search(q,40,D.offset); D.more = (d||[]).length===40;
+  }
+  D.loading = false;
+  if (q!==D.q) return;
+  D.offset += q.startsWith('__search:') ? 30 : 40;
+  const have = new Set(D.list.map(s=>s.uuid));
+  const n = normList(d, have);
+  D.list.push(...n);
+  if (!D.list.length) { $('#discRes').innerHTML='<div class="ldg"><div class="ldg-kanji">無</div><div>sonuç bulunamadı — başka bir şey dene</div></div>'; return; }
+  $('#discHd').textContent = `${D.label} · ${D.list.length} istasyon`;
+  $('#discRes').innerHTML = grid(D.list,'disc') + (D.more ? `<div class="more-row"><button class="sm-btn" id="discMoreBtn" data-act="disc-more">daha fazla ↓</button></div>` : '');
+}
+function buildDiscover(){
+  $('#sortChips').innerHTML = SORTS.map((s,i)=>`<button class="chip" data-act="disc" data-q="${esc(s.q)}" data-l="${esc(s.l)}">${esc(s.l)}</button>`).join('');
+  $('#tagChips').innerHTML = TAGS.map(([l,t,k])=>`<button class="chip${k?' lang':''}" data-act="disc" data-q="${esc((k?'language=':'tag=')+encodeURIComponent(t)+'&order=votes&reverse=true')}" data-l="${esc(l)}">${esc(l)}</button>`).join('');
+  $('#ccChips').innerHTML = COUNTRIES.map(([cc,n])=>`<button class="chip" data-act="disc" data-q="countrycode=${cc}&order=votes&reverse=true" data-l="${esc(flag(cc)+' '+n)}">${flag(cc)} ${esc(n)}</button>`).join('');
+}
+
+/* ---------- library ---------- */
+function renderLibrary(){
+  $('#favSub').textContent = S.favs.length ? `${S.favs.length} istasyon` : '';
+  $('#favRes').innerHTML = S.favs.length ? grid(S.favs,'fav') : '<div class="ldg" style="padding:24px"><div>henüz favori yok — beğendiğin istasyonda ♡’ye bas</div></div>';
+  $('#recRes').innerHTML = S.recents.length ? grid(S.recents,'rec') : '<div class="ldg" style="padding:24px"><div>henüz bir şey dinlemedin</div></div>';
+}
+function slim(s){ return {uuid:s.uuid,name:s.name,url:s.url,favicon:s.favicon,cc:s.cc,country:s.country,tags:s.tags,codec:s.codec,bitrate:s.bitrate,homepage:s.homepage,votes:s.votes,lat:s.lat??null,lon:s.lon??null}; }
+function toggleFav(uuid){
+  const st = LIB.get(uuid); if (!st) return;
+  if (isFav(uuid)) { S.favs = S.favs.filter(f=>f.uuid!==uuid); toast('favorilerden çıkarıldı'); }
+  else { S.favs.unshift(slim(st)); toast(`♥ ${st.name} eklendi`); api(`/json/vote/${uuid}`); }
+  LS.set('favs', S.favs);
+  renderSideLib(); refreshCards(); updateFavBtns();
+  if ($('#view-library').classList.contains('active')) renderLibrary();
+}
+function pushRecent(st){
+  S.recents = [slim(st), ...S.recents.filter(r=>r.uuid!==st.uuid)].slice(0,30);
+  LS.set('recents', S.recents); renderSideLib();
+}
+function exportFavs(){
+  const blob = new Blob([JSON.stringify({app:'rad-io',v:1,favs:S.favs},null,1)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rad-io-favoriler.json'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+async function importFavs(file){
+  try{
+    const d = JSON.parse(await file.text()); const arr = Array.isArray(d) ? d : d.favs;
+    let n=0; for (const f of arr||[]) { if (f && f.uuid && /^https:/.test(f.url||'') && !isFav(f.uuid)) { const s=slim({...f,tags:Array.isArray(f.tags)?f.tags:[]}); S.favs.push(s); LIB.set(s.uuid,s); n++; } }
+    LS.set('favs',S.favs); renderSideLib(); renderLibrary(); toast(`${n} istasyon içe aktarıldı`);
+  }catch(e){ toast('dosya okunamadı'); }
+}
+
+/* ---------- queue ---------- */
+function renderQueue(){
+  if (!S.queue.length) { $('#qItems').innerHTML='<div class="sb-empty" style="padding:20px 0">sıra boş — bir mod seç ya da çevir</div>'; $('#qSub').textContent='—'; return; }
+  $('#qSub').textContent = `${S.queue.length} istasyon`;
+  $('#qItems').innerHTML = S.queue.map((s,i)=>`<button class="q-item${i===S.qi?' active':''}" data-act="play-uid" data-ctx="queue" data-uid="${esc(s.uuid)}"><span class="q-num">${i===S.qi?'▶':i+1}</span><span class="q-name">${esc(s.name)}</span><span class="q-cc">${flag(s.cc)}</span></button>`).join('');
+}
+
+/* ---------- playback ---------- */
+let loadTimer=null;
+function setState(st){
+  S.state = st;
+  document.body.classList.toggle('is-playing', st==='playing');
+  document.body.classList.toggle('is-loading', st==='loading');
+  const icon = st==='playing' ? '⏸' : st==='loading' ? '…' : '▶';
+  $('#playBtn').textContent = icon;
+  $('#stPlay').textContent = st==='playing' ? '⏸ duraklat' : st==='loading' ? '… bağlanıyor' : '▶ dinle';
+  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = st==='playing'?'playing':st==='idle'?'none':'paused';
+  updateKicker();
+}
+function updateKicker(){
+  const st = LIB.get(S.cur);
+  const k = $('#stKicker');
+  if (!st) { k.textContent='binlerce canlı radyo'; return; }
+  k.textContent = S.state==='playing' ? 'şimdi canlı' : S.state==='loading' ? 'frekans aranıyor…' : S.state==='paused' ? 'duraklatıldı' : 'hazır — dinlemek için bas';
+}
+function playFrom(ctx, uuid){
+  const list = listFor(ctx);
+  S.queue = list.slice(); S.queueCtx = ctx;
+  if (!S.queue.some(s=>s.uuid===uuid)) { const s=LIB.get(uuid); if (s) S.queue.unshift(s); }
+  play(uuid);
+}
+function play(uuid){
+  const st = LIB.get(uuid); if (!st) return;
+  ensureCtx();
+  S.cur = uuid; S.qi = S.queue.findIndex(s=>s.uuid===uuid);
+  LS.set('last', slim(st));
   updateNP(st);
-  highlightActive();
-  setStatus(`▶ ${(st.name||'İstasyon').substring(0,28)}`);
-  document.getElementById('liveDot').className = 'live-dot on';
+  setState('loading'); staticOn();
+  audio.src = st.url;
+  audio.play().catch(err=>{
+    if (err.name==='NotAllowedError') { clearTimeout(loadTimer); staticOff(true); setState('idle'); }
+  });
+  clearTimeout(loadTimer);
+  loadTimer = setTimeout(()=>{ if (S.state==='loading' && S.cur===uuid) fail('zaman aşımı'); }, 12000);
+  api(`/json/url/${uuid}`); // radio-browser tıklama sayacı
+  try { history.replaceState(null,'',`#s=${uuid}`); } catch(e){}
+  refreshCards(); renderQueue();
+}
+function playPause(){
+  ensureCtx();
+  if (!S.cur) { zap(); return; }
+  if (S.state==='playing') { audio.pause(); return; }
+  if (S.state==='loading') { audio.pause(); clearTimeout(loadTimer); staticOff(true); setState('paused'); return; }
+  play(S.cur); // canlı yayında yeniden bağlan → gecikmesiz
+}
+function step(dir){
+  if (!S.queue.length) { zap(); return; }
+  if (S.queueCtx==='zap' && dir>0 && S.qi>=S.queue.length-1) { zap(); return; }
+  let i = S.qi;
+  for (let n=0;n<S.queue.length;n++){
+    i = (i+dir+S.queue.length)%S.queue.length;
+    if (!S.bad.has(S.queue[i].uuid)) { play(S.queue[i].uuid); return; }
+  }
+  zap();
+}
+function fail(why){
+  clearTimeout(loadTimer); staticOff(true);
+  if (!S.cur) return;
+  S.bad.add(S.cur); S.errs++;
+  refreshCards();
+  if (S.errs>=6) { S.errs=0; setState('idle'); toast('yayınlara ulaşılamıyor — bağlantını kontrol et'); return; }
+  toast('bu yayın açılmadı → sıradaki');
+  setTimeout(()=>step(1), 700);
+}
+audio.addEventListener('playing', ()=>{
+  clearTimeout(loadTimer); staticOff(); S.errs=0;
+  if (S.state!=='playing') S.startedAt = Date.now();
+  setState('playing');
+  const st=LIB.get(S.cur); if (st) pushRecent(st);
+});
+audio.addEventListener('waiting', ()=>{ if (S.state==='playing') { setState('loading'); } });
+audio.addEventListener('pause', ()=>{ if (S.state==='playing') setState('paused'); });
+audio.addEventListener('error', ()=>{ if (audio.src && S.state!=='idle' && S.state!=='paused') fail('error'); });
+audio.addEventListener('stalled', ()=>{ if (S.state==='loading') {/* timeout halleder */} });
+
+function updateNP(st){
+  $('#npName').textContent = st.name;
+  const where = [flag(st.cc)+' '+(st.country||st.cc||''), st.bitrate?st.bitrate+'k':'', st.codec&&st.codec!=='unknown'?st.codec:''].filter(x=>x.trim()).join(' · ');
+  $('#npSub').textContent = where || 'canlı yayın';
+  setArt($('#npArt'), st); setArt($('#stArt'), st);
+  $('#stName').textContent = st.name;
+  $('#stMeta').innerHTML = [
+    st.cc ? `<span>${flag(st.cc)} ${esc(st.country||st.cc)}</span>` : '',
+    st.bitrate ? `<span>${st.bitrate} kbps</span>` : '',
+    st.codec && st.codec!=='unknown' ? `<span>${esc(st.codec)}</span>` : '',
+    ...st.tags.slice(0,3).map(t=>`<button class="tag" data-act="disc" data-q="tag=${esc(encodeURIComponent(t))}&order=votes&reverse=true" data-l="${esc(t)}" style="cursor:pointer">${esc(t)}</button>`),
+    st.homepage ? `<a href="${esc(st.homepage)}" target="_blank" rel="noopener noreferrer">site ↗</a>` : '',
+  ].join('');
+  updateFavBtns(); updateKicker();
+  document.title = `♪ ${st.name} — rad—io`;
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: st.name||'Radyo',
-      artist: S.mode?MODES[S.mode]?.name:'rad-io',
-      album: 'rad-io'
+      title: st.name, artist: [st.country, st.tags[0]].filter(Boolean).join(' · ') || 'canlı radyo', album: 'rad—io',
+      artwork: st.favicon ? [{src:st.favicon, sizes:'512x512'}] : [{src:'icon.svg', sizes:'512x512', type:'image/svg+xml'}],
     });
-    navigator.mediaSession.setActionHandler('play',          ()=>audio.play().catch(()=>{}));
-    navigator.mediaSession.setActionHandler('pause',         ()=>audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', ()=>prevTrack());
-    navigator.mediaSession.setActionHandler('nexttrack',     ()=>nextTrack());
-    navigator.mediaSession.playbackState = 'playing';
   }
-  document.title = `♪ ${(st.name||'rad-io').substring(0,22)}`;
 }
-function playPause() {
-  if (!S.queue.length) { selectMode('calisma'); return; }
-  audio.paused ? audio.play().catch(()=>{}) : audio.pause();
+function updateFavBtns(){
+  const f = S.cur && isFav(S.cur);
+  ['#npFav','#npFavM'].forEach(s=>{ const b=$(s); b.textContent=f?'♥':'♡'; b.classList.toggle('active',!!f); });
+  const sb=$('#stFav'); sb.textContent = f?'♥ favoride':'♡ favori'; sb.classList.toggle('faved',!!f);
 }
-function playIndex(i) {
-  if (!S.queue[i]) return;
-  S.qi = i; loadAndPlay(S.queue[i]);
+if ('mediaSession' in navigator) {
+  const ms = navigator.mediaSession;
+  const h = (a,f)=>{ try{ ms.setActionHandler(a,f); }catch(e){} };
+  h('play', ()=>playPause()); h('pause', ()=>audio.pause()); h('stop', ()=>audio.pause());
+  h('previoustrack', ()=>step(-1)); h('nexttrack', ()=>step(1));
 }
-function playUid(uid) {
-  if (!uid) return;
-  const idx = S.queue.findIndex(s=>(s.stationuuid||'')===uid);
-  if (idx>=0) { S.qi=idx; loadAndPlay(S.queue[idx]); return; }
-  const s = _dList.find(x=>(x.stationuuid||'')===uid);
-  if (s) { S.queue=[s]; S.qi=0; S.mode=null; loadAndPlay(s); renderQueue(); }
+// canlı süre
+setInterval(()=>{
+  if (S.state==='playing') $('#liveTxt').textContent = 'canlı · ' + fmtT((Date.now()-S.startedAt)/1000);
+  else if (S.state==='paused') $('#liveTxt').textContent = 'duraklatıldı';
+  else if (S.state==='loading') $('#liveTxt').textContent = 'bağlanıyor…';
+  else $('#liveTxt').textContent = 'canlı';
+}, 1000);
+
+/* ---------- zap: frekansı çevir ---------- */
+let zapping=false;
+async function zap(){
+  if (zapping) return; zapping=true;
+  ensureCtx(); staticOn();
+  setState('loading'); $('#stName').textContent = 'frekans aranıyor…'; $('#stMeta').textContent='';
+  const d = await search('order=random', 20);
+  zapping=false;
+  const list = normList(d, S.bad);
+  if (!list.length) { staticOff(true); setState(S.cur?'paused':'idle'); toast('frekans bulunamadı, tekrar dene'); if (S.cur) updateNP(LIB.get(S.cur)); return; }
+  S.coll = null; refreshCards();
+  S.queue = list; S.queueCtx = 'zap';
+  play(list[0].uuid);
+  toast(`📻 ${flag(list[0].cc)} ${list[0].name}`);
 }
-function nextTrack() {
-  if (!S.queue.length) return;
-  clearTimeout(_eTimer); _eTimer=null;
-  S.qi = (S.qi+1)%S.queue.length;
-  loadAndPlay(S.queue[S.qi]);
+
+/* ---------- sleep timer ---------- */
+const SLEEP_STEPS=[0,15,30,60,90];
+let sleepIv=null;
+function cycleSleep(){
+  const left = S.sleepEnd ? Math.round((S.sleepEnd-Date.now())/60000) : 0;
+  const idx = SLEEP_STEPS.findIndex(m=>m>left);
+  const next = idx<0 ? 0 : SLEEP_STEPS[idx];
+  S.sleepEnd = next ? Date.now()+next*60000 : 0;
+  toast(next ? `☾ ${next} dk sonra kapanacak` : '☾ uyku zamanlayıcı kapalı');
+  clearInterval(sleepIv); if (next) sleepIv=setInterval(sleepTick,5000);
+  sleepTick();
 }
-function prevTrack() {
-  if (!S.queue.length) return;
-  clearTimeout(_eTimer); _eTimer=null;
-  if (audio.currentTime>3){audio.currentTime=0;return;}
-  S.qi = (S.qi-1+S.queue.length)%S.queue.length;
-  loadAndPlay(S.queue[S.qi]);
-}
-function toggleShuffle() {
-  S.shuffle=!S.shuffle;
-  document.getElementById('shuffleBtn').classList.toggle('active',S.shuffle);
-  if (S.shuffle) shuffleArr(S.queue);
-  save(); showToast(S.shuffle?'⇌ karıştırma açık':'⇌ karıştırma kapalı');
-}
-function seek(e) {
-  const b=document.getElementById('pBar');
-  const pct=(e.clientX-b.getBoundingClientRect().left)/b.offsetWidth;
-  if (audio.duration&&isFinite(audio.duration)) audio.currentTime=pct*audio.duration;
-}
-audio.addEventListener('play', ()=>{
-  S.playing=true; _eCnt=0;
-  document.getElementById('playBtn').textContent='⏸';
-  document.getElementById('liveDot').className='live-dot on';
-  if ('mediaSession' in navigator) navigator.mediaSession.playbackState='playing';
-});
-audio.addEventListener('pause', ()=>{
-  S.playing=false;
-  document.getElementById('playBtn').textContent='▶';
-  document.getElementById('liveDot').className='live-dot';
-  if ('mediaSession' in navigator) navigator.mediaSession.playbackState='paused';
-});
-audio.addEventListener('timeupdate', ()=>{
-  const cur=audio.currentTime, dur=audio.duration;
-  if (!dur||!isFinite(dur)) {
-    document.getElementById('curT').textContent=fmtT(cur);
-    document.getElementById('totT').textContent='∞';
-    document.getElementById('pFill').style.width='0%';
-    return;
+function sleepTick(){
+  const b=$('#sleepBtn');
+  if (!S.sleepEnd) { b.textContent='☾'; b.classList.remove('active'); clearInterval(sleepIv); return; }
+  const ms = S.sleepEnd-Date.now();
+  b.textContent = '☾ '+Math.max(1,Math.ceil(ms/60000)); b.classList.add('active');
+  if (ms<=0) {
+    clearInterval(sleepIv); S.sleepEnd=0;
+    const v0 = audio.volume; let i=0;
+    const fade=setInterval(()=>{ i++; audio.volume=Math.max(0,v0*(1-i/20)); if(i>=20){ clearInterval(fade); audio.pause(); audio.volume=v0; sleepTick(); toast('☾ iyi uykular'); } },400);
   }
-  document.getElementById('pFill').style.width=Math.min((cur/dur)*100,100)+'%';
-  document.getElementById('curT').textContent=fmtT(cur);
-  document.getElementById('totT').textContent=fmtT(dur);
-});
-audio.addEventListener('ended', ()=>{ if(_eTimer)return; nextTrack(); });
-audio.addEventListener('error', ()=>{
-  const src=audio.src;
-  if (src===_eSrc&&_eTimer) return; 
-  _eSrc=src;
-  clearTimeout(_eTimer);
-  _eCnt++;
-  const mx=Math.max(S.queue.length,3);
-  if (_eCnt>mx) {
-    _eCnt=0;_eTimer=null;
-    setStatus('istasyon bulunamadı — ↻ yenile');
-    document.getElementById('liveDot').className='live-dot';
-    return;
+}
+
+/* ---------- share ---------- */
+async function share(){
+  const st = LIB.get(S.cur); if (!st) { toast('önce bir istasyon çal'); return; }
+  const url = location.origin + location.pathname + '#s=' + st.uuid;
+  const data = {title:`${st.name} — rad—io`, text:`${st.name} şimdi rad—io’da canlı`, url};
+  try { if (navigator.share) { await navigator.share(data); return; } } catch(e){ if (e.name==='AbortError') return; }
+  try { await navigator.clipboard.writeText(url); toast('bağlantı kopyalandı'); } catch(e){ prompt('bağlantı:', url); }
+}
+
+/* ---------- view / ui ---------- */
+function switchView(v){
+  $$('.view').forEach(el=>el.classList.toggle('active', el.id==='view-'+v));
+  $$('.top-btn[data-v]').forEach(b=>b.classList.toggle('active', b.dataset.v===v));
+  if (v==='queue') renderQueue();
+  if (v==='library') renderLibrary();
+  $('#main').scrollTop = 0;
+  if (v==='map') openMap(); else MAP.active=false;
+}
+function toast(msg){
+  const el=$('#toast'); el.textContent=msg; el.classList.add('show');
+  clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),2600);
+}
+function setVol(v){
+  v=Math.min(1,Math.max(0,v)); audio.volume=v; audio.muted=false; $('#volSlider').value=v; LS.set('vol',v);
+  $('#muteBtn').textContent = v===0?'∅':'♪';
+}
+function toggleMute(){ audio.muted=!audio.muted; $('#muteBtn').textContent=audio.muted?'∅':'♪'; toast(audio.muted?'sessiz':'ses açık'); }
+async function loadStats(){
+  const d = await api('/json/stats', 6000);
+  if (!d || !d.stations) return;
+  const live = d.stations-(d.stations_broken||0);
+  $('#counter').innerHTML = `<span class="live-dot"></span><span><b>${fmtN(live)}</b><span class="c-word"> canlı radyo</span></span><span class="c-extra">&nbsp;· ${fmtN(d.countries||0)} ülke · son 1 saatte ${fmtN(d.clicks_last_hour||0)} dinlenme</span>`;
+  $('#discSub').textContent = `${fmtN(live)} canlı istasyon arasında ara`;
+}
+
+
+/* ---------- dünya haritası ---------- */
+const MAP = {pts:[], loaded:false, loading:false, active:false, k:1, k0:1, cx:0, cy:0, w:0, h:0, dpr:1, hover:null, me:null, raf:0};
+const cv = $('#mapCv');
+function resizeMap(){
+  const r = $('#mapWrap').getBoundingClientRect();
+  const first = !MAP.w;
+  MAP.dpr = Math.min(2, window.devicePixelRatio||1);
+  const ow=MAP.w, oh=MAP.h;
+  MAP.w = r.width; MAP.h = r.height;
+  cv.width = Math.round(MAP.w*MAP.dpr); cv.height = Math.round(MAP.h*MAP.dpr);
+  MAP.k0 = Math.min(MAP.w/345, MAP.h/135);
+  if (first) fitMap(); else { MAP.cx += (MAP.w-ow)/2; MAP.cy += (MAP.h-oh)/2; }
+}
+function fitMap(){ const tall = MAP.w < MAP.h; MAP.k = MAP.k0*(tall?2.8:1); const lon = tall?28:12, lat = tall?36:12; MAP.cx = MAP.w/2 - lon*MAP.k; MAP.cy = MAP.h/2 + lat*MAP.k; }
+const sx = lon => lon*MAP.k + MAP.cx;
+const sy = lat => -lat*MAP.k + MAP.cy;
+function zoomAt(x, y, f){
+  const nk = Math.min(MAP.k0*400, Math.max(MAP.k0*0.8, MAP.k*f));
+  const r = nk/MAP.k; MAP.cx = x-(x-MAP.cx)*r; MAP.cy = y-(y-MAP.cy)*r; MAP.k = nk;
+}
+function centerOn(lat, lon, zoom){
+  if (zoom) MAP.k = Math.max(MAP.k, MAP.k0*zoom);
+  MAP.cx = MAP.w/2 - lon*MAP.k; MAP.cy = MAP.h/2 + lat*MAP.k;
+}
+async function loadMapData(){
+  if (MAP.loaded || MAP.loading) return;
+  MAP.loading = true;
+  $('#mapSub').textContent = 'istasyonlar haritaya yerleşiyor…';
+  const res = await Promise.allSettled([
+    search('has_geo_info=true&order=clickcount&reverse=true', 3000, 0),
+    search('has_geo_info=true&order=votes&reverse=true', 2000, 0),
+    search('has_geo_info=true&order=clicktrend&reverse=true', 1000, 0),
+  ]);
+  const seen = new Set();
+  for (const r of res) if (r.status==='fulfilled' && r.value) for (const s of r.value) {
+    const n = norm(s); if (!n || n.lat==null || seen.has(n.uuid)) continue;
+    seen.add(n.uuid); MAP.pts.push(n);
   }
-  setStatus(`akış hatası ${_eCnt}/${mx} — sonraki deneniyor`);
-  _eTimer=setTimeout(()=>{ _eTimer=null; nextTrack(); }, 2800);
-});
-document.addEventListener('visibilitychange', ()=>{
-  if (!document.hidden&&S.playing&&audio.paused) audio.play().catch(()=>{});
-});
-document.addEventListener('touchend', ()=>{
-  if (audio.src&&audio.paused&&S.playing) audio.play().catch(()=>{});
-}, {passive:true});
-function updateNP(s) {
-  document.getElementById('npName').textContent = (s.name||'İstasyon').substring(0,42);
-  document.getElementById('npMode').textContent = S.mode?`${MODES[S.mode].icon} ${MODES[S.mode].name}`:'✦ keşif';
-  const art=document.getElementById('npArt');
-  art.innerHTML='♪';
-  const set=u=>{art.innerHTML=`<img src="${u}" alt="">`;};
-  if (s.favicon&&s.favicon.startsWith('http')) {
-    const img=new Image();
-    img.onload=()=>set(s.favicon);
-    img.onerror=()=>getCover(s.name).then(u=>{if(u)set(u);});
-    img.src=s.favicon;
-  } else getCover(s.name).then(u=>{if(u)set(u);});
+  MAP.loading = false; MAP.loaded = MAP.pts.length>0;
+  $('#mapSub').textContent = MAP.loaded ? `${fmtN(MAP.pts.length)} canlı radyo haritada · bir noktaya dokun` : 'harita yüklenemedi — tekrar dene';
 }
-function highlightActive() {
-  document.querySelectorAll('.st-card').forEach((el,i)=>el.classList.toggle('playing',i===S.qi));
+async function openMap(){
+  MAP.active = true;
+  requestAnimationFrame(()=>{ resizeMap(); loop(); });
+  await loadMapData();
+  const st = LIB.get(S.cur);
+  if (st && st.lat!=null && MAP.k<=MAP.k0*1.01) centerOn(st.lat, st.lon, 2.5);
 }
-function renderQueue() {
-  const c=document.getElementById('qItems');
-  if (!S.queue.length) {
-    c.innerHTML='<div style="font-size:11px;color:var(--ink3);padding:20px 0">sıra boş — bir mod seç</div>';
-    document.getElementById('qSub').textContent='—';
-    return;
+function loop(t){
+  cancelAnimationFrame(MAP.raf);
+  if (!MAP.active || document.hidden) return;
+  drawMap(t||0);
+  MAP.raf = requestAnimationFrame(loop);
+}
+function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function drawMap(t){
+  const g = cv.getContext('2d'), {w,h,k} = MAP;
+  g.setTransform(MAP.dpr,0,0,MAP.dpr,0,0); g.clearRect(0,0,w,h);
+  const C = {line:cssVar('--line'), ink3:cssVar('--ink3'), ink:cssVar('--ink'), acc:cssVar('--accent'), sak:cssVar('--sakura')};
+  // graticule
+  g.strokeStyle = C.line; g.lineWidth = 1; g.beginPath();
+  for (let lon=-180; lon<=180; lon+=30){ const x=sx(lon); g.moveTo(x,sy(85)); g.lineTo(x,sy(-85)); }
+  for (let lat=-60; lat<=80; lat+=20){ const y=sy(lat); g.moveTo(sx(-180),y); g.lineTo(sx(180),y); }
+  g.stroke();
+  g.strokeStyle = C.ink3; g.globalAlpha=.35; g.setLineDash([2,4]); g.beginPath(); g.moveTo(sx(-180),sy(0)); g.lineTo(sx(180),sy(0)); g.stroke(); g.setLineDash([]); g.globalAlpha=1;
+  // dots
+  const r = Math.max(1.1, Math.min(3.4, 1.15*Math.pow(k/MAP.k0, .35)));
+  const fs = favSet();
+  g.fillStyle = C.acc; g.globalAlpha = .55; g.beginPath();
+  for (const p of MAP.pts){
+    const x=sx(p.lon), y=sy(p.lat); if (x<-5||y<-5||x>w+5||y>h+5) continue;
+    if (fs.has(p.uuid)) continue;
+    g.moveTo(x+r,y); g.arc(x,y,r,0,6.2832);
   }
-  document.getElementById('qSub').textContent=`${S.queue.length} istasyon`;
-  c.innerHTML=S.queue.map((s,i)=>`
-    <div class="q-item ${i===S.qi?'active':''}" onclick="playUid('${(s.stationuuid||'')}')">
-      <span class="q-num">${i===S.qi?'▶':i+1}</span>
-      <span class="q-name">${(s.name||'İstasyon').substring(0,52)}</span>
-    </div>
-  `).join('');
-}
-function isFav(s) {
-  const u=s.url_resolved||s.url;
-  return S.favs.some(f=>f.url===u);
-}
-function isFavUrl(u) { return S.favs.some(f=>f.url===u); }
-function toggleFav(e, i) {
-  e.stopPropagation();
-  const s=S.queue[i]; if(!s) return;
-  const u=s.url_resolved||s.url;
-  if (isFav(s)) {
-    S.favs=S.favs.filter(f=>f.url!==u);
-    showToast('favorilerden çıkarıldı');
-  } else {
-    S.favs.push({name:s.name||'İstasyon',url:u,uuid:s.stationuuid||''});
-    showToast(`♡ ${(s.name||'').substring(0,22)} eklendi`);
+  g.fill();
+  g.globalAlpha = 1; g.fillStyle = C.sak; g.beginPath();
+  for (const p of MAP.pts) if (fs.has(p.uuid)) { const x=sx(p.lon), y=sy(p.lat); g.moveTo(x+r+1,y); g.arc(x,y,r+1,0,6.2832); }
+  for (const p of S.favs) if (p.lat!=null && !MAP.pts.some(q=>q.uuid===p.uuid)) { const x=sx(p.lon), y=sy(p.lat); g.moveTo(x+r+1,y); g.arc(x,y,r+1,0,6.2832); }
+  g.fill();
+  // hover
+  if (MAP.hover){ const x=sx(MAP.hover.lon), y=sy(MAP.hover.lat); g.strokeStyle=C.ink; g.lineWidth=1.2; g.beginPath(); g.arc(x,y,r+5,0,6.2832); g.stroke(); }
+  // me
+  if (MAP.me){ const x=sx(MAP.me.lon), y=sy(MAP.me.lat); g.fillStyle='#4a8fd0'; g.beginPath(); g.arc(x,y,4.5,0,6.2832); g.fill(); g.strokeStyle='#4a8fd0'; g.globalAlpha=.35; g.beginPath(); g.arc(x,y,11,0,6.2832); g.stroke(); g.globalAlpha=1; }
+  // now playing: radyo dalgası
+  const st = LIB.get(S.cur);
+  if (st && st.lat!=null){
+    const x=sx(st.lon), y=sy(st.lat);
+    g.fillStyle = C.acc; g.beginPath(); g.arc(x,y,r+2.5,0,6.2832); g.fill();
+    if (S.state==='playing' || S.state==='loading'){
+      for (let i=0;i<3;i++){
+        const ph = ((t/1800)+i/3)%1;
+        g.strokeStyle = C.acc; g.globalAlpha = (1-ph)*.7; g.lineWidth=1.2;
+        g.beginPath(); g.arc(x,y,4+ph*34,0,6.2832); g.stroke();
+      }
+      g.globalAlpha = 1;
+    }
   }
-  save(); renderFavs();
-  const btn=document.getElementById(`fb_${i}`);
-  if (btn) btn.classList.toggle('faved',isFav(s));
-}
-function addFav(s) {
-  if (!s) return;
-  if (isFav(s)) {showToast('zaten favorilerde');return;}
-  S.favs.push({name:s.name||'İstasyon',url:s.url_resolved||s.url,uuid:s.stationuuid||''});
-  showToast(`♡ ${(s.name||'').substring(0,22)} eklendi`);
-  save(); renderFavs();
-}
-function rmFav(e, i) {
-  e.stopPropagation();
-  S.favs.splice(i,1); save(); renderFavs();
-}
-function playFav(i) {
-  const f=S.favs[i]; if(!f)return;
-  S.queue=[{name:f.name,url_resolved:f.url,stationuuid:f.uuid}];
-  S.qi=0; S.mode=null;
-  loadAndPlay(S.queue[0]); renderQueue();
-  showToast(`▶ ${f.name.substring(0,26)}`);
-}
-let _dList=[];
-async function discByTag(tag, el) {
-  document.querySelectorAll('.tag-pill').forEach(p=>p.classList.remove('active'));
-  if(el)el.classList.add('active');
-  showDiscLdg();
-  const list=await fetchTag(tag,22);
-  _dList=list; renderDiscRes(list);
-}
-async function doSearch() {
-  const q=document.getElementById('searchIn').value.trim();
-  if(!q){showToast('arama terimi gir');return;}
-  document.querySelectorAll('.tag-pill').forEach(p=>p.classList.remove('active'));
-  showDiscLdg();
-  const byName=await fetchName(q,14);
-  const byTag=await fetchTag(q,10);
-  const merged=[...byName];
-  for(const s of byTag) if(!merged.find(x=>x.stationuuid===s.stationuuid)) merged.push(s);
-  _dList=merged; renderDiscRes(merged);
-}
-async function doRandom() {
-  document.querySelectorAll('.tag-pill').forEach(p=>p.classList.remove('active'));
-  showDiscLdg();
-  const list=await fetchRandom();
-  _dList=list; renderDiscRes(list);
-}
-function showDiscLdg() {
-  document.getElementById('discRes').innerHTML='<div class="ldg"><div class="spin"></div><div>aranıyor...</div></div>';
-}
-function renderDiscRes(list) {
-  if(!list||!list.length) {
-    document.getElementById('discRes').innerHTML='<div class="ldg"><div>sonuç bulunamadı</div></div>';
-    return;
+  if (!MAP.loaded){
+    g.fillStyle = C.ink3; g.font = '11px "DM Mono", monospace'; g.textAlign='center';
+    g.fillText(MAP.loading ? 'binlerce istasyon haritaya yerleşiyor…' : '', w/2, h/2);
   }
-  document.getElementById('discRes').innerHTML=`<div class="st-grid">${list.map((s,i)=>discCard(s,i)).join('')}</div>`;
-  list.forEach((s,i)=>lazyArt(s,i,'da'));
 }
-function discCard(s, i) {
-  const name=(s.name||'İstasyon').substring(0,46);
-  const tag=(s.tags||'').split(',').map(t=>t.trim()).filter(Boolean)[0]||'';
-  const cc=s.countrycode||''; const bc=s.bitrate?`${s.bitrate}k`:``;
-  const fv=isFavUrl(s.url_resolved||s.url);
-  const uid=s.stationuuid||'';
-  return `<div class="st-card" onclick="playDisc(this)" data-uid="${uid}">
-    <div class="st-art" id="da_${i}">♪</div>
-    <div class="st-info">
-      <div class="st-name">${name}</div>
-      <div class="st-meta">${cc?`<span>${cc}</span>`:''}${bc?`<span>${bc}</span>`:''}${tag?`<span class="st-tag">${tag}</span>`:''}</div>
-    </div>
-    <div class="st-acts">
-      <div class="ic-btn ${fv?'faved':''}" id="dfb_${i}" onclick="event.stopPropagation();discFav(event,${i})" title="favori">♡</div>
-    </div>
-  </div>`;
+function nearestPx(x, y, max=16){
+  let best=null, bd=max*max;
+  for (const p of MAP.pts){ const dx=sx(p.lon)-x, dy=sy(p.lat)-y, d=dx*dx+dy*dy; if (d<bd){ bd=d; best=p; } }
+  return best;
 }
-function playDisc(el) {
-  const uid=el.dataset.uid; if(!uid)return;
-  const s=_dList.find(x=>x.stationuuid===uid)||_dList[0];
-  if(!s)return;
-  S.queue=[s]; S.qi=0; S.mode=null;
-  loadAndPlay(s); renderQueue();
-  showToast(`▶ ${(s.name||'').substring(0,26)}`);
+const geoD = (a,b) => { const dl=(a.lon-b.lon)*Math.cos((a.lat+b.lat)/2*Math.PI/180); const dp=a.lat-b.lat; return dl*dl+dp*dp; };
+function playNear(p, label){
+  const near = MAP.pts.filter(q=>q.lat!=null).map(q=>[geoD(p,q),q]).sort((a,b)=>a[0]-b[0]).slice(0,40).map(x=>x[1]);
+  if (!near.some(q=>q.uuid===p.uuid) && p.uuid) near.unshift(p);
+  S.queue = near; S.queueCtx = 'map'; S.coll = null;
+  play(near[0].uuid);
+  toast(label || `${flag(near[0].cc)} ${near[0].name} — ${near[0].country||near[0].cc}`);
 }
-function discFav(e, i) {
-  e.stopPropagation();
-  const el=e.currentTarget||e.target;
-  const card=el.closest('.st-card');
-  const uid=card?card.dataset.uid:'';
-  if(!uid)return;
-  const s=_dList.find(x=>(x.stationuuid||'')===uid);
-  if(!s)return;
-  addFav(s);
-  const btn=document.getElementById(`dfb_${i}`);
-  if(btn)btn.classList.add('faved');
+(function mapInput(){
+  const ptr = new Map(); let movedPx=0, pinchD=0;
+  const pos = e => { const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; };
+  cv.addEventListener('pointerdown', e=>{ cv.setPointerCapture(e.pointerId); ptr.set(e.pointerId,pos(e)); movedPx=0; cv.classList.add('grabbing');
+    if (ptr.size===2){ const [a,b]=[...ptr.values()]; pinchD=Math.hypot(a.x-b.x,a.y-b.y); } });
+  cv.addEventListener('pointermove', e=>{
+    const p = pos(e);
+    if (!ptr.has(e.pointerId)){
+      if (e.pointerType==='mouse'){ MAP.hover = nearestPx(p.x,p.y,12); showTip(MAP.hover); }
+      return;
+    }
+    const prev = ptr.get(e.pointerId); ptr.set(e.pointerId,p);
+    if (ptr.size===1){ MAP.cx += p.x-prev.x; MAP.cy += p.y-prev.y; movedPx += Math.abs(p.x-prev.x)+Math.abs(p.y-prev.y); MAP.hover=null; showTip(null); }
+    else if (ptr.size===2){ const [a,b]=[...ptr.values()]; const d=Math.hypot(a.x-b.x,a.y-b.y); if (pinchD) zoomAt((a.x+b.x)/2,(a.y+b.y)/2,d/pinchD); pinchD=d; movedPx+=99; }
+  });
+  const up = e=>{
+    if (!ptr.has(e.pointerId)) return;
+    const p = ptr.get(e.pointerId); ptr.delete(e.pointerId); cv.classList.remove('grabbing');
+    if (ptr.size<2) pinchD=0;
+    if (e.type==='pointerup' && movedPx<6 && ptr.size===0){
+      const hit = nearestPx(p.x,p.y, e.pointerType==='mouse'?12:22);
+      if (hit) playNear(hit); else zoomAt(p.x,p.y,1.8);
+    }
+  };
+  cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+  cv.addEventListener('pointerleave', ()=>{ MAP.hover=null; showTip(null); });
+  cv.addEventListener('wheel', e=>{ e.preventDefault(); const p=pos(e); zoomAt(p.x,p.y,Math.exp(-e.deltaY*0.0016)); }, {passive:false});
+  cv.addEventListener('dblclick', e=>{ const p=pos(e); zoomAt(p.x,p.y,2); });
+  window.addEventListener('resize', ()=>{ if (MAP.active) resizeMap(); });
+  document.addEventListener('visibilitychange', ()=>{ if (MAP.active && !document.hidden) loop(); });
+})();
+function showTip(p){
+  const tip = $('#mapTip');
+  if (!p){ tip.classList.remove('show'); return; }
+  tip.innerHTML = `${flag(p.cc)} ${esc(p.name)}<small>${esc(p.country||p.cc)}${p.tags[0]?' · '+esc(p.tags[0]):''}</small>`;
+  tip.style.left = sx(p.lon)+'px'; tip.style.top = sy(p.lat)+'px'; tip.classList.add('show');
 }
-function switchView(n) {
-  document.getElementById('viewStations').classList.toggle('active',n==='stations');
-  document.getElementById('viewDiscover').classList.toggle('active',n==='discover');
-  document.getElementById('viewQueue').classList.toggle('active',n==='queue');
-  if(n==='queue')renderQueue();
+function nearMe(){
+  if (!navigator.geolocation){ toast('konum desteklenmiyor'); return; }
+  toast('📍 konum alınıyor…');
+  navigator.geolocation.getCurrentPosition(async pos=>{
+    const me = {lat:pos.coords.latitude, lon:pos.coords.longitude};
+    MAP.me = me;
+    if (!$('#view-map').classList.contains('active')) switchView('map');
+    await loadMapData();
+    if (!MAP.pts.length){ toast('harita verisi yok'); return; }
+    centerOn(me.lat, me.lon, 14);
+    playNear(me, '📍 sana en yakın istasyonlar çalıyor — ⏭ ile komşulara geç');
+  }, ()=>toast('konum izni verilmedi'), {timeout:10000, maximumAge:600000});
 }
-function fmtT(s){
-  if(isNaN(s)||!isFinite(s))return'—';
-  const m=Math.floor(s/60),sec=Math.floor(s%60);
-  return m+':'+(sec<10?'0':'')+sec;
+
+/* ---------- dünya turu ---------- */
+const TOUR = {on:false, iv:null, every:8};
+function toggleTour(){
+  TOUR.on = !TOUR.on;
+  $$('.tour-btn').forEach(b=>b.classList.toggle('active', TOUR.on));
+  clearInterval(TOUR.iv);
+  if (TOUR.on){
+    toast(`🌍 dünya turu başladı — her ${TOUR.every} dakikada başka bir ülke`);
+    tourHop();
+    TOUR.iv = setInterval(()=>{ if (S.state==='playing') tourHop(); }, TOUR.every*60000);
+  } else toast('🌍 dünya turu bitti');
 }
-function shuffleArr(a){
-  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
-  return a;
+async function tourHop(){
+  const curCC = LIB.get(S.cur)?.cc;
+  let pool;
+  if (MAP.loaded) pool = MAP.pts.filter(p=>p.cc && p.cc!==curCC && !S.bad.has(p.uuid));
+  else pool = normList(await search('order=random', 60), S.bad).filter(p=>p.cc && p.cc!==curCC);
+  if (!pool.length){ zap(); return; }
+  // önce ülke seç, sonra istasyon: küçük ülkeler de eşit şans alır
+  const byCC = {}; for (const p of pool) (byCC[p.cc] ||= []).push(p);
+  const cc = pick(Object.keys(byCC)); const st = pick(byCC[cc]);
+  const sameLand = byCC[cc].filter(x=>x.uuid!==st.uuid);
+  S.queue = [st, ...shuffle(sameLand).slice(0,10)]; S.queueCtx='tour'; S.coll=null;
+  play(st.uuid);
+  toast(`🌍 ${flag(st.cc)} ${st.country||st.cc} — ${st.name}`);
+  if (MAP.active && st.lat!=null) centerOn(st.lat, st.lon, 3);
 }
-function setStatus(t){document.getElementById('statusText').textContent=t;}
-function showToast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  clearTimeout(showToast._t);
-  showToast._t=setTimeout(()=>el.classList.remove('show'),2600);
+
+/* ---------- radyolu çalar saat ---------- */
+function openAlarm(){
+  const a = LS.get('alarm', null);
+  if (a) { $('#alarmTime').value = a.time; $('#alarmSrc').value = a.src; }
+  $('#alarmModal').classList.add('show');
 }
-document.addEventListener('keydown',e=>{
-  if(e.target.tagName==='INPUT')return;
-  if(e.code==='Space'){e.preventDefault();playPause();}
-  if(e.code==='ArrowRight')nextTrack();
-  if(e.code==='ArrowLeft')prevTrack();
-  if(e.code==='KeyS')toggleShuffle();
-  if(e.code==='KeyD')switchView('discover');
-  if(e.code==='KeyT')toggleTheme();
-  if(e.code==='Escape')switchView('stations');
+function setAlarm(){
+  const time = $('#alarmTime').value; if (!time) return;
+  const src = $('#alarmSrc').value;
+  const cur = LIB.get(S.cur) || LS.get('last', null);
+  LS.set('alarm', {time, src, st: cur ? slim(cur) : null, fired:''});
+  $('#alarmModal').classList.remove('show'); updateAlarmBtn();
+  toast(`⏰ ${time}’de radyo seni uyandıracak`);
+}
+function updateAlarmBtn(){
+  const a = LS.get('alarm', null), b = $('#alarmBtn');
+  b.textContent = a ? '⏰ '+a.time : '⏰'; b.classList.toggle('active', !!a);
+}
+async function fireAlarm(a){
+  const target = LS.get('vol', 0.7);
+  audio.volume = 0.02;
+  if (a.src==='zap') await zap();
+  else if (a.src==='kafe') await loadColl('mode','kafe');
+  else {
+    const st = a.src==='fav' && S.favs.length ? pick(S.favs) : (a.st || LS.get('last',null) || (S.favs[0]));
+    if (st) { LIB.set(st.uuid, st); S.queue=[st, ...S.favs.filter(f=>f.uuid!==st.uuid)]; S.queueCtx='alarm'; play(st.uuid); } else await zap();
+  }
+  let i=0; const ramp=setInterval(()=>{ i++; audio.volume=Math.min(target, 0.02+target*i/60); if (i>=60) clearInterval(ramp); }, 1000);
+  toast('⏰ günaydın ☀');
+}
+setInterval(()=>{
+  const a = LS.get('alarm', null); if (!a) return;
+  const now = new Date(), hm = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  const day = now.toDateString();
+  if (hm===a.time && a.fired!==day){ a.fired=day; LS.set('alarm',a); fireAlarm(a); }
+}, 10000);
+
+/* ---------- events ---------- */
+document.addEventListener('click', e=>{
+  const a = e.target.closest('[data-act]');
+  if (a) {
+    const act=a.dataset.act;
+    switch(act){
+      case 'view': switchView(a.dataset.v); return;
+      case 'theme': toggleTheme(); return;
+      case 'home': switchView('stations'); return;
+      case 'coll': loadColl(a.dataset.type, a.dataset.key); return;
+      case 'refresh': refreshColl(); return;
+      case 'play': playPause(); return;
+      case 'next': step(1); return;
+      case 'prev': step(-1); return;
+      case 'zap': zap(); return;
+      case 'fav': { const c=a.closest('[data-uid]'); if (c) toggleFav(c.dataset.uid); return; }
+      case 'fav-cur': if (S.cur) toggleFav(S.cur); else toast('önce bir istasyon çal'); return;
+      case 'play-uid': playFrom(a.dataset.ctx, a.dataset.uid); return;
+      case 'share': share(); return;
+      case 'sleep': cycleSleep(); return;
+      case 'mute': toggleMute(); return;
+      case 'static': S.staticFx=!S.staticFx; LS.set('static',S.staticFx); $('#staticBtn').classList.toggle('active',S.staticFx); toast(S.staticFx?'∿ parazit efekti açık':'∿ parazit efekti kapalı'); return;
+      case 'help': $('#helpModal').classList.add('show'); return;
+      case 'close-modal': if (e.target===a) a.classList.remove('show'); return;
+      case 'tour': toggleTour(); return;
+      case 'near': nearMe(); return;
+      case 'map-center': { const st=LIB.get(S.cur); if (st && st.lat!=null) centerOn(st.lat,st.lon,6); else toast('çalan istasyonun konumu yok'); return; }
+      case 'map-reset': fitMap(); return;
+      case 'zoom-in': zoomAt(MAP.w/2,MAP.h/2,1.6); return;
+      case 'zoom-out': zoomAt(MAP.w/2,MAP.h/2,1/1.6); return;
+      case 'alarm': openAlarm(); return;
+      case 'alarm-set': setAlarm(); return;
+      case 'alarm-off': LS.set('alarm',null); updateAlarmBtn(); $('#alarmModal').classList.remove('show'); toast('⏰ alarm kapalı'); return;
+      case 'disc': $$('.chip').forEach(c=>c.classList.toggle('active', c===a)); discover(a.dataset.q, a.dataset.l); return;
+      case 'disc-more': discMore(); return;
+      case 'export': exportFavs(); return;
+      case 'import': $('#importIn').click(); return;
+      case 'clear-recent': S.recents=[]; LS.set('recents',[]); renderSideLib(); renderLibrary(); return;
+    }
+  }
+  const c = e.target.closest('.st-card');
+  if (c) playFrom(c.dataset.ctx, c.dataset.uid);
 });
-buildSidebar();
-buildDiscTags();
-renderFavs();
-if(S.shuffle)document.getElementById('shuffleBtn').classList.add('active');
-setTimeout(()=>selectMode('calisma'),300);
-console.log('%c✿ rad-io v3 — sakura edition','color:#c8a96e;font-family:serif;font-size:14px');
+document.addEventListener('keydown', e=>{
+  if (e.target.closest('input,textarea')) { if (e.key==='Escape') e.target.blur(); return; }
+  if (e.key==='Enter' && e.target.classList?.contains('st-card')) { e.target.click(); return; }
+  if (e.metaKey||e.ctrlKey||e.altKey) return;
+  const k=e.key.toLowerCase();
+  if (e.code==='Space'){ e.preventDefault(); playPause(); }
+  else if (e.key==='ArrowRight') step(1);
+  else if (e.key==='ArrowLeft') step(-1);
+  else if (e.key==='ArrowUp'){ e.preventDefault(); setVol(audio.volume+.05); }
+  else if (e.key==='ArrowDown'){ e.preventDefault(); setVol(audio.volume-.05); }
+  else if (k==='r') zap();
+  else if (k==='g') switchView('map');
+  else if (k==='w') toggleTour();
+  else if (k==='f') { if (S.cur) toggleFav(S.cur); }
+  else if (k==='m') toggleMute();
+  else if (k==='t') toggleTheme();
+  else if (k==='d') switchView('discover');
+  else if (k==='l') switchView('library');
+  else if (k==='q') switchView('queue');
+  else if (e.key==='/') { e.preventDefault(); switchView('discover'); $('#searchIn').focus(); }
+  else if (e.key==='?' || (e.shiftKey && e.code==='Slash')) $('#helpModal').classList.toggle('show');
+  else if (e.key==='Escape') $$('.modal').forEach(m=>m.classList.remove('show'));
+});
+['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev, ensureCtx, {once:true, passive:true}));
+$('#volSlider').addEventListener('input', e=>setVol(parseFloat(e.target.value)));
+$('#searchForm').addEventListener('submit', e=>{
+  e.preventDefault(); const q=$('#searchIn').value.trim(); if (!q){ toast('arama terimi gir'); return; }
+  $$('.chip').forEach(c=>c.classList.remove('active'));
+  discover('__search:'+q, `“${q}”`);
+});
+$('#importIn').addEventListener('change', e=>{ const f=e.target.files[0]; if (f) importFavs(f); e.target.value=''; });
+window.addEventListener('hashchange', ()=>{ const m=location.hash.match(/s=([\w-]+)/); if (m && m[1]!==S.cur) openShared(m[1]); });
+
+/* ---------- start ---------- */
+async function openShared(uuid){
+  let st = LIB.get(uuid);
+  if (!st) { const d = await api(`/json/stations/byuuid/${encodeURIComponent(uuid)}`); st = normList(d)[0]; }
+  if (!st) { toast('paylaşılan istasyon bulunamadı'); return false; }
+  S.queue=[st]; S.queueCtx='shared';
+  play(st.uuid); toast(`🔗 ${st.name}`);
+  return true;
+}
+function timeMode(){
+  const h = new Date().getHours();
+  let set = TIME_MODES[TIME_MODES.length-1][1];
+  for (const [start,m] of TIME_MODES) if (h>=start) set=m;
+  if (h<5) set = TIME_MODES[TIME_MODES.length-1][1];
+  return pick(set);
+}
+(async function init(){
+  buildSidebar(); buildDiscover(); renderSideLib(); setVol(audio.volume); updateAlarmBtn();
+  $('#staticBtn').classList.toggle('active', S.staticFx);
+  loadStats();
+  const m = location.hash.match(/s=([\w-]+)/);
+  if (m && await openShared(m[1])) { loadColl('mode', timeMode(), {autoplay:false}); return; }
+  // her açılışta farklı: günün saatine göre rastgele bir mod + o moddan rastgele istasyon
+  await loadColl('mode', timeMode());
+  const last = LS.get('last', null);
+  if (last && last.uuid !== S.cur) {
+    LIB.set(last.uuid, last);
+    setTimeout(()=>toast(`↩ en son: ${last.name} — kitaplıkta`), 3200);
+  }
+})();
 </script>
 </body>
 </html>
