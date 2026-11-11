@@ -10,6 +10,8 @@ Kurulum yok, hesap yok. Aç, çevir, dinle.
 - **Her açılışta farklı istasyon:** Günün saatine göre bir mod seçilir (sabah kafe, gündüz çalışma, gece uyku…), istasyon da o havuzdan rastgele gelir
 - **📻 Frekansı çevir:** Tek tuşla dünyanın herhangi bir yerinden rastgele canlı yayın, geçişte analog radyo paraziti
 - **🗺 Canlı dünya haritası:** Binlerce istasyon haritada birer ışık noktası. Sürükle, yakınlaştır, bir noktaya dokun ve o şehri dinle; ⏭ seni komşu şehre götürür. Çalan istasyonun etrafında yayın dalgası atar
+- **🌗 Gece / gündüz:** Haritada gerçek zamanlı gece gölgesi ve güneşin tepede olduğu nokta. Her istasyonda "☀ orada gündüz / ☾ orada gece / 🌅 gün doğuyor" bilgisi
+- **📔 Radyo günlüğü ve pasaport:** Toplam dinleme süresi, gezilen ülke sayısı, üst üste dinlenen gün sayısı, son 7 gün grafiği, en çok dinlenen istasyonlar ve her ülke için bir pasaport damgası. Özetini tek tuşla paylaşabilirsin. Veriler yalnızca cihazında tutulur
 - **📍 Yakınımdakiler:** Konumuna en yakın radyolar, yakından uzağa sıralı
 - **🌍 Dünya turu:** Her 8 dakikada başka bir ülkeye geçer. Önce ülke seçilir, sonra istasyon; böylece küçük ülkeler de eşit şans alır
 - **⏰ Radyolu çalar saat:** Seçtiğin saatte çalan istasyon, favorilerinden biri, kafe modu ya da dünyadan sürpriz bir yayınla, ses 60 saniyede yavaşça açılarak uyandırır
