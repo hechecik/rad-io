@@ -237,6 +237,25 @@ kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line2);border-
 .map-zoom button:hover{border-color:var(--ink);color:var(--ink)}
 .map-legend{position:absolute;left:18px;bottom:16px;font-size:9.5px;color:var(--ink3);letter-spacing:.06em;display:flex;gap:12px;align-items:center}
 .map-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.log-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.log-tile{background:var(--bg);padding:16px 20px}
+.log-num{font-family:var(--serif);font-size:26px;font-weight:300;line-height:1.1}
+.log-lbl{font-size:9.5px;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase;margin-top:5px}
+.log-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;padding:20px 30px}
+.log-h{font-size:9.5px;letter-spacing:.16em;color:var(--ink3);text-transform:uppercase;margin-bottom:12px}
+.week{display:flex;align-items:flex-end;gap:8px;height:110px}
+.week-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.week-bar{width:100%;max-width:34px;background:var(--accent);opacity:.75;border-radius:2px 2px 0 0;min-height:2px}
+.week-col.today .week-bar{opacity:1}
+.week-d{font-size:9px;color:var(--ink3)}
+.stamps{display:flex;flex-wrap:wrap;gap:8px}
+.stamp{border:1px dashed var(--line2);border-radius:6px;padding:7px 9px;text-align:center;min-width:64px;transform:rotate(var(--rot,0deg))}
+.stamp b{display:block;font-size:20px;font-weight:400;line-height:1.2}
+.stamp span{font-size:9px;color:var(--ink3)}
+.top-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:11px;width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left;color:var(--ink2)}
+.top-row:hover{color:var(--ink)}
+.top-row .t-n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top-row .t-s{font-size:10px;color:var(--ink3)}
 .form-row{display:flex;flex-direction:column;gap:6px;margin:10px 0}
 .form-row label{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
 .form-row input,.form-row select{font-family:var(--mono);font-size:13px;padding:8px 10px;background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r);color:var(--ink)}
@@ -244,6 +263,8 @@ kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line2);border-
 .modal-acts{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 
 @media(max-width:760px){
+.log-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+.log-grid{grid-template-columns:1fr;padding:16px}
 .map-legend{display:none}
 .map-hud{top:10px;left:12px;right:12px}
 .map-title{font-size:17px}
@@ -350,7 +371,7 @@ kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line2);border-
           </div>
         </div>
         <div class="map-tip" id="mapTip"></div>
-        <div class="map-legend"><span><i style="background:var(--accent)"></i>yayında</span><span><i style="background:var(--sakura)"></i>favorin</span><span>sürükle · yakınlaştır · dokun</span></div>
+        <div class="map-legend"><span><i style="background:var(--accent)"></i>yayında</span><span><i style="background:var(--sakura)"></i>favorin</span><span><i style="background:var(--ink3);opacity:.5"></i>gece</span><span>sürükle · yakınlaştır · dokun</span></div>
         <div class="map-zoom"><button data-act="zoom-in" aria-label="yakınlaştır">+</button><button data-act="zoom-out" aria-label="uzaklaştır">−</button></div>
       </div>
     </div>
@@ -377,6 +398,9 @@ kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line2);border-
 
     <!-- LIBRARY -->
     <div class="view" id="view-library">
+      <div class="vh"><div><div class="vh-title">radyo günlüğün <span class="vh-jp">日記</span></div><div class="vh-sub">dinleme alışkanlıkların — yalnızca bu cihazda tutulur</div></div>
+        <div class="vh-acts"><button class="sm-btn" data-act="share-log">⤴ paylaş</button></div></div>
+      <div id="logRes"></div>
       <div class="vh"><div><div class="vh-title">favoriler <span class="vh-jp">お気に入り</span></div><div class="vh-sub" id="favSub"></div></div>
         <div class="vh-acts"><button class="sm-btn" data-act="export">⇣ dışa aktar</button><button class="sm-btn" data-act="import">⇡ içe aktar</button></div></div>
       <div id="favRes"></div>
@@ -769,6 +793,7 @@ function buildDiscover(){
 
 /* ---------- library ---------- */
 function renderLibrary(){
+  renderLog();
   $('#favSub').textContent = S.favs.length ? `${S.favs.length} istasyon` : '';
   $('#favRes').innerHTML = S.favs.length ? grid(S.favs,'fav') : '<div class="ldg" style="padding:24px"><div>henüz favori yok — beğendiğin istasyonda ♡’ye bas</div></div>';
   $('#recRes').innerHTML = S.recents.length ? grid(S.recents,'rec') : '<div class="ldg" style="padding:24px"><div>henüz bir şey dinlemedin</div></div>';
@@ -896,6 +921,7 @@ function updateNP(st){
     st.codec && st.codec!=='unknown' ? `<span>${esc(st.codec)}</span>` : '',
     ...st.tags.slice(0,3).map(t=>`<button class="tag" data-act="disc" data-q="tag=${esc(encodeURIComponent(t))}&order=votes&reverse=true" data-l="${esc(t)}" style="cursor:pointer">${esc(t)}</button>`),
     st.homepage ? `<a href="${esc(st.homepage)}" target="_blank" rel="noopener noreferrer">site ↗</a>` : '',
+    st.lat!=null ? `<span id="stDay">${esc(dayLabel(st))}</span>` : '',
   ].join('');
   updateFavBtns(); updateKicker();
   document.title = `♪ ${st.name} — rad—io`;
@@ -1001,6 +1027,92 @@ async function loadStats(){
 }
 
 
+
+/* ---------- güneş: gece / gündüz ---------- */
+function sunPos(d=new Date()){
+  const rad=Math.PI/180, n=(d.getTime()-Date.UTC(2000,0,1,12))/864e5;
+  const L=(280.46+0.9856474*n)%360, g=((357.528+0.9856003*n)%360)*rad;
+  const lam=(L+1.915*Math.sin(g)+0.02*Math.sin(2*g))*rad, eps=(23.439-4e-7*n)*rad;
+  const dec=Math.asin(Math.sin(eps)*Math.sin(lam));
+  const ra=Math.atan2(Math.cos(eps)*Math.sin(lam),Math.cos(lam))/rad;
+  const gmst=((18.697374558+24.06570982441908*n)%24+24)%24;
+  let lon=((ra-gmst*15)%360+540)%360-180;
+  return {lat:dec/rad, lon};
+}
+function sunAlt(lat, lon, sp=sunPos()){
+  const r=Math.PI/180;
+  return Math.asin(Math.sin(lat*r)*Math.sin(sp.lat*r)+Math.cos(lat*r)*Math.cos(sp.lat*r)*Math.cos((lon-sp.lon)*r))/r;
+}
+function dayLabel(st){
+  if (!st || st.lat==null) return '';
+  const a = sunAlt(st.lat, st.lon);
+  return a>6 ? '☀ orada gündüz' : a>-6 ? (sunAlt(st.lat, st.lon+1)>a ? '🌅 orada gün doğuyor' : '🌇 orada gün batıyor') : '☾ orada gece';
+}
+
+/* ---------- radyo günlüğü ---------- */
+const LOG = Object.assign({total:0, cc:{}, st:{}, days:{}}, LS.get('log', {}));
+const dayKey = (d=new Date()) => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function logTick(sec){
+  const st = LIB.get(S.cur); if (!st) return;
+  LOG.total += sec;
+  if (st.cc) LOG.cc[st.cc] = (LOG.cc[st.cc]||0)+sec;
+  const e = LOG.st[st.uuid] || (LOG.st[st.uuid] = {s:0});
+  e.s += sec; e.d = slim(st);
+  const d = dayKey(); LOG.days[d] = (LOG.days[d]||0)+sec;
+  const keys = Object.keys(LOG.st);
+  if (keys.length>150) keys.sort((a,b)=>LOG.st[a].s-LOG.st[b].s).slice(0,keys.length-150).forEach(k=>delete LOG.st[k]);
+  const dk = Object.keys(LOG.days).sort(); if (dk.length>90) dk.slice(0,dk.length-90).forEach(k=>delete LOG.days[k]);
+  LS.set('log', LOG);
+}
+function fmtDur(sec){
+  const m = Math.round(sec/60); if (m<60) return m+' dk';
+  const h = Math.floor(m/60); return h+' sa'+(m%60?' '+(m%60)+' dk':'');
+}
+function streak(){
+  let n=0; const d=new Date();
+  if (!(LOG.days[dayKey(d)]>=60)) d.setDate(d.getDate()-1);
+  while (LOG.days[dayKey(d)]>=60){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+function renderLog(){
+  const ccs = Object.entries(LOG.cc).sort((a,b)=>b[1]-a[1]);
+  const sts = Object.values(LOG.st).filter(e=>e.d).sort((a,b)=>b.s-a.s);
+  if (!LOG.total || LOG.total<30){ $('#logRes').innerHTML = '<div class="ldg" style="padding:24px"><div>dinledikçe günlüğün dolacak — kaç saat, kaç ülke, en sevdiğin istasyonlar</div></div>'; return; }
+  const days=[]; const DN=['paz','pzt','sal','çar','per','cum','cmt'];
+  for (let i=6;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); days.push({k:dayKey(d), l:DN[d.getDay()], v:LOG.days[dayKey(d)]||0, today:i===0}); }
+  const mx = Math.max(60, ...days.map(d=>d.v));
+  $('#logRes').innerHTML = `
+    <div class="log-tiles">
+      <div class="log-tile"><div class="log-num">${fmtDur(LOG.total)}</div><div class="log-lbl">toplam dinleme</div></div>
+      <div class="log-tile"><div class="log-num">${ccs.length}</div><div class="log-lbl">ülke gezildi</div></div>
+      <div class="log-tile"><div class="log-num">${Object.keys(LOG.st).length}</div><div class="log-lbl">istasyon</div></div>
+      <div class="log-tile"><div class="log-num">${streak()} <span style="font-size:14px">gün</span></div><div class="log-lbl">üst üste dinleme</div></div>
+    </div>
+    <div class="log-grid">
+      <div>
+        <div class="log-h">son 7 gün</div>
+        <div class="week">${days.map(d=>`<div class="week-col${d.today?' today':''}" title="${d.k}: ${fmtDur(d.v)}"><div class="week-bar" style="height:${Math.round(d.v/mx*88)}%"></div><div class="week-d">${d.l}</div></div>`).join('')}</div>
+        <div class="log-h" style="margin-top:22px">en çok dinlediklerin</div>
+        ${sts.slice(0,6).map((e,i)=>`<button class="top-row" data-act="play-log" data-uid="${esc(e.d.uuid)}"><span class="t-s">${i+1}</span><span>${flag(e.d.cc)}</span><span class="t-n">${esc(e.d.name)}</span><span class="t-s">${fmtDur(e.s)}</span></button>`).join('')}
+      </div>
+      <div>
+        <div class="log-h">radyo pasaportun · ${ccs.length} ülke</div>
+        <div class="stamps">${ccs.slice(0,40).map(([cc,v])=>`<div class="stamp" style="--rot:${(hue(cc)%9)-4}deg" title="${esc(cc)}"><b>${flag(cc)||esc(cc)}</b><span>${esc(cc)} · ${fmtDur(v)}</span></div>`).join('')}</div>
+      </div>
+    </div>`;
+}
+function shareLog(){
+  const ccs = Object.entries(LOG.cc).sort((a,b)=>b[1]-a[1]);
+  const top = Object.values(LOG.st).filter(e=>e.d).sort((a,b)=>b.s-a.s)[0];
+  const txt = `📻 rad—io günlüğüm: ${fmtDur(LOG.total)} canlı radyo, ${ccs.length} ülke ${ccs.slice(0,8).map(c=>flag(c[0])).join('')}${top?` · favorim: ${top.d.name}`:''}`;
+  const url = location.origin+location.pathname;
+  if (navigator.share) navigator.share({text:txt, url}).catch(()=>{});
+  else navigator.clipboard.writeText(txt+' '+url).then(()=>toast('günlük özeti kopyalandı'), ()=>prompt('kopyala:', txt+' '+url));
+}
+setInterval(()=>{ if (S.state==='playing') logTick(10); }, 10000);
+setInterval(()=>{ const st=LIB.get(S.cur); if (st) updateDayLabel(st); }, 60000);
+function updateDayLabel(st){ const el=$('#stDay'); if (el) el.textContent = dayLabel(st); }
+
 /* ---------- dünya haritası ---------- */
 const MAP = {pts:[], loaded:false, loading:false, active:false, k:1, k0:1, cx:0, cy:0, w:0, h:0, dpr:1, hover:null, me:null, raf:0};
 const cv = $('#mapCv');
@@ -1065,6 +1177,19 @@ function drawMap(t){
   for (let lon=-180; lon<=180; lon+=30){ const x=sx(lon); g.moveTo(x,sy(85)); g.lineTo(x,sy(-85)); }
   for (let lat=-60; lat<=80; lat+=20){ const y=sy(lat); g.moveTo(sx(-180),y); g.lineTo(sx(180),y); }
   g.stroke();
+  // gece gölgesi
+  const sp = sunPos();
+  const dec = Math.abs(sp.lat)<0.1 ? 0.1 : sp.lat, r0=Math.PI/180;
+  g.beginPath();
+  for (let lon=-180; lon<=180; lon+=2){
+    let lat = Math.atan(-Math.cos((lon-sp.lon)*r0)/Math.tan(dec*r0))/r0;
+    lat = Math.max(-85, Math.min(85, lat));
+    lon===-180 ? g.moveTo(sx(lon),sy(lat)) : g.lineTo(sx(lon),sy(lat));
+  }
+  const pole = dec>0 ? -85 : 85;
+  g.lineTo(sx(180),sy(pole)); g.lineTo(sx(-180),sy(pole)); g.closePath();
+  g.fillStyle = document.documentElement.dataset.theme==='dark' ? 'rgba(0,0,0,.38)' : 'rgba(40,40,70,.07)'; g.fill();
+  g.fillStyle = C.acc; g.globalAlpha=.5; g.font='14px serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('☀', sx(sp.lon), sy(sp.lat)); g.globalAlpha=1;
   g.strokeStyle = C.ink3; g.globalAlpha=.35; g.setLineDash([2,4]); g.beginPath(); g.moveTo(sx(-180),sy(0)); g.lineTo(sx(180),sy(0)); g.stroke(); g.setLineDash([]); g.globalAlpha=1;
   // dots
   const r = Math.max(1.1, Math.min(3.4, 1.15*Math.pow(k/MAP.k0, .35)));
@@ -1150,7 +1275,7 @@ function playNear(p, label){
 function showTip(p){
   const tip = $('#mapTip');
   if (!p){ tip.classList.remove('show'); return; }
-  tip.innerHTML = `${flag(p.cc)} ${esc(p.name)}<small>${esc(p.country||p.cc)}${p.tags[0]?' · '+esc(p.tags[0]):''}</small>`;
+  tip.innerHTML = `${flag(p.cc)} ${esc(p.name)}<small>${esc(p.country||p.cc)}${p.tags[0]?' · '+esc(p.tags[0]):''} · ${esc(dayLabel(p).replace(' orada',''))}</small>`;
   tip.style.left = sx(p.lon)+'px'; tip.style.top = sy(p.lat)+'px'; tip.classList.add('show');
 }
 function nearMe(){
@@ -1257,6 +1382,8 @@ document.addEventListener('click', e=>{
       case 'help': $('#helpModal').classList.add('show'); return;
       case 'close-modal': if (e.target===a) a.classList.remove('show'); return;
       case 'tour': toggleTour(); return;
+      case 'share-log': shareLog(); return;
+      case 'play-log': { const e=LOG.st[a.dataset.uid]; if (e&&e.d){ LIB.set(e.d.uuid,e.d); S.queue=Object.values(LOG.st).filter(x=>x.d).sort((x,y)=>y.s-x.s).map(x=>{LIB.set(x.d.uuid,x.d);return x.d;}); S.queueCtx='log'; play(e.d.uuid);} return; }
       case 'near': nearMe(); return;
       case 'map-center': { const st=LIB.get(S.cur); if (st && st.lat!=null) centerOn(st.lat,st.lon,6); else toast('çalan istasyonun konumu yok'); return; }
       case 'map-reset': fitMap(); return;
