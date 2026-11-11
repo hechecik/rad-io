@@ -1,5 +1,5 @@
 // rad—io service worker: yalnızca uygulama kabuğu (yayınlara ve API'ye dokunmaz)
-const C = 'radio-shell-v5';
+const C = 'radio-shell-v5.1';
 const SHELL = ['./', './index.html', './icon.svg', './manifest.webmanifest'];
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(C).then(c => c.addAll(SHELL)).catch(()=>{})); });
 self.addEventListener('activate', e => e.waitUntil(

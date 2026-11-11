@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#fafaf8" id="themeMetaColor">
-<title>rad—io · binlerce canlı radyo · thousands of live radio</title>
+<title>rad—io · binlerce canlı radyo</title>
 <meta name="description" content="Dünyanın dört bir yanından binlerce canlı radyo. Mod seç, çevir, keşfet.">
 <meta property="og:title" content="rad—io · binlerce canlı radyo">
 <meta property="og:description" content="Dünyanın dört bir yanından binlerce canlı radyo. Mod seç, çevir, keşfet.">
@@ -818,6 +818,7 @@ function artPNG(st){ // araç ekranları/kilit ekranı için PNG kapak
 /* ---------- i18n apply ---------- */
 function applyLang(){
   document.documentElement.lang = LANG;
+  document.title = 'rad—io · ' + t('slogan'); // yer imi / sekme adı sabit kalır
   RN = null; NF = new Intl.NumberFormat(LANG==='tr'?'tr-TR':'en-US');
   $$('[data-i18n]').forEach(el=>{ el.textContent = t(el.dataset.i18n); });
   $$('[data-i18n-ph]').forEach(el=>{ el.placeholder = t(el.dataset.i18nPh); });
@@ -1152,7 +1153,6 @@ function play(uuid){
   clearTimeout(loadTimer);
   loadTimer = setTimeout(()=>{ if (S.state==='loading' && S.cur===uuid && navigator.onLine) fail(); }, 12000);
   api(`/json/url/${uuid}`);
-  try { history.replaceState(null,'',`#s=${uuid}`); } catch(e){}
   refreshCards(); if ($('#view-queue').classList.contains('active')) renderQueue();
 }
 function playPause(){
@@ -1227,7 +1227,6 @@ function updateNP(st){
     st.lat!=null ? `<span id="stDay">${esc(dayLabel(st))}</span>` : '',
   ].join('');
   updateFavBtns(); updateKicker(); updateCar();
-  document.title = `♪ ${st.name} — rad—io`;
   if ('mediaSession' in navigator) {
     const artwork = [];
     if (st.favicon) artwork.push({src:st.favicon, sizes:'192x192'});
@@ -1950,6 +1949,7 @@ async function openShared(uuid){
   if (!st) { toast(t('t.shared404')); return false; }
   S.queue=[st]; S.queueCtx='shared';
   play(st.uuid); toast(`🔗 ${st.name}`);
+  try { history.replaceState(null,'',location.pathname+location.search); } catch(e){} // paylaşım linki bir kez açılır, yer imine yapışmaz
   return true;
 }
 function timeMode(){
