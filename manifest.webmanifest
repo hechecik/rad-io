@@ -1,0 +1,14 @@
+{
+  "name": "rad—io · binlerce canlı radyo",
+  "short_name": "rad—io",
+  "description": "Dünyanın dört bir yanından binlerce canlı radyo.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fafaf8",
+  "theme_color": "#fafaf8",
+  "lang": "tr",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
