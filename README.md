@@ -15,14 +15,18 @@ Kurulum yok, hesap yok. Aç, çevir, dinle.
 - **📍 Yakınımdakiler:** Konumuna en yakın radyolar, yakından uzağa sıralı
 - **🌍 Dünya turu:** Her 8 dakikada başka bir ülkeye geçer. Önce ülke seçilir, sonra istasyon; böylece küçük ülkeler de eşit şans alır
 - **⏰ Radyolu çalar saat:** Seçtiğin saatte çalan istasyon, favorilerinden biri, kafe modu ya da dünyadan sürpriz bir yayınla, ses 60 saniyede yavaşça açılarak uyandırır
-- **12 mod:** Çalışma, Kafe, Sürüş, Koşu, Uyku, Şifa, Klasik, Türkçe, Kürtçe, 90'lar, Indie, Dünya
+- **14 mod:** Çalışma, Kafe, Sürüş, Koşu, Uyku, Şifa, Klasik, Türkçe, Kürtçe, 90'lar, Indie, Dünya ve güneşe bağlı iki mod:
+  - **◐ Şafak:** Şu an güneşin doğduğu şehirlerin radyoları, ülkeler arasında dengeli dağıtılır
+  - **✶ Gece:** Dünyanın o an derin gecede olan yarısından yayınlar
+- **≈ Benzerleri:** Çalan istasyonla ortak etiketi en çok olan yayınlar, aynı ülkeden olanlar önce gelir
+- **İzin:** Dinlediğin yerler haritada pembe halka olarak kalır (çok dinlediğin yer daha belirgin), son dinlediklerin kesik bir çizgiyle birbirine bağlanır
 - **Ülkeler:** Bayrağa dokun, o ülkenin popüler ve trend yayınları gelsin
 - **Keşfet:** Trend, popüler, çok dinlenen, yeni ve rastgele sıralama; tür/dil/ülke filtreleri; arama; "daha fazla" sayfalama
 - **Kitaplık:** Favoriler ve son dinlenenler cihazda kalıcı; JSON ile dışa/içe aktarma
 - **Paylaş:** Her istasyonun kendi bağlantısı var (`#s=<uuid>`), açan kişi doğrudan o yayına düşer
 - **Uyku zamanlayıcı:** 15 / 30 / 60 / 90 dk, sonunda sesi yavaşça kısar
 - **Canlı sayaç:** Radio Browser'daki çalışan istasyon, ülke ve son 1 saatteki dinlenme sayısı
-- Kilit ekranı ve kulaklık kontrolleri (Media Session), açık/koyu tema, mobil uyumlu, ana ekrana eklenebilir (PWA)
+- Kilit ekranı ve kulaklık kontrolleri (Media Session), açık/koyu tema, mobil uyumlu, ana ekrana eklenebilir (PWA, 📲 yükle butonu), çevrimdışı açılır
 - Yalnızca HTTPS yayınlar listelenir, böylece GitHub Pages'te "açılmayan istasyon" sorunu azalır. Açılmayan yayın otomatik atlanır
 
 ## Kısayollar
@@ -50,6 +54,7 @@ Tek `index.html`, bağımlılık yok. Veri: [Radio Browser API](https://www.radi
 index.html            uygulama
 manifest.webmanifest  PWA tanımı
 icon.svg              ikon
+sw.js                 service worker (yalnızca uygulama kabuğu)
 ```
 
 Yerelde çalıştırmak için: `python3 -m http.server` → http://localhost:8000
