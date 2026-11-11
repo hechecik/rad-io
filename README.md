@@ -1,11 +1,20 @@
 # rad—io · binlerce canlı radyo
 
+*Thousands of live radio stations from around the world — Turkish & English UI.*
+
 Dünyanın dört bir yanından **binlerce canlı radyo**, sade bir Japon estetiğiyle tarayıcında.
 Kurulum yok, hesap yok. Aç, çevir, dinle.
 
 **▶ Canlı:** https://hechecik.github.io/rad-io/
 
 ## Özellikler
+
+- **🌐 Türkçe / English:** Tarayıcı diline göre otomatik seçilir; ülke adları her dilde yerel olarak gösterilir
+- **🌍 3D dünya küresi:** Döndür, yakınlaştır, dokun ve dinle. Gerçek zamanlı gece hilali, çalan istasyonda yayın dalgası. Düz harita da istenirse tek tıkla açılır
+- **🖼 Kartpostal (P):** Çalan istasyon için paylaşılabilir görsel: istasyonun üzerinde duran bir küre, şehir/ülke ve "orada gece/gündüz" bilgisi. Renkleri istasyonun o anki gün ışığına göre değişir (gece koyu, gündüz açık, şafak sıcak tonlu)
+- **🚗 Araç modu (C):** Büyük dokunmatik butonlar, saat, ekranın kapanmaması (wake lock), sağa/sola kaydırarak istasyon değiştirme, tek dokunuşla favoriler; dikey ve yatay ekrana uyar
+- **📶 Kopmayan yayın:** Tünelde ya da zayıf sinyalde önce aynı yayına yeniden bağlanır (3 deneme), olmazsa sıradakine geçer. İnternet kesilirse bekler, gelince kaldığı yerden devam eder
+- **📡 Hoparlöre / TV'ye yayın:** Chromecast (Android Chrome) ve AirPlay (Safari) destekleniyorsa buton kendiliğinden çıkar
 
 - **Her açılışta farklı istasyon:** Günün saatine göre bir mod seçilir (sabah kafe, gündüz çalışma, gece uyku…), istasyon da o havuzdan rastgele gelir
 - **📻 Frekansı çevir:** Tek tuşla dünyanın herhangi bir yerinden rastgele canlı yayın, geçişte analog radyo paraziti
@@ -37,6 +46,8 @@ Kurulum yok, hesap yok. Aç, çevir, dinle.
 | `R` | frekansı çevir |
 | `G` | dünya haritası |
 | `W` | dünya turu |
+| `C` | araç modu |
+| `P` | kartpostal |
 | `← →` | önceki / sonraki |
 | `↑ ↓` | ses |
 | `F` | favori |
@@ -46,6 +57,23 @@ Kurulum yok, hesap yok. Aç, çevir, dinle.
 | `T` | tema |
 | `?` | yardım |
 
+## Araçta ve telefonda
+
+| Ortam | Durum |
+|---|---|
+| Bluetooth / AUX / USB ile araç teybi | ✅ Ses telefondan gelir; istasyon adı ve ülke araç ekranında görünür, direksiyondaki ⏮ ⏭ ⏯ tuşları çalışır (Media Session) |
+| Kilit ekranı ve bildirim kontrolleri (Android / iOS) | ✅ Kapak görseli ile birlikte |
+| Android Auto / Apple CarPlay ekranında ayrı uygulama olarak | ❌ Web uygulamaları bu ekranlarda listelenemez; Google ve Apple bunu yalnızca mağaza uygulamalarına açıyor. Telefon araç moduyla tutucuda kullanılır |
+| Ana ekrana ekleme (PWA) | ✅ Android'de "yükle" butonu, iOS'ta Paylaş → Ana Ekrana Ekle |
+| iOS'ta arka planda çalma | ✅ Ekran kilitliyken çalmaya devam eder (alarm hariç, o sekme açık ister) |
+
+## Performans
+
+- Harita verisi cihazda 12 saat önbelleklenir: tekrar açılışta ağ isteği yok
+- Düz harita statik katmanı (noktalar, gece, iz) önbellekte tutulur; her karede yalnızca hazır görüntü + yayın dalgası çizilir
+- Küre: önceden hesaplanmış sin/cos ile 2.500+ nokta bir karede ~0,7 ms
+- Çizim döngüsü yalnızca gerektiğinde çalışır (~30 fps sınırı), sekme arka plandayken tamamen durur
+
 ## Teknik
 
 Tek `index.html`, bağımlılık yok. Veri: [Radio Browser API](https://www.radio-browser.info/) (topluluk tarafından tutulan, 50 binden fazla istasyon).
@@ -54,7 +82,7 @@ Tek `index.html`, bağımlılık yok. Veri: [Radio Browser API](https://www.radi
 index.html            uygulama
 manifest.webmanifest  PWA tanımı
 icon.svg              ikon
-sw.js                 service worker (yalnızca uygulama kabuğu)
+sw.js                 service worker (yalnızca uygulama kabuğu, önce ağ)
 ```
 
 Yerelde çalıştırmak için: `python3 -m http.server` → http://localhost:8000

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#fafaf8" id="themeMetaColor">
-<title>rad—io · binlerce canlı radyo</title>
+<title>rad—io · binlerce canlı radyo · thousands of live radio</title>
 <meta name="description" content="Dünyanın dört bir yanından binlerce canlı radyo. Mod seç, çevir, keşfet.">
 <meta property="og:title" content="rad—io · binlerce canlı radyo">
 <meta property="og:description" content="Dünyanın dört bir yanından binlerce canlı radyo. Mod seç, çevir, keşfet.">
@@ -13,6 +13,9 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="rad—io">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
@@ -301,6 +304,50 @@ kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line2);border-
 .sakura-bg{display:none}
 *{animation-duration:.001s!important;animation-iteration-count:1!important;transition:none!important}
 }
+
+/* ===== v5 ===== */
+.stage-acts2{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:20px;overflow:hidden;background:var(--bg)}
+.seg button{font-size:10px;letter-spacing:.07em;padding:5px 12px;border:none;background:none;cursor:pointer;color:var(--ink2)}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.lang-btn{font-weight:400}
+.pc-img{display:block;width:100%;max-height:62vh;object-fit:contain;border-radius:var(--r);border:1px solid var(--line);background:var(--bg2)}
+.modal-box.wide{max-width:440px}
+.pc-wait{display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 0;color:var(--ink3)}
+
+/* araç modu */
+.car{position:fixed;inset:0;z-index:300;background:#0b0b0a;color:#f2efe8;display:flex;flex-direction:column;padding:max(14px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));font-family:var(--mono);user-select:none;-webkit-user-select:none}
+.car[hidden]{display:none}
+.car-top{display:flex;align-items:center;gap:14px;font-size:clamp(16px,2.6vw,22px);color:#9d988d}
+.car-clock{font-variant-numeric:tabular-nums;color:#f2efe8}
+.car-net{font-size:.75em}
+.car-net.off{color:#e0705f}
+.car-x{margin-left:auto;font-family:inherit;font-size:clamp(14px,2.2vw,18px);color:#f2efe8;background:#1f1e1b;border:1px solid #3a3833;border-radius:40px;padding:10px 20px;cursor:pointer}
+.car-main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;min-height:0;touch-action:pan-y;padding:10px 0}
+.car-flag{font-size:clamp(34px,7vw,64px);line-height:1}
+.car-name{font-family:var(--serif);font-weight:400;font-size:clamp(30px,6.4vw,66px);line-height:1.12;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.car-sub{font-size:clamp(14px,2.4vw,20px);color:#9d988d;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.car-state{color:#c8a96e}
+.car-favs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:6px 0 14px}
+.car-favs::-webkit-scrollbar{display:none}
+.car-fav{flex:0 0 auto;max-width:230px;min-height:58px;padding:10px 16px;border-radius:14px;border:1px solid #3a3833;background:#181715;color:#f2efe8;font-family:inherit;font-size:clamp(13px,2vw,16px);text-align:left;cursor:pointer;display:flex;align-items:center;gap:10px;overflow:hidden}
+.car-fav span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.car-fav.on{border-color:#c8a96e;color:#c8a96e}
+.car-ctrls{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(8px,1.6vw,16px)}
+.car-ctrls button{min-height:clamp(70px,13vh,120px);border-radius:20px;border:1px solid #3a3833;background:#181715;color:#f2efe8;font-size:clamp(26px,5vw,42px);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.car-ctrls button:active{background:#2a2925}
+.car-ctrls .car-play{background:#f2efe8;color:#0b0b0a;border-color:#f2efe8}
+.car-ctrls .on{color:#c8a96e;border-color:#c8a96e}
+@media (orientation:landscape) and (max-height:520px){
+  .car{display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:auto 1fr auto;column-gap:22px}
+  .car-top{grid-column:1/-1}
+  .car-main{grid-column:1;grid-row:2}
+  .car-favs{grid-column:1;grid-row:3;padding-bottom:0}
+  .car-ctrls{grid-column:2;grid-row:2/4;grid-template-columns:repeat(2,1fr);align-content:center}
+  .car-ctrls .car-play{grid-column:1/-1;order:-1}
+  .car-ctrls button{min-height:clamp(56px,20vh,96px)}
+}
+@media(max-width:420px){ .counter{display:none} }
 </style>
 </head>
 <body>
@@ -308,291 +355,377 @@ kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line2);border-
 <div class="shell">
   <header class="topbar">
     <div class="brand">
-      <button class="logo" data-act="home" aria-label="ana sayfa">rad<span class="logo-accent">—</span>io</button>
+      <button class="logo" data-act="home" aria-label="rad—io">rad<span class="logo-accent">—</span>io</button>
       <span class="logo-by">by <a href="https://github.com/hechecik" target="_blank" rel="noopener">@hechecik</a> · <a href="https://github.com/hechecik/rad-io" target="_blank" rel="noopener">repo</a></span>
     </div>
-    <div class="counter" id="counter" aria-live="polite">
-      <span class="live-dot"></span><span><b>binlerce</b> canlı radyo</span>
-    </div>
+    <div class="counter" id="counter" aria-live="polite"><span class="live-dot"></span><span data-i18n="slogan"></span></div>
     <nav class="topbar-right">
-      <button class="top-btn active" data-act="view" data-v="stations">◎<span class="t-full"> radyolar</span></button>
-      <button class="top-btn" data-act="view" data-v="map">◍<span class="t-full"> harita</span></button>
-      <button class="top-btn" data-act="view" data-v="discover">⌕<span class="t-full"> keşfet</span></button>
-      <button class="top-btn" data-act="view" data-v="library">♡<span class="t-full"> kitaplık</span></button>
-      <button class="top-btn" data-act="view" data-v="queue">≡<span class="t-full"> sıra</span></button>
-      <button class="top-btn" id="installBtn" data-act="install" hidden>📲<span class="t-full"> yükle</span></button>
-      <button class="round-btn" id="themeBtn" data-act="theme" title="tema (T)" aria-label="tema değiştir">☽</button>
+      <button class="top-btn active" data-act="view" data-v="stations">◎<span class="t-full" data-i18n="nav.stations"></span></button>
+      <button class="top-btn" data-act="view" data-v="map">◍<span class="t-full" data-i18n="nav.map"></span></button>
+      <button class="top-btn" data-act="view" data-v="discover">⌕<span class="t-full" data-i18n="nav.discover"></span></button>
+      <button class="top-btn" data-act="view" data-v="library">♡<span class="t-full" data-i18n="nav.library"></span></button>
+      <button class="top-btn" data-act="view" data-v="queue">≡<span class="t-full" data-i18n="nav.queue"></span></button>
+      <button class="top-btn" id="installBtn" data-act="install" hidden>📲<span class="t-full" data-i18n="nav.install"></span></button>
+      <button class="top-btn lang-btn" id="langBtn" data-act="lang">EN</button>
+      <button class="round-btn" id="themeBtn" data-act="theme" data-i18n-aria="a.theme">☽</button>
     </nav>
   </header>
 
   <aside class="sidebar" id="sidebar"></aside>
 
   <main class="main" id="main">
-    <!-- STATIONS -->
     <div class="view active" id="view-stations">
       <section class="stage" id="stage">
         <div class="stage-art art" id="stArt">桜</div>
         <div class="stage-info">
-          <div class="kicker"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="stKicker">binlerce canlı radyo</span></div>
-          <h1 class="stage-name" id="stName">dünyayı dinle</h1>
-          <div class="stage-meta" id="stMeta">bir mod seç ya da frekansı çevir — her açılışta başka bir istasyon.</div>
+          <div class="kicker"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="stKicker"></span></div>
+          <h1 class="stage-name" id="stName" data-i18n="stage.idleName"></h1>
+          <div class="stage-meta" id="stMeta" data-i18n="stage.idleMeta"></div>
           <div class="stage-acts">
-            <button class="big-btn primary" data-act="play" id="stPlay">▶ dinle</button>
-            <button class="big-btn" data-act="zap">📻 çevir</button>
-            <button class="big-btn" data-act="fav-cur" id="stFav">♡ favori</button>
-            <button class="big-btn" data-act="share">⤴ paylaş</button>
-            <button class="big-btn" data-act="similar">≈ benzerleri</button>
-            <button class="big-btn tour-btn" data-act="tour">🌍 dünya turu</button>
+            <button class="big-btn primary" data-act="play" id="stPlay"></button>
+            <button class="big-btn" data-act="zap" data-i18n="b.zap"></button>
+            <button class="big-btn" data-act="fav-cur" id="stFav"></button>
+          </div>
+          <div class="stage-acts2">
+            <button class="sm-btn" data-act="share" data-i18n="b.share"></button>
+            <button class="sm-btn" data-act="postcard" data-i18n="b.postcard"></button>
+            <button class="sm-btn" data-act="similar" data-i18n="b.similar"></button>
+            <button class="sm-btn tour-btn" data-act="tour" data-i18n="b.tour"></button>
+            <button class="sm-btn" data-act="car" data-i18n="b.car"></button>
           </div>
         </div>
       </section>
       <div class="vh">
-        <div>
-          <div class="vh-title" id="vhTitle">—</div>
-          <div class="vh-sub" id="vhSub"></div>
-        </div>
-        <div class="vh-acts">
-          <button class="sm-btn" data-act="refresh">↻ başka istasyonlar</button>
-        </div>
+        <div><div class="vh-title" id="vhTitle">—</div><div class="vh-sub" id="vhSub"></div></div>
+        <div class="vh-acts"><button class="sm-btn" data-act="refresh" data-i18n="b.more"></button></div>
       </div>
       <div id="collRes"></div>
     </div>
 
-    <!-- MAP -->
     <div class="view" id="view-map">
       <div class="map-wrap" id="mapWrap">
-        <canvas id="mapCv" aria-label="canlı radyo haritası"></canvas>
+        <canvas id="mapCv"></canvas>
         <div class="map-hud">
-          <div class="map-title">dünya haritası <span class="vh-jp">地図</span></div>
-          <div class="vh-sub" id="mapSub">her nokta canlı bir radyo</div>
+          <div class="map-title"><span data-i18n="map.title"></span> <span class="vh-jp">地図</span></div>
+          <div class="vh-sub" id="mapSub"></div>
           <div class="map-acts">
-            <button class="sm-btn" data-act="near">📍 yakınımdakiler</button>
-            <button class="sm-btn tour-btn" data-act="tour">🌍 dünya turu</button>
-            <button class="sm-btn" data-act="map-center">◎ çalana git</button>
-            <button class="sm-btn" data-act="map-reset">⤢ tüm dünya</button>
+            <span class="seg"><button data-act="map-mode" data-m="globe" data-i18n="map.globe"></button><button data-act="map-mode" data-m="flat" data-i18n="map.flat"></button></span>
+            <button class="sm-btn" data-act="near" data-i18n="map.near"></button>
+            <button class="sm-btn tour-btn" data-act="tour" data-i18n="b.tour"></button>
+            <button class="sm-btn" data-act="map-center" data-i18n="map.center"></button>
+            <button class="sm-btn" data-act="map-reset" data-i18n="map.reset"></button>
           </div>
         </div>
         <div class="map-tip" id="mapTip"></div>
-        <div class="map-legend"><span><i style="background:var(--accent)"></i>yayında</span><span><i style="background:var(--sakura)"></i>favorin</span><span><i style="background:var(--ink3);opacity:.5"></i>gece</span><span><i style="border:1px solid var(--sakura);background:none"></i>izin</span><span>sürükle · yakınlaştır · dokun</span></div>
-        <div class="map-zoom"><button data-act="zoom-in" aria-label="yakınlaştır">+</button><button data-act="zoom-out" aria-label="uzaklaştır">−</button></div>
+        <div class="map-legend"><span><i style="background:var(--accent)"></i><b data-i18n="lg.live" style="font-weight:400"></b></span><span><i style="background:var(--sakura)"></i><b data-i18n="lg.fav" style="font-weight:400"></b></span><span><i style="background:var(--ink3);opacity:.5"></i><b data-i18n="lg.night" style="font-weight:400"></b></span><span><i style="border:1px solid var(--sakura)"></i><b data-i18n="lg.trail" style="font-weight:400"></b></span><span data-i18n="lg.hint"></span></div>
+        <div class="map-zoom"><button data-act="zoom-in" aria-label="+">+</button><button data-act="zoom-out" aria-label="−">−</button></div>
       </div>
     </div>
 
-    <!-- DISCOVER -->
     <div class="view" id="view-discover">
       <div class="disc-hd">
-        <div class="vh-title">keşfet <span class="vh-jp">発見</span></div>
-        <div class="vh-sub" id="discSub">binlerce canlı istasyon arasında ara</div>
+        <div class="vh-title"><span data-i18n="d.title"></span> <span class="vh-jp">発見</span></div>
+        <div class="vh-sub" id="discSub"></div>
         <form class="search-row" id="searchForm">
-          <input class="search-in" id="searchIn" type="search" placeholder="istasyon adı, tür, şehir…  ( / )" autocomplete="off">
-          <button class="sm-btn" type="submit">ara →</button>
+          <input class="search-in" id="searchIn" type="search" data-i18n-ph="d.ph" autocomplete="off" enterkeyhint="search">
+          <button class="sm-btn" type="submit" data-i18n="d.search"></button>
         </form>
       </div>
-      <div class="chip-lbl">sırala</div>
-      <div class="chip-row" id="sortChips"></div>
-      <div class="chip-lbl">tür &amp; dil</div>
-      <div class="chip-row" id="tagChips"></div>
-      <div class="chip-lbl">ülke</div>
-      <div class="chip-row" id="ccChips"></div>
+      <div class="chip-lbl" data-i18n="d.sort"></div><div class="chip-row" id="sortChips"></div>
+      <div class="chip-lbl" data-i18n="d.tags"></div><div class="chip-row" id="tagChips"></div>
+      <div class="chip-lbl" data-i18n="d.country"></div><div class="chip-row" id="ccChips"></div>
       <div class="disc-res-hd" id="discHd"></div>
       <div id="discRes"></div>
     </div>
 
-    <!-- LIBRARY -->
     <div class="view" id="view-library">
-      <div class="vh"><div><div class="vh-title">radyo günlüğün <span class="vh-jp">日記</span></div><div class="vh-sub">dinleme alışkanlıkların — yalnızca bu cihazda tutulur</div></div>
-        <div class="vh-acts"><button class="sm-btn" data-act="share-log">⤴ paylaş</button></div></div>
+      <div class="vh"><div><div class="vh-title"><span data-i18n="l.log"></span> <span class="vh-jp">日記</span></div><div class="vh-sub" data-i18n="l.logSub"></div></div>
+        <div class="vh-acts"><button class="sm-btn" data-act="share-log" data-i18n="b.share"></button></div></div>
       <div id="logRes"></div>
-      <div class="vh"><div><div class="vh-title">favoriler <span class="vh-jp">お気に入り</span></div><div class="vh-sub" id="favSub"></div></div>
-        <div class="vh-acts"><button class="sm-btn" data-act="export">⇣ dışa aktar</button><button class="sm-btn" data-act="import">⇡ içe aktar</button></div></div>
+      <div class="vh"><div><div class="vh-title"><span data-i18n="l.favs"></span> <span class="vh-jp">お気に入り</span></div><div class="vh-sub" id="favSub"></div></div>
+        <div class="vh-acts"><button class="sm-btn" data-act="export" data-i18n="l.export"></button><button class="sm-btn" data-act="import" data-i18n="l.import"></button></div></div>
       <div id="favRes"></div>
-      <div class="vh"><div><div class="vh-title">son dinlenenler <span class="vh-jp">履歴</span></div></div>
-        <div class="vh-acts"><button class="sm-btn" data-act="clear-recent">temizle</button></div></div>
+      <div class="vh"><div><div class="vh-title"><span data-i18n="l.recents"></span> <span class="vh-jp">履歴</span></div></div>
+        <div class="vh-acts"><button class="sm-btn" data-act="clear-recent" data-i18n="l.clear"></button></div></div>
       <div id="recRes"></div>
       <input type="file" id="importIn" accept="application/json" hidden>
     </div>
 
-    <!-- QUEUE -->
     <div class="view" id="view-queue">
-      <div class="vh"><div><div class="vh-title">çalma sırası <span class="vh-jp">順番</span></div><div class="vh-sub" id="qSub">—</div></div></div>
+      <div class="vh"><div><div class="vh-title"><span data-i18n="q.title"></span> <span class="vh-jp">順番</span></div><div class="vh-sub" id="qSub">—</div></div></div>
       <div class="q-list" id="qItems"></div>
     </div>
   </main>
 
   <footer class="player-bar">
     <div class="load-line"></div>
-    <button class="np-left" data-act="view" data-v="stations" aria-label="şimdi çalan">
+    <button class="np-left" data-act="view" data-v="stations">
       <div class="np-art art" id="npArt">♪</div>
       <div class="np-txt">
         <div class="np-name" id="npName">rad—io</div>
-        <div class="np-sub"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="npSub">binlerce canlı radyo</span></div>
+        <div class="np-sub"><span class="eq"><i></i><i></i><i></i><i></i></span><span id="npSub" data-i18n="slogan"></span></div>
       </div>
     </button>
     <div class="np-ctr">
       <div class="ctrls">
-        <button class="ctrl m-only" data-act="fav-cur" id="npFavM" aria-label="favori">♡</button>
-        <button class="ctrl prev" data-act="prev" aria-label="önceki (←)">⏮</button>
-        <button class="ctrl play" id="playBtn" data-act="play" aria-label="oynat / duraklat (boşluk)">▶</button>
-        <button class="ctrl" data-act="next" aria-label="sonraki (→)">⏭</button>
-        <button class="ctrl zap" data-act="zap" aria-label="rastgele istasyon (R)">📻<span class="z-txt">çevir</span></button>
+        <button class="ctrl m-only" data-act="fav-cur" id="npFavM" data-i18n-aria="a.fav">♡</button>
+        <button class="ctrl prev" data-act="prev" data-i18n-aria="a.prev">⏮</button>
+        <button class="ctrl play" id="playBtn" data-act="play" data-i18n-aria="a.play">▶</button>
+        <button class="ctrl" data-act="next" data-i18n-aria="a.next">⏭</button>
+        <button class="ctrl zap" data-act="zap" data-i18n-aria="a.zap">📻<span class="z-txt" data-i18n="b.zapShort"></span></button>
       </div>
-      <div class="live-row"><span class="on">●</span><span id="liveTxt">canlı</span></div>
+      <div class="live-row"><span class="on">●</span><span id="liveTxt"></span></div>
     </div>
     <div class="np-right">
-      <button class="ctrl" data-act="fav-cur" id="npFav" aria-label="favori (F)">♡</button>
-      <button class="ctrl sleep" data-act="sleep" id="sleepBtn" aria-label="uyku zamanlayıcı">☾</button>
-      <button class="ctrl sleep" data-act="alarm" id="alarmBtn" aria-label="radyolu çalar saat">⏰</button>
-      <button class="ctrl" data-act="static" id="staticBtn" aria-label="parazit efekti" title="frekans paraziti">∿</button>
+      <button class="ctrl" data-act="fav-cur" id="npFav" data-i18n-aria="a.fav">♡</button>
+      <button class="ctrl" data-act="car" data-i18n-aria="a.car">🚗</button>
+      <button class="ctrl" data-act="cast" id="castBtn" data-i18n-aria="a.cast" hidden>📡</button>
+      <button class="ctrl sleep" data-act="sleep" id="sleepBtn" data-i18n-aria="a.sleep">☾</button>
+      <button class="ctrl sleep" data-act="alarm" id="alarmBtn" data-i18n-aria="a.alarm">⏰</button>
+      <button class="ctrl" data-act="static" id="staticBtn" data-i18n-aria="a.static">∿</button>
       <div class="vol-row">
-        <button data-act="mute" id="muteBtn" aria-label="sessiz (M)">♪</button>
-        <input type="range" id="volSlider" min="0" max="1" step="0.02" value="0.7" aria-label="ses">
+        <button data-act="mute" id="muteBtn" data-i18n-aria="a.mute">♪</button>
+        <input type="range" id="volSlider" min="0" max="1" step="0.02" value="0.7" data-i18n-aria="a.vol">
       </div>
-      <button class="ctrl" data-act="help" aria-label="kısayollar (?)">?</button>
+      <button class="ctrl" data-act="help" data-i18n-aria="a.help">?</button>
     </div>
   </footer>
 </div>
 
+<!-- araç modu -->
+<div class="car" id="car" hidden>
+  <div class="car-top"><span class="car-clock" id="carClock">--:--</span><span class="car-net" id="carNet"></span><button class="car-x" data-act="car-exit">✕ <span data-i18n="car.exit"></span></button></div>
+  <div class="car-main" id="carMain">
+    <div class="car-flag" id="carFlag"></div>
+    <div class="car-name" id="carName">rad—io</div>
+    <div class="car-sub"><span class="car-state" id="carState"></span><span id="carSub"></span></div>
+  </div>
+  <div class="car-favs" id="carFavs"></div>
+  <div class="car-ctrls">
+    <button data-act="prev" data-i18n-aria="a.prev">⏮</button>
+    <button data-act="play" class="car-play" id="carPlay" data-i18n-aria="a.play">▶</button>
+    <button data-act="next" data-i18n-aria="a.next">⏭</button>
+    <button data-act="zap" data-i18n-aria="a.zap">📻</button>
+    <button data-act="fav-cur" id="carFav" data-i18n-aria="a.fav">♡</button>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status"></div>
+
 <div class="modal" id="helpModal" data-act="close-modal">
   <div class="modal-box">
-    <h3>kısayollar</h3>
+    <h3 data-i18n="h.title"></h3>
     <div class="kb">
-      <kbd>boşluk</kbd><span>oynat / duraklat</span>
-      <kbd>R</kbd><span>frekansı çevir (rastgele)</span>
-      <kbd>G</kbd><span>dünya haritası</span>
-      <kbd>W</kbd><span>dünya turu aç / kapat</span>
-      <kbd>← →</kbd><span>önceki / sonraki</span>
-      <kbd>↑ ↓</kbd><span>ses</span>
-      <kbd>F</kbd><span>favorilere ekle</span>
-      <kbd>M</kbd><span>sessiz</span>
-      <kbd>/</kbd><span>ara</span>
-      <kbd>D L Q</kbd><span>keşfet / kitaplık / sıra</span>
-      <kbd>T</kbd><span>tema</span>
+      <kbd>␣</kbd><span data-i18n="h.play"></span>
+      <kbd>R</kbd><span data-i18n="h.zap"></span>
+      <kbd>← →</kbd><span data-i18n="h.prevnext"></span>
+      <kbd>↑ ↓</kbd><span data-i18n="h.vol"></span>
+      <kbd>F</kbd><span data-i18n="h.fav"></span>
+      <kbd>M</kbd><span data-i18n="h.mute"></span>
+      <kbd>G</kbd><span data-i18n="h.map"></span>
+      <kbd>W</kbd><span data-i18n="h.tour"></span>
+      <kbd>C</kbd><span data-i18n="h.car"></span>
+      <kbd>P</kbd><span data-i18n="h.postcard"></span>
+      <kbd>/</kbd><span data-i18n="h.search"></span>
+      <kbd>D L Q</kbd><span data-i18n="h.views"></span>
+      <kbd>T</kbd><span data-i18n="h.theme"></span>
     </div>
+    <div class="modal-acts"><button class="sm-btn" data-act="lang" data-i18n="h.lang"></button></div>
   </div>
 </div>
 
 <div class="modal" id="alarmModal" data-act="close-modal">
   <div class="modal-box">
-    <h3>radyolu çalar saat ⏰</h3>
-    <div class="form-row"><label for="alarmTime">saat</label><input type="time" id="alarmTime" value="07:30"></div>
-    <div class="form-row"><label for="alarmSrc">ne çalsın</label>
+    <h3 data-i18n="al.title"></h3>
+    <div class="form-row"><label for="alarmTime" data-i18n="al.time"></label><input type="time" id="alarmTime" value="07:30"></div>
+    <div class="form-row"><label for="alarmSrc" data-i18n="al.what"></label>
       <select id="alarmSrc">
-        <option value="cur">şu an çalan / en son dinlediğim</option>
-        <option value="fav">favorilerimden biri</option>
-        <option value="kafe">kafe modu (rastgele)</option>
-        <option value="zap">sürpriz — dünyadan rastgele</option>
+        <option value="cur" data-i18n="al.cur"></option>
+        <option value="fav" data-i18n="al.fav"></option>
+        <option value="kafe" data-i18n="al.kafe"></option>
+        <option value="zap" data-i18n="al.zap"></option>
       </select></div>
-    <div class="modal-note">ses 60 saniyede yavaşça açılır. bu sekme açık kalmalı; telefonda ekran kilitliyken tarayıcı uyuyabilir.</div>
-    <div class="modal-acts"><button class="sm-btn" data-act="alarm-off">kapat</button><button class="big-btn primary" data-act="alarm-set">kur</button></div>
+    <div class="modal-note" data-i18n="al.note"></div>
+    <div class="modal-acts"><button class="sm-btn" data-act="alarm-off" data-i18n="al.off"></button><button class="big-btn primary" data-act="alarm-set" data-i18n="al.set"></button></div>
+  </div>
+</div>
+
+<div class="modal" id="pcModal" data-act="close-modal">
+  <div class="modal-box wide">
+    <h3 data-i18n="pc.title"></h3>
+    <div id="pcBody"></div>
+    <div class="modal-acts"><button class="sm-btn" data-act="pc-download" data-i18n="pc.download"></button><button class="big-btn primary" data-act="pc-share" data-i18n="pc.share"></button></div>
   </div>
 </div>
 
 <script>
 'use strict';
-/* ---------- data ---------- */
-const MODES = {
-  calisma:{icon:'✦',name:'Çalışma',desc:'derin odak',tags:['lofi','chillhop','study','downtempo']},
-  kafe:{icon:'◎',name:'Kafe',desc:'birer kahve',tags:['jazz','bossa nova','lounge','cafe']},
-  surus:{icon:'→',name:'Sürüş',desc:'yola çık',tags:['rock','classic rock','driving','synthwave']},
-  kosu:{icon:'▲',name:'Koşu',desc:'terleyelim',tags:['dance','house','edm','energetic']},
-  uyku:{icon:'◇',name:'Uyku',desc:'derin nefes',tags:['ambient','sleep','drone','relax']},
-  sifa:{icon:'○',name:'Şifa',desc:'iyileşme',tags:['meditation','healing','new age','nature']},
-  klasik:{icon:'♩',name:'Klasik',desc:'zamansız',tags:['classical','baroque','opera','piano']},
-  turkce:{icon:'☾',name:'Türkçe',desc:'türkçe radyo',cc:'TR'},
-  kurtce:{icon:'✿',name:'Kürtçe',desc:'kürtçe yayın',tags:['kurdish','kurdi','kurmanci']},
-  doksan:{icon:'◈',name:"90'lar",desc:'nostalji',tags:['90s','90er','eurodance','oldies']},
-  indie:{icon:'◉',name:'Indie',desc:'bağımsız ses',tags:['indie','alternative','indie rock','folk']},
-  dunya:{icon:'◍',name:'Dünya',desc:'sınır yok',tags:['world music','world','ethnic','afrobeat']},
-  safak:{icon:'◐',name:'Şafak',desc:'gün doğanlar',sun:'dawn'},
-  geceyarisi:{icon:'✶',name:'Gece',desc:'uyuyan yarı',sun:'night'},
-};
-const TIME_MODES = [ // [startHour, modes]
-  [5,['kafe','klasik','turkce','sifa']],
-  [10,['calisma','indie','kafe','dunya']],
-  [18,['indie','surus','turkce','doksan','kosu','dunya']],
-  [22,['uyku','sifa','klasik','calisma']],
-];
-const COUNTRIES = [['TR','Türkiye'],['DE','Almanya'],['GB','İngiltere'],['US','ABD'],['FR','Fransa'],['IT','İtalya'],['ES','İspanya'],['GR','Yunanistan'],['NL','Hollanda'],['JP','Japonya'],['KR','Kore'],['BR','Brezilya'],['MX','Meksika'],['IN','Hindistan'],['EG','Mısır'],['RU','Rusya'],['AZ','Azerbaycan'],['IR','İran']];
-const SORTS = [
-  {l:'🔥 trend',q:'order=clicktrend&reverse=true'},
-  {l:'★ popüler',q:'order=votes&reverse=true'},
-  {l:'▶ çok dinlenen',q:'order=clickcount&reverse=true'},
-  {l:'✧ yeni',q:'order=changetimestamp&reverse=true'},
-  {l:'⚄ rastgele',q:'order=random'},
-];
-const TAGS = [
-  ['türkçe','turkish','lang'],['kürtçe','kurdish','lang'],['arapça','arabic','lang'],['farsça','persian','lang'],['ingilizce','english','lang'],
-  ['jazz','jazz'],['lo-fi','lofi'],['ambient','ambient'],['klasik','classical'],['elektronik','electronic'],['rock','rock'],['pop','pop'],['soul','soul'],
-  ['reggae','reggae'],['blues','blues'],['hiphop','hip-hop'],['house','house'],['techno','techno'],['metal','metal'],['80s','80s'],['90s','90s'],
-  ['arabesk','arabesk'],['türk halk','turkish folk'],['dünya','world music'],['folk','folk'],['haber','news'],['talk','talk'],['drone','drone'],
-];
+/* =========================================================
+   rad—io v5 · binlerce canlı radyo / thousands of live radio
+   ========================================================= */
+
+/* ---------- i18n ---------- */
+const I18N = {
+tr:{
+  'slogan':'binlerce canlı radyo','nav.stations':' radyolar','nav.map':' harita','nav.discover':' keşfet','nav.library':' kitaplık','nav.queue':' sıra','nav.install':' yükle',
+  'stage.idleName':'dünyayı dinle','stage.idleMeta':'bir mod seç ya da frekansı çevir — her açılışta başka bir istasyon.',
+  'b.listen':'▶ dinle','b.pause':'⏸ duraklat','b.connecting':'… bağlanıyor','b.zap':'📻 çevir','b.zapShort':'çevir','b.fav':'♡ favori','b.faved':'♥ favoride','b.share':'⤴ paylaş','b.similar':'≈ benzerleri','b.tour':'🌍 dünya turu','b.postcard':'🖼 kartpostal','b.car':'🚗 araç modu','b.more':'↻ başka istasyonlar','b.retry':'↻ tekrar dene',
+  'k.live':'şimdi canlı','k.loading':'frekans aranıyor…','k.paused':'duraklatıldı','k.ready':'hazır — dinlemek için bas','k.reconnect':'sinyal zayıf — yeniden bağlanıyor…','k.offline':'bağlantı yok — bekleniyor…',
+  'c.loading':'yükleniyor…','c.count':'{n} istasyon','c.empty':'şu an istasyon bulunamadı','c.country':'bu ülkeden canlı yayınlar','c.sunEmpty':'şu an uygun istasyon bulunamadı',
+  'cnt.live':'canlı radyo','cnt.countries':'{n} ülke','cnt.clicks':'son 1 saatte {n} dinlenme',
+  'm.calisma':'Çalışma','m.calisma.d':'derin odak','m.kafe':'Kafe','m.kafe.d':'birer kahve','m.surus':'Sürüş','m.surus.d':'yola çık','m.kosu':'Koşu','m.kosu.d':'terleyelim','m.uyku':'Uyku','m.uyku.d':'derin nefes','m.sifa':'Şifa','m.sifa.d':'iyileşme','m.klasik':'Klasik','m.klasik.d':'zamansız','m.turkce':'Türkçe','m.turkce.d':'türkçe radyo','m.kurtce':'Kürtçe','m.kurtce.d':'kürtçe yayın','m.doksan':"90'lar",'m.doksan.d':'nostalji','m.indie':'Indie','m.indie.d':'bağımsız ses','m.dunya':'Dünya','m.dunya.d':'sınır yok','m.safak':'Şafak','m.safak.d':'gün doğanlar','m.geceyarisi':'Gece','m.geceyarisi.d':'uyuyan yarı',
+  'sb.modes':'modlar','sb.countries':'ülkeler','sb.favs':'favoriler','sb.recents':'son dinlenenler','sb.favEmpty':'henüz yok — ♡ ile ekle','sb.recEmpty':'son dinlediklerin burada görünecek',
+  'd.title':'keşfet','d.sub':'{n} canlı istasyon arasında ara','d.subIdle':'binlerce canlı istasyon arasında ara','d.ph':'istasyon adı, tür, şehir…  ( / )','d.search':'ara →','d.sort':'sırala','d.tags':'tür & dil','d.country':'ülke',
+  'd.s.trend':'🔥 trend','d.s.votes':'★ popüler','d.s.clicks':'▶ çok dinlenen','d.s.new':'✧ yeni','d.s.random':'⚄ rastgele','d.none':'sonuç bulunamadı — başka bir şey dene','d.more':'daha fazla ↓','d.similar':'≈ {name} gibi','d.similarNone':'benzer yayın bulunamadı',
+  'l.log':'radyo günlüğün','l.logSub':'dinleme alışkanlıkların — yalnızca bu cihazda tutulur','l.logEmpty':'dinledikçe günlüğün dolacak — kaç saat, kaç ülke, en sevdiğin istasyonlar',
+  'l.total':'toplam dinleme','l.countries':'ülke gezildi','l.stations':'istasyon','l.streak':'üst üste dinleme','l.days':'gün','l.week':'son 7 gün','l.top':'en çok dinlediklerin','l.passport':'radyo pasaportun · {n} ülke',
+  'l.favs':'favoriler','l.favEmpty':'henüz favori yok — beğendiğin istasyonda ♡’ye bas','l.recents':'son dinlenenler','l.recEmpty':'henüz bir şey dinlemedin','l.export':'⇣ dışa aktar','l.import':'⇡ içe aktar','l.clear':'temizle',
+  'l.share':'📻 rad—io günlüğüm: {d} canlı radyo, {n} ülke {flags}{top}','l.shareTop':' · favorim: {name}',
+  'q.title':'çalma sırası','q.empty':'sıra boş — bir mod seç ya da çevir',
+  'p.live':'canlı','p.liveT':'canlı · {t}','p.paused':'duraklatıldı','p.connecting':'bağlanıyor…','p.default':'canlı yayın',
+  'u.min':'dk','u.h':'sa','days':['paz','pzt','sal','çar','per','cum','cmt'],
+  't.favAdd':'♥ {name} eklendi','t.favRm':'favorilerden çıkarıldı','t.playFirst':'önce bir istasyon çal','t.failNext':'bu yayın açılmadı → sıradaki','t.failAll':'yayınlara ulaşılamıyor — bağlantını kontrol et','t.zapNone':'frekans bulunamadı, tekrar dene',
+  't.sleepOn':'☾ {n} dk sonra kapanacak','t.sleepOff':'☾ uyku zamanlayıcı kapalı','t.night':'☾ iyi uykular','t.copied':'bağlantı kopyalandı','t.shareText':'{name} şimdi rad—io’da canlı','t.mute':'sessiz','t.unmute':'ses açık','t.staticOn':'∿ parazit efekti açık','t.staticOff':'∿ parazit efekti kapalı',
+  't.last':'↩ en son: {name} — kitaplıkta','t.shared404':'paylaşılan istasyon bulunamadı','t.offline':'bağlantı koptu — gelince kaldığın yerden devam','t.online':'bağlantı geri geldi','t.tourOn':'🌍 dünya turu başladı — her {n} dakikada başka bir ülke','t.tourOff':'🌍 dünya turu bitti',
+  't.alarmSet':'⏰ {t}’de radyo seni uyandıracak','t.alarmOff':'⏰ alarm kapalı','t.morning':'⏰ günaydın ☀','t.locating':'📍 konum alınıyor…','t.noGeo':'konum desteklenmiyor','t.geoDenied':'konum izni verilmedi','t.near':'📍 sana en yakın istasyonlar — ⏭ ile komşulara geç','t.noMap':'harita verisi yok','t.noPos':'çalan istasyonun konumu yok','t.installed':'📲 rad—io yüklendi','t.importN':'{n} istasyon içe aktarıldı','t.importErr':'dosya okunamadı','t.logCopied':'günlük özeti kopyalandı','t.searchEmpty':'arama terimi gir','t.carHint':'🚗 sağa/sola kaydır: istasyon değiştir',
+  'map.title':'dünya haritası','map.sub':'her nokta canlı bir radyo','map.loading':'binlerce istasyon yerleşiyor…','map.loaded':'{n} canlı radyo · bir noktaya dokun','map.fail':'harita yüklenemedi — tekrar dene','map.near':'📍 yakınımdakiler','map.center':'◎ çalana git','map.reset':'⤢ tümü','map.globe':'küre','map.flat':'düz',
+  'lg.live':'yayında','lg.fav':'favorin','lg.night':'gece','lg.trail':'izin','lg.hint':'sürükle · yakınlaştır · dokun',
+  'day.day':'☀ orada gündüz','day.dawn':'🌅 orada gün doğuyor','day.dusk':'🌇 orada gün batıyor','day.night':'☾ orada gece',
+  'h.title':'kısayollar','h.play':'oynat / duraklat','h.zap':'frekansı çevir','h.prevnext':'önceki / sonraki','h.vol':'ses','h.fav':'favori','h.mute':'sessiz','h.map':'dünya haritası','h.tour':'dünya turu','h.car':'araç modu','h.postcard':'kartpostal','h.search':'ara','h.views':'keşfet / kitaplık / sıra','h.theme':'tema','h.lang':'English',
+  'al.title':'radyolu çalar saat ⏰','al.time':'saat','al.what':'ne çalsın','al.cur':'şu an çalan / en son dinlediğim','al.fav':'favorilerimden biri','al.kafe':'kafe modu (rastgele)','al.zap':'sürpriz — dünyadan rastgele','al.note':'ses 60 saniyede yavaşça açılır. bu sekme açık kalmalı; telefonda ekran kilitliyken tarayıcı uyuyabilir.','al.off':'kapat','al.set':'kur',
+  'pc.title':'kartpostal','pc.download':'⇣ indir','pc.share':'⤴ paylaş','pc.now':'ŞİMDİ DİNLİYORUM','pc.making':'kartpostal hazırlanıyor…',
+  'car.exit':'çık','car.favs':'favoriler',
+  'a.theme':'tema','a.fav':'favori','a.prev':'önceki','a.next':'sonraki','a.play':'oynat / duraklat','a.zap':'rastgele istasyon','a.car':'araç modu','a.cast':'hoparlöre / TV’ye yayınla','a.sleep':'uyku zamanlayıcı','a.alarm':'radyolu çalar saat','a.static':'parazit efekti','a.mute':'sessiz','a.vol':'ses','a.help':'kısayollar',
+  'tag':['türkçe','kürtçe','arapça','farsça','ingilizce','jazz','lo-fi','ambient','klasik','elektronik','rock','pop','soul','reggae','blues','hiphop','house','techno','metal','80ler','90lar','arabesk','türk halk','dünya','folk','haber','talk','drone'],
+},
+en:{
+  'slogan':'thousands of live radio stations','nav.stations':' stations','nav.map':' map','nav.discover':' discover','nav.library':' library','nav.queue':' queue','nav.install':' install',
+  'stage.idleName':'listen to the world','stage.idleMeta':'pick a mood or spin the dial — a different station every time.',
+  'b.listen':'▶ listen','b.pause':'⏸ pause','b.connecting':'… connecting','b.zap':'📻 spin','b.zapShort':'spin','b.fav':'♡ save','b.faved':'♥ saved','b.share':'⤴ share','b.similar':'≈ similar','b.tour':'🌍 world tour','b.postcard':'🖼 postcard','b.car':'🚗 car mode','b.more':'↻ other stations','b.retry':'↻ try again',
+  'k.live':'live now','k.loading':'tuning in…','k.paused':'paused','k.ready':'ready — tap to listen','k.reconnect':'weak signal — reconnecting…','k.offline':'offline — waiting…',
+  'c.loading':'loading…','c.count':'{n} stations','c.empty':'no stations found right now','c.country':'live from this country','c.sunEmpty':'no matching stations right now',
+  'cnt.live':'live stations','cnt.countries':'{n} countries','cnt.clicks':'{n} plays in the last hour',
+  'm.calisma':'Focus','m.calisma.d':'deep work','m.kafe':'Café','m.kafe.d':'a cup of coffee','m.surus':'Drive','m.surus.d':'hit the road','m.kosu':'Run','m.kosu.d':'let’s sweat','m.uyku':'Sleep','m.uyku.d':'deep breath','m.sifa':'Heal','m.sifa.d':'restore','m.klasik':'Classical','m.klasik.d':'timeless','m.turkce':'Turkish','m.turkce.d':'turkish radio','m.kurtce':'Kurdish','m.kurtce.d':'kurdish radio','m.doksan':'90s','m.doksan.d':'nostalgia','m.indie':'Indie','m.indie.d':'independent','m.dunya':'World','m.dunya.d':'no borders','m.safak':'Sunrise','m.safak.d':'sun rising now','m.geceyarisi':'Night','m.geceyarisi.d':'sleeping half',
+  'sb.modes':'moods','sb.countries':'countries','sb.favs':'favorites','sb.recents':'recently played','sb.favEmpty':'none yet — tap ♡','sb.recEmpty':'your recent stations show up here',
+  'd.title':'discover','d.sub':'search {n} live stations','d.subIdle':'search thousands of live stations','d.ph':'station, genre, city…  ( / )','d.search':'search →','d.sort':'sort','d.tags':'genre & language','d.country':'country',
+  'd.s.trend':'🔥 trending','d.s.votes':'★ popular','d.s.clicks':'▶ most played','d.s.new':'✧ new','d.s.random':'⚄ random','d.none':'nothing found — try something else','d.more':'more ↓','d.similar':'≈ like {name}','d.similarNone':'no similar stations found',
+  'l.log':'your radio diary','l.logSub':'your listening habits — stored only on this device','l.logEmpty':'your diary fills up as you listen — hours, countries, favorite stations',
+  'l.total':'total listening','l.countries':'countries visited','l.stations':'stations','l.streak':'day streak','l.days':'days','l.week':'last 7 days','l.top':'your most played','l.passport':'your radio passport · {n} countries',
+  'l.favs':'favorites','l.favEmpty':'no favorites yet — tap ♡ on a station you like','l.recents':'recently played','l.recEmpty':'nothing played yet','l.export':'⇣ export','l.import':'⇡ import','l.clear':'clear',
+  'l.share':'📻 my rad—io diary: {d} of live radio, {n} countries {flags}{top}','l.shareTop':' · favorite: {name}',
+  'q.title':'play queue','q.empty':'queue is empty — pick a mood or spin the dial',
+  'p.live':'live','p.liveT':'live · {t}','p.paused':'paused','p.connecting':'connecting…','p.default':'live stream',
+  'u.min':'min','u.h':'h','days':['sun','mon','tue','wed','thu','fri','sat'],
+  't.favAdd':'♥ {name} saved','t.favRm':'removed from favorites','t.playFirst':'play a station first','t.failNext':'stream unavailable → next','t.failAll':'can’t reach streams — check your connection','t.zapNone':'nothing on the dial, try again',
+  't.sleepOn':'☾ stopping in {n} min','t.sleepOff':'☾ sleep timer off','t.night':'☾ good night','t.copied':'link copied','t.shareText':'{name} is live on rad—io','t.mute':'muted','t.unmute':'sound on','t.staticOn':'∿ static effect on','t.staticOff':'∿ static effect off',
+  't.last':'↩ last played: {name} — in your library','t.shared404':'shared station not found','t.offline':'offline — will resume when you’re back','t.online':'back online','t.tourOn':'🌍 world tour started — a new country every {n} minutes','t.tourOff':'🌍 world tour ended',
+  't.alarmSet':'⏰ radio will wake you at {t}','t.alarmOff':'⏰ alarm off','t.morning':'⏰ good morning ☀','t.locating':'📍 finding your location…','t.noGeo':'location not supported','t.geoDenied':'location permission denied','t.near':'📍 stations nearest you — ⏭ for neighbors','t.noMap':'no map data','t.noPos':'the playing station has no location','t.installed':'📲 rad—io installed','t.importN':'{n} stations imported','t.importErr':'couldn’t read the file','t.logCopied':'diary summary copied','t.searchEmpty':'type something to search','t.carHint':'🚗 swipe left/right to change station',
+  'map.title':'world map','map.sub':'every dot is a live station','map.loading':'placing thousands of stations…','map.loaded':'{n} live stations · tap a dot','map.fail':'couldn’t load the map — try again','map.near':'📍 near me','map.center':'◎ go to playing','map.reset':'⤢ all','map.globe':'globe','map.flat':'flat',
+  'lg.live':'on air','lg.fav':'favorite','lg.night':'night','lg.trail':'your trail','lg.hint':'drag · zoom · tap',
+  'day.day':'☀ daytime there','day.dawn':'🌅 sunrise there','day.dusk':'🌇 sunset there','day.night':'☾ night there',
+  'h.title':'shortcuts','h.play':'play / pause','h.zap':'spin the dial','h.prevnext':'previous / next','h.vol':'volume','h.fav':'favorite','h.mute':'mute','h.map':'world map','h.tour':'world tour','h.car':'car mode','h.postcard':'postcard','h.search':'search','h.views':'discover / library / queue','h.theme':'theme','h.lang':'Türkçe',
+  'al.title':'radio alarm clock ⏰','al.time':'time','al.what':'what to play','al.cur':'current / last played','al.fav':'one of my favorites','al.kafe':'café mood (random)','al.zap':'surprise — anywhere in the world','al.note':'volume fades in over 60 seconds. keep this tab open; on phones the browser may sleep while locked.','al.off':'turn off','al.set':'set',
+  'pc.title':'postcard','pc.download':'⇣ download','pc.share':'⤴ share','pc.now':'NOW LISTENING','pc.making':'making your postcard…',
+  'car.exit':'exit','car.favs':'favorites',
+  'a.theme':'theme','a.fav':'favorite','a.prev':'previous','a.next':'next','a.play':'play / pause','a.zap':'random station','a.car':'car mode','a.cast':'cast to speaker / TV','a.sleep':'sleep timer','a.alarm':'radio alarm','a.static':'static effect','a.mute':'mute','a.vol':'volume','a.help':'shortcuts',
+  'tag':['turkish','kurdish','arabic','persian','english','jazz','lo-fi','ambient','classical','electronic','rock','pop','soul','reggae','blues','hip-hop','house','techno','metal','80s','90s','arabesque','turkish folk','world','folk','news','talk','drone'],
+}};
 
 /* ---------- utils ---------- */
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const shuffle = a => { for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
-const pick = a => a[Math.floor(Math.random()*a.length)];
-const flag = cc => /^[A-Z]{2}$/.test(cc||'') ? String.fromCodePoint(...[...cc].map(c=>127397+c.charCodeAt(0))) : '';
-const fmtN = n => new Intl.NumberFormat('tr-TR').format(n);
-const fmtT = s => { s=Math.floor(s||0); const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60; return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0'); };
-const hue = s => { let h=0; for (const c of String(s)) h=(h*31+c.charCodeAt(0))|0; return Math.abs(h)%360; };
 const LS = {
   get(k,d){ try{ const v=localStorage.getItem('radio.'+k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
   set(k,v){ try{ localStorage.setItem('radio.'+k, JSON.stringify(v)); }catch(e){} },
 };
+let LANG = LS.get('lang', null) || ((navigator.language||'').toLowerCase().startsWith('tr') ? 'tr' : 'en');
+const t = (k, v) => { let s = I18N[LANG][k] ?? I18N.tr[k] ?? k; if (v && typeof s==='string') s = s.replace(/\{(\w+)\}/g, (_,x)=>v[x] ?? ''); return s; };
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const flag = cc => /^[A-Z]{2}$/.test(cc||'') ? String.fromCodePoint(...[...cc].map(c=>127397+c.charCodeAt(0))) : '';
+let NF = new Intl.NumberFormat(LANG==='tr'?'tr-TR':'en-US');
+const fmtN = n => NF.format(n);
+const fmtT = s => { s=Math.floor(s||0); const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60; return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0'); };
+const hue = s => { let h=0; for (const c of String(s)) h=(h*31+c.charCodeAt(0))|0; return Math.abs(h)%360; };
+let RN = null;
+const regionName = cc => { if (!cc) return ''; try { RN ||= new Intl.DisplayNames([LANG==='tr'?'tr':'en'],{type:'region'}); return RN.of(cc) || cc; } catch(e){ return cc; } };
 const canHls = !!document.createElement('audio').canPlayType('application/vnd.apple.mpegurl');
+const D2R = Math.PI/180, TAU = Math.PI*2;
+let DATA_VER = 0; // favori/iz değişince harita katmanı yenilenir
+
+/* ---------- data ---------- */
+const MODES = {
+  calisma:{icon:'✦',tags:['lofi','chillhop','study','downtempo']},
+  kafe:{icon:'◎',tags:['jazz','bossa nova','lounge','cafe']},
+  surus:{icon:'→',tags:['rock','classic rock','driving','synthwave']},
+  kosu:{icon:'▲',tags:['dance','house','edm','energetic']},
+  uyku:{icon:'◇',tags:['ambient','sleep','drone','relax']},
+  sifa:{icon:'○',tags:['meditation','healing','new age','nature']},
+  klasik:{icon:'♩',tags:['classical','baroque','opera','piano']},
+  turkce:{icon:'☾',cc:'TR'},
+  kurtce:{icon:'✿',tags:['kurdish','kurdi','kurmanci']},
+  doksan:{icon:'◈',tags:['90s','90er','eurodance','oldies']},
+  indie:{icon:'◉',tags:['indie','alternative','indie rock','folk']},
+  dunya:{icon:'◍',tags:['world music','world','ethnic','afrobeat']},
+  safak:{icon:'◐',sun:'dawn'},
+  geceyarisi:{icon:'✶',sun:'night'},
+};
+const TIME_MODES = [[5,['kafe','klasik','turkce','sifa']],[10,['calisma','indie','kafe','dunya']],[18,['indie','surus','turkce','doksan','kosu','dunya']],[22,['uyku','sifa','klasik','calisma']]];
+const COUNTRIES = ['TR','DE','GB','US','FR','IT','ES','GR','NL','JP','KR','BR','MX','IN','EG','RU','AZ','IR','CY','BG','UA','AR','CA','AU'];
+const SORTS = [['d.s.trend','order=clicktrend&reverse=true'],['d.s.votes','order=votes&reverse=true'],['d.s.clicks','order=clickcount&reverse=true'],['d.s.new','order=changetimestamp&reverse=true'],['d.s.random','order=random']];
+const TAGS = [['turkish','lang'],['kurdish','lang'],['arabic','lang'],['persian','lang'],['english','lang'],['jazz'],['lofi'],['ambient'],['classical'],['electronic'],['rock'],['pop'],['soul'],['reggae'],['blues'],['hip-hop'],['house'],['techno'],['metal'],['80s'],['90s'],['arabesk'],['turkish folk'],['world music'],['folk'],['news'],['talk'],['drone']];
 
 /* ---------- api ---------- */
 let SERVERS = shuffle(['de1','de2','nl1','at1','fi1'].map(h=>`https://${h}.api.radio-browser.info`));
 async function api(path, timeout=9000) {
   for (const base of SERVERS) {
-    const ac = new AbortController(); const t = setTimeout(()=>ac.abort(), timeout);
+    const ac = new AbortController(); const tm = setTimeout(()=>ac.abort(), timeout);
     try {
       const r = await fetch(base+path, {signal:ac.signal});
-      clearTimeout(t);
+      clearTimeout(tm);
       if (r.ok) { SERVERS = [base, ...SERVERS.filter(x=>x!==base)]; return await r.json(); }
-    } catch(e) { clearTimeout(t); }
+    } catch(e) { clearTimeout(tm); }
   }
   return null;
 }
 const BASEQ = 'hidebroken=true&is_https=true';
+const search = (q, limit=40, offset=0) => api(`/json/stations/search?${q}&limit=${limit}&offset=${offset}&${BASEQ}`);
 const LIB = new Map();
+const numOrNull = v => (v===null || v===undefined || v==='' || !Number.isFinite(+v)) ? null : +v;
 function norm(s) {
   if (!s || !s.stationuuid) return null;
   const url = s.url_resolved || s.url || '';
   if (!/^https:\/\//i.test(url)) return null;
   if (+s.hls && !canHls) return null;
   const st = {
-    uuid:s.stationuuid, name:(s.name||'İstasyon').replace(/\s+/g,' ').trim().slice(0,80), url,
+    uuid:s.stationuuid, name:(s.name||'Radio').replace(/\s+/g,' ').trim().slice(0,80), url,
     favicon:/^https:\/\//i.test(s.favicon||'') ? s.favicon : '',
-    cc:(s.countrycode||'').toUpperCase(), country:s.country||'',
-    tags:(s.tags||'').split(',').map(t=>t.trim().toLowerCase()).filter(t=>t&&t.length<24).slice(0,4),
+    cc:(s.countrycode||'').toUpperCase(), country:s.country||'', state:(s.state||'').slice(0,40),
+    tags:(s.tags||'').split(',').map(x=>x.trim().toLowerCase()).filter(x=>x&&x.length<24).slice(0,4),
     codec:(s.codec||'').toLowerCase(), bitrate:+s.bitrate||0,
     homepage:/^https?:\/\//i.test(s.homepage||'') ? s.homepage : '', votes:+s.votes||0,
-    lat: Number.isFinite(+s.geo_lat) && s.geo_lat!==null && s.geo_lat!=='' ? +s.geo_lat : (Number.isFinite(s.lat)?s.lat:null),
-    lon: Number.isFinite(+s.geo_long) && s.geo_long!==null && s.geo_long!=='' ? +s.geo_long : (Number.isFinite(s.lon)?s.lon:null),
+    lat:numOrNull(s.geo_lat), lon:numOrNull(s.geo_long),
   };
-  if (st.lat===0 && st.lon===0) { st.lat=null; st.lon=null; }
+  if (st.lat===0 && st.lon===0) st.lat = st.lon = null;
   LIB.set(st.uuid, st); return st;
 }
 function normList(arr, exclude=new Set()) {
   const seen = new Set(), out = [];
   for (const s of arr||[]) {
     const n = norm(s); if (!n) continue;
-    const k = n.name.toLowerCase().replace(/[^a-z0-9ğüşıöç]/g,'');
+    const k = n.name.toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
     if (seen.has(k) || exclude.has(n.uuid)) continue;
     seen.add(k); out.push(n);
   }
   return out;
 }
-const search = (q, limit=40, offset=0) => api(`/json/stations/search?${q}&limit=${limit}&offset=${offset}&${BASEQ}`);
+function slim(s){ return {uuid:s.uuid,name:s.name,url:s.url,favicon:s.favicon,cc:s.cc,country:s.country,state:s.state||'',tags:s.tags||[],codec:s.codec,bitrate:s.bitrate,homepage:s.homepage||'',votes:s.votes||0,lat:s.lat??null,lon:s.lon??null}; }
 
 /* ---------- state ---------- */
 const S = {
-  coll:null, collList:[], queue:[], qi:-1, cur:null,
-  state:'idle', errs:0, bad:new Set(),
+  coll:null, collList:[], queue:[], queueCtx:'', qi:-1, cur:null,
+  state:'idle', want:false, errs:0, bad:new Set(),
   favs:LS.get('favs',[]), recents:LS.get('recents',[]),
   staticFx:LS.get('static',true), sleepEnd:0, startedAt:0,
 };
@@ -601,33 +734,41 @@ const favSet = () => new Set(S.favs.map(f=>f.uuid));
 const isFav = u => S.favs.some(f=>f.uuid===u);
 const audio = new Audio();
 audio.preload = 'none';
+audio.setAttribute('playsinline','');
+audio.setAttribute('x-webkit-airplay','allow');
 audio.volume = LS.get('vol',0.7);
 
-/* ---------- theme ---------- */
-function applyTheme(t) {
-  document.documentElement.setAttribute('data-theme', t);
-  $('#themeBtn').textContent = t==='dark' ? '☀' : '☽';
-  $('#themeMetaColor').content = t==='dark' ? '#121210' : '#fafaf8';
+/* ---------- theme & palette ---------- */
+let PAL = {};
+function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function applyTheme(th) {
+  document.documentElement.setAttribute('data-theme', th);
+  $('#themeBtn').textContent = th==='dark' ? '☀' : '☽';
+  $('#themeMetaColor').content = th==='dark' ? '#121210' : '#fafaf8';
+  PAL = {dark:th==='dark', bg:cssVar('--bg'), bg2:cssVar('--bg2'), bg3:cssVar('--bg3'), line:cssVar('--line'), ink:cssVar('--ink'), ink2:cssVar('--ink2'), ink3:cssVar('--ink3'), acc:cssVar('--accent'), sak:cssVar('--sakura')};
+  DATA_VER++; if (window.MAP) requestDraw();
 }
 applyTheme(LS.get('theme', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-function toggleTheme(){ const t = document.documentElement.dataset.theme==='dark'?'light':'dark'; applyTheme(t); LS.set('theme',t); }
+function toggleTheme(){ const th = document.documentElement.dataset.theme==='dark'?'light':'dark'; applyTheme(th); LS.set('theme',th); }
 
 /* ---------- sakura ---------- */
 (function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const bg=$('#sakuraBg'), ns='http://www.w3.org/2000/svg';
   const pp='M0,-8 C4,-8 7,-4 6,0 C5,4 2,7 0,8 C-2,7 -5,4 -6,0 C-7,-4 -4,-8 0,-8Z';
   const colors=['#e8b4c0','#f5dde4','#dba8b8','#f0ccd4'];
-  for (let i=0;i<14;i++){
+  const n = innerWidth<760 ? 7 : 12;
+  for (let i=0;i<n;i++){
     const svg=document.createElementNS(ns,'svg'); svg.setAttribute('viewBox','-8 -8 16 16');
     const p=document.createElementNS(ns,'path'); p.setAttribute('d',pp); p.setAttribute('fill',colors[i%4]);
     svg.appendChild(p); svg.classList.add('petal');
     const sz=9+Math.random()*9;
-    svg.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${10+Math.random()*14}s;animation-delay:${Math.random()*24}s`;
+    svg.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${10+Math.random()*14}s;animation-delay:${Math.random()*24}s;will-change:transform`;
     bg.appendChild(svg);
   }
 })();
 
-/* ---------- static noise (radyo paraziti) ---------- */
+/* ---------- static noise ---------- */
 let actx=null, noiseBuf=null, noise=null;
 function ensureCtx(){
   if (!actx) { try { actx = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){ return; } }
@@ -654,40 +795,71 @@ function staticOff(now){
 }
 
 /* ---------- art ---------- */
+const initial = st => (st?.name||'♪').replace(/^[^\p{L}\p{N}]+/u,'').charAt(0).toUpperCase() || '♪';
 function art(st, cls, fallback) {
-  const ch = fallback || (st?.name||'♪').replace(/^[^\p{L}\p{N}]+/u,'').charAt(0).toUpperCase() || '♪';
-  const img = st?.favicon ? `<img src="${esc(st.favicon)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
-  return `<div class="${cls} art" style="--h:${hue(st?.name||'')}">${esc(ch)}${img}</div>`;
+  const img = st?.favicon ? `<img src="${esc(st.favicon)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
+  return `<div class="${cls} art" style="--h:${hue(st?.name||'')}">${esc(fallback||initial(st))}${img}</div>`;
 }
-function setArt(el, st, fallback) {
-  const tmp=document.createElement('div'); tmp.innerHTML=art(st,'x',fallback);
-  const n=tmp.firstChild; el.style.cssText=n.style.cssText; el.innerHTML=n.innerHTML;
+function setArt(el, st) {
+  el.style.setProperty('--h', hue(st?.name||''));
+  el.innerHTML = esc(initial(st)) + (st?.favicon ? `<img src="${esc(st.favicon)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : '');
 }
+const artCache = new Map();
+function artPNG(st){ // araç ekranları/kilit ekranı için PNG kapak
+  if (artCache.has(st.uuid)) return artCache.get(st.uuid);
+  const c=document.createElement('canvas'); c.width=c.height=512; const g=c.getContext('2d');
+  g.fillStyle=`hsl(${hue(st.name)} 35% 78%)`; g.fillRect(0,0,512,512);
+  g.fillStyle='#1a1915'; g.font='300 260px "Noto Serif JP", serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText(initial(st),256,272);
+  g.font='400 34px "DM Mono", monospace'; g.globalAlpha=.55; g.fillText('rad—io',256,460);
+  let u=''; try { u=c.toDataURL('image/png'); } catch(e){}
+  artCache.set(st.uuid,u); return u;
+}
+
+/* ---------- i18n apply ---------- */
+function applyLang(){
+  document.documentElement.lang = LANG;
+  RN = null; NF = new Intl.NumberFormat(LANG==='tr'?'tr-TR':'en-US');
+  $$('[data-i18n]').forEach(el=>{ el.textContent = t(el.dataset.i18n); });
+  $$('[data-i18n-ph]').forEach(el=>{ el.placeholder = t(el.dataset.i18nPh); });
+  $$('[data-i18n-aria]').forEach(el=>{ el.setAttribute('aria-label', t(el.dataset.i18nAria)); el.title = t(el.dataset.i18nAria); });
+  $('#langBtn').textContent = LANG==='tr' ? 'EN' : 'TR';
+  $('#langBtn').title = LANG==='tr' ? 'English' : 'Türkçe';
+  buildSidebar(); buildDiscover(); renderSideLib(); updateFavBtns(); setState(S.state); renderStats();
+  if (S.coll) setCollTitle(); else if (!S.cur) { $('#vhTitle').textContent='—'; }
+  const st = LIB.get(S.cur); if (st) updateNP(st);
+  if (MAP.loaded) $('#mapSub').textContent = t('map.loaded',{n:fmtN(MAP.pts.length)}); else if (!MAP.loading) $('#mapSub').textContent = t('map.sub');
+  $$('[data-act="map-mode"]').forEach(b=>b.classList.toggle('on', (b.dataset.m==='globe')===MAP.globe));
+  if ($('#view-library').classList.contains('active')) renderLibrary();
+  if ($('#view-queue').classList.contains('active')) renderQueue();
+  updateAlarmBtn(); updateCar();
+}
+function toggleLang(){ LANG = LANG==='tr'?'en':'tr'; LS.set('lang',LANG); applyLang(); }
 
 /* ---------- sidebar ---------- */
 function buildSidebar(){
-  const modes = Object.entries(MODES).map(([k,m])=>`<button class="sb-item" data-act="coll" data-type="mode" data-key="${k}"><span class="sb-icon">${m.icon}</span><span class="sb-name">${esc(m.name)}</span><span class="sb-sub">${esc(m.desc)}</span></button>`).join('');
-  const ccs = COUNTRIES.slice(0,12).map(([cc,n])=>`<button class="sb-item" data-act="coll" data-type="country" data-key="${cc}"><span class="sb-icon">${flag(cc)}</span><span class="sb-name">${esc(n)}</span></button>`).join('');
+  const modes = Object.entries(MODES).map(([k,m])=>`<button class="sb-item" data-act="coll" data-type="mode" data-key="${k}"><span class="sb-icon">${m.icon}</span><span class="sb-name">${esc(t('m.'+k))}</span><span class="sb-sub">${esc(t('m.'+k+'.d'))}</span></button>`).join('');
+  const ccs = COUNTRIES.slice(0,12).map(cc=>`<button class="sb-item" data-act="coll" data-type="country" data-key="${cc}"><span class="sb-icon">${flag(cc)}</span><span class="sb-name">${esc(regionName(cc))}</span></button>`).join('');
   $('#sidebar').innerHTML = `
-    <div class="sb-sec"><div class="sb-lbl">modlar</div>${modes}</div>
+    <div class="sb-sec"><div class="sb-lbl">${esc(t('sb.modes'))}</div>${modes}</div>
     <div class="sb-div"></div>
-    <div class="sb-sec countries"><div class="sb-lbl">ülkeler</div>${ccs}</div>
+    <div class="sb-sec countries"><div class="sb-lbl">${esc(t('sb.countries'))}</div>${ccs}</div>
     <div class="sb-div"></div>
-    <div class="sb-sec sb-lib"><div class="sb-lbl"><span>favoriler</span><span id="favCnt"></span></div><div id="sbFavs"></div></div>
-    <div class="sb-sec sb-lib"><div class="sb-lbl">son dinlenenler</div><div id="sbRecs"></div></div>`;
+    <div class="sb-sec sb-lib"><div class="sb-lbl"><span>${esc(t('sb.favs'))}</span><span id="favCnt"></span></div><div id="sbFavs"></div></div>
+    <div class="sb-sec sb-lib"><div class="sb-lbl">${esc(t('sb.recents'))}</div><div id="sbRecs"></div></div>`;
+  refreshCards();
 }
 function renderSideLib(){
   const item = (s,ctx) => `<button class="sb-item" data-act="play-uid" data-ctx="${ctx}" data-uid="${esc(s.uuid)}"><span class="sb-icon">${flag(s.cc)||'♪'}</span><span class="sb-name">${esc(s.name)}</span></button>`;
-  $('#sbFavs').innerHTML = S.favs.length ? S.favs.slice(0,12).map(s=>item(s,'fav')).join('') : '<div class="sb-empty">henüz yok — ♡ ile ekle</div>';
+  $('#sbFavs').innerHTML = S.favs.length ? S.favs.slice(0,12).map(s=>item(s,'fav')).join('') : `<div class="sb-empty">${esc(t('sb.favEmpty'))}</div>`;
   $('#favCnt').textContent = S.favs.length || '';
-  $('#sbRecs').innerHTML = S.recents.length ? S.recents.slice(0,6).map(s=>item(s,'rec')).join('') : '<div class="sb-empty">burada son dinlediklerin görünecek</div>';
+  $('#sbRecs').innerHTML = S.recents.length ? S.recents.slice(0,6).map(s=>item(s,'rec')).join('') : `<div class="sb-empty">${esc(t('sb.recEmpty'))}</div>`;
 }
 
 /* ---------- cards ---------- */
 function card(st, ctx, fs) {
   const on = st.uuid===S.cur, fv = fs.has(st.uuid);
   const meta = [
-    st.cc ? `<span title="${esc(st.country)}">${flag(st.cc)} ${esc(st.cc)}</span>` : '',
+    st.cc ? `<span title="${esc(regionName(st.cc))}">${flag(st.cc)} ${esc(st.cc)}</span>` : '',
     st.bitrate ? `<span>${st.bitrate}k</span>` : '',
     st.codec && st.codec!=='unknown' ? `<span>${esc(st.codec)}</span>` : '',
     st.tags[0] ? `<span class="tag">${esc(st.tags[0])}</span>` : '',
@@ -695,18 +867,13 @@ function card(st, ctx, fs) {
   return `<div class="st-card${on?' playing':''}${S.bad.has(st.uuid)?' bad':''}" role="button" tabindex="0" data-ctx="${ctx}" data-uid="${esc(st.uuid)}">
     ${art(st,'st-art')}
     <div class="st-info"><div class="st-name">${esc(st.name)}</div><div class="st-meta">${meta}</div></div>
-    <button class="ic-btn${fv?' faved':''}" data-act="fav" aria-label="favori">${fv?'♥':'♡'}</button>
+    <button class="ic-btn${fv?' faved':''}" data-act="fav" aria-label="${esc(t('a.fav'))}">${fv?'♥':'♡'}</button>
   </div>`;
 }
 function grid(list, ctx){ const fs=favSet(); return `<div class="st-grid">${list.map(s=>card(s,ctx,fs)).join('')}</div>`; }
 const skeleton = n => `<div class="st-grid">${'<div class="skel"></div>'.repeat(n)}</div>`;
 function listFor(ctx){
-  if (ctx==='coll') return S.collList;
-  if (ctx==='disc') return D.list;
-  if (ctx==='fav') return S.favs;
-  if (ctx==='rec') return S.recents;
-  if (ctx==='queue') return S.queue;
-  return [];
+  return ctx==='coll' ? S.collList : ctx==='disc' ? D.list : ctx==='fav' ? S.favs : ctx==='rec' ? S.recents : ctx==='queue' ? S.queue : [];
 }
 function refreshCards(){
   const fs=favSet();
@@ -716,58 +883,75 @@ function refreshCards(){
     c.classList.toggle('bad', S.bad.has(u));
     const b=c.querySelector('.ic-btn'); if (b){ const f=fs.has(u); b.classList.toggle('faved',f); b.textContent=f?'♥':'♡'; }
   });
-  $$('.sb-item[data-act="coll"]').forEach(b=>b.classList.toggle('active', S.coll && b.dataset.type===S.coll.type && b.dataset.key===S.coll.key));
+  $$('.sb-item[data-act="coll"]').forEach(b=>b.classList.toggle('active', !!S.coll && b.dataset.type===S.coll.type && b.dataset.key===S.coll.key));
 }
 
-/* ---------- collections (mod / ülke) ---------- */
+/* ---------- güneş ---------- */
+function sunPos(d=new Date()){
+  const n=(d.getTime()-Date.UTC(2000,0,1,12))/864e5;
+  const L=(280.46+0.9856474*n)%360, g=((357.528+0.9856003*n)%360)*D2R;
+  const lam=(L+1.915*Math.sin(g)+0.02*Math.sin(2*g))*D2R, eps=(23.439-4e-7*n)*D2R;
+  const dec=Math.asin(Math.sin(eps)*Math.sin(lam));
+  const ra=Math.atan2(Math.cos(eps)*Math.sin(lam),Math.cos(lam))/D2R;
+  const gmst=((18.697374558+24.06570982441908*n)%24+24)%24;
+  return {lat:dec/D2R, lon:((ra-gmst*15)%360+540)%360-180};
+}
+function sunAlt(lat, lon, sp=sunPos()){
+  return Math.asin(Math.sin(lat*D2R)*Math.sin(sp.lat*D2R)+Math.cos(lat*D2R)*Math.cos(sp.lat*D2R)*Math.cos((lon-sp.lon)*D2R))/D2R;
+}
+function dayKind(st){
+  if (!st || st.lat==null) return '';
+  const a = sunAlt(st.lat, st.lon);
+  return a>6 ? 'day' : a>-6 ? (sunAlt(st.lat, st.lon, sunPos(new Date(Date.now()+6e5)))>a ? 'dawn' : 'dusk') : 'night';
+}
+const dayLabel = st => { const k=dayKind(st); return k ? t('day.'+k) : ''; };
+
+/* ---------- collections ---------- */
 let collToken = 0;
+function setCollTitle(){
+  const {type,key} = S.coll;
+  if (type==='mode') { $('#vhTitle').textContent = `${MODES[key].icon} ${t('m.'+key)}`; S.collSub = t('m.'+key+'.d'); }
+  else { $('#vhTitle').textContent = `${flag(key)} ${regionName(key)}`; S.collSub = t('c.country'); }
+  $('#vhSub').textContent = S.collSub + (S.collList.length ? ' · '+t('c.count',{n:S.collList.length}) : '');
+}
 async function loadColl(type, key, {autoplay=true, random=true}={}) {
   const tok = ++collToken;
-  S.coll = {type,key};
+  S.coll = {type,key}; S.collList = [];
   switchView('stations');
-  let title, sub;
-  if (type==='mode') { const m=MODES[key]; title=`${m.icon} ${m.name}`; sub=m.desc; }
-  else { const c=COUNTRIES.find(x=>x[0]===key); title=`${flag(key)} ${c?c[1]:key}`; sub='bu ülkeden canlı yayınlar'; }
-  $('#vhTitle').textContent = title; $('#vhSub').textContent = sub+' · yükleniyor…';
+  setCollTitle(); $('#vhSub').textContent = S.collSub+' · '+t('c.loading');
   $('#collRes').innerHTML = skeleton(8);
   refreshCards();
-  let raw = [];
   const m = MODES[key];
+  let list;
   if (m?.sun) {
     await loadMapData();
     if (tok!==collToken) return;
     const sp = sunPos(), sp2 = sunPos(new Date(Date.now()+15*60000));
     const ok = p => { const a=sunAlt(p.lat,p.lon,sp); return m.sun==='dawn' ? (a>-7 && a<12 && sunAlt(p.lat,p.lon,sp2)>a) : a<-28; };
     const byCC = {}; for (const p of MAP.pts) if (ok(p) && !S.bad.has(p.uuid)) (byCC[p.cc||'?'] ||= []).push(p);
-    // ülkeler arasında sırayla dağıt → çeşitlilik
     const lists = shuffle(Object.values(byCC).map(l=>shuffle(l.slice())));
-    const out = []; let i=0;
-    while (out.length<30 && lists.some(l=>l.length)) { const l=lists[i++%lists.length]; if (l.length) out.push(l.pop()); }
-    const flags = [...new Set(out.map(p=>p.cc))].slice(0,10).map(flag).join('');
-    S.collList = out;
-    $('#vhSub').textContent = out.length ? `${sub} · ${flags} · ${out.length} istasyon` : sub;
-    if (!out.length) { $('#collRes').innerHTML = `<div class="ldg"><div class="ldg-kanji">${m.sun==='dawn'?'暁':'夜'}</div><div>şu an uygun istasyon bulunamadı</div></div>`; return; }
-    $('#collRes').innerHTML = grid(out,'coll'); refreshCards();
-    if (autoplay) playFrom('coll', out[0].uuid);
-    return;
-  }
-  if (type==='country' || m?.cc) {
-    const cc = type==='country' ? key : m.cc;
-    const off = random ? Math.floor(Math.random()*3)*40 : 0;
-    const [a,b] = await Promise.all([search(`countrycode=${cc}&order=votes&reverse=true`,60,0), search(`countrycode=${cc}&order=clicktrend&reverse=true`,40,off)]);
-    raw = [...(a||[]),...(b||[])];
+    list = []; let i=0;
+    while (list.length<30 && lists.some(l=>l.length)) { const l=lists[i++%lists.length]; if (l.length) list.push(l.pop()); }
   } else {
-    const res = await Promise.allSettled(m.tags.map(t=>search(`tag=${encodeURIComponent(t)}&order=votes&reverse=true`,40,0)));
-    res.forEach(r=>{ if (r.status==='fulfilled' && r.value) raw.push(...r.value); });
+    let raw = [];
+    if (type==='country' || m?.cc) {
+      const cc = type==='country' ? key : m.cc;
+      const off = random ? Math.floor(Math.random()*3)*40 : 0;
+      const [a,b] = await Promise.all([search(`countrycode=${cc}&order=votes&reverse=true`,60,0), search(`countrycode=${cc}&order=clicktrend&reverse=true`,40,off)]);
+      raw = [...(a||[]),...(b||[])];
+    } else {
+      const res = await Promise.allSettled(m.tags.map(tg=>search(`tag=${encodeURIComponent(tg)}&order=votes&reverse=true`,40,0)));
+      res.forEach(r=>{ if (r.status==='fulfilled' && r.value) raw.push(...r.value); });
+    }
+    if (tok!==collToken) return;
+    list = normList(raw);
+    list = (random ? shuffle(list) : list).slice(0,30);
   }
-  if (tok!==collToken) return;
-  // havuzdan rastgele seçim: her açılışta farklı istasyonlar
-  let list = normList(raw);
-  list = random ? shuffle(list).slice(0,30) : list.slice(0,30);
   S.collList = list;
-  $('#vhSub').textContent = `${sub} · ${list.length} istasyon`;
+  setCollTitle();
+  if (m?.sun && list.length) $('#vhSub').textContent = `${S.collSub} · ${[...new Set(list.map(p=>p.cc))].slice(0,10).map(flag).join('')} · ${t('c.count',{n:list.length})}`;
   if (!list.length) {
-    $('#collRes').innerHTML = `<div class="ldg"><div class="ldg-kanji">静</div><div>şu an istasyon bulunamadı</div><button class="sm-btn" data-act="refresh">↻ tekrar dene</button></div>`;
+    $('#collRes').innerHTML = `<div class="ldg"><div class="ldg-kanji">${m?.sun?(m.sun==='dawn'?'暁':'夜'):'静'}</div><div>${esc(t(m?.sun?'c.sunEmpty':'c.empty'))}</div><button class="sm-btn" data-act="refresh">${esc(t('b.retry'))}</button></div>`;
     return;
   }
   $('#collRes').innerHTML = grid(list,'coll');
@@ -779,7 +963,7 @@ function refreshColl(){ if (S.coll) loadColl(S.coll.type, S.coll.key); else zap(
 /* ---------- discover ---------- */
 const D = {q:'', label:'', offset:0, list:[], more:false, loading:false};
 async function discover(q, label) {
-  Object.assign(D,{q,label,offset:0,list:[],more:false});
+  Object.assign(D,{q,label,offset:0,list:[],more:false,loading:false});
   switchView('discover');
   $('#discHd').textContent = label;
   $('#discRes').innerHTML = skeleton(6);
@@ -787,291 +971,54 @@ async function discover(q, label) {
 }
 async function discMore(){
   if (D.loading) return; D.loading = true;
-  const btn = $('#discMoreBtn'); if (btn) btn.textContent='yükleniyor…';
-  const q = D.q;
+  const btn = $('#discMoreBtn'); if (btn) btn.textContent=t('c.loading');
+  const q = D.q, isS = q.startsWith('__search:');
   let d;
-  if (q.startsWith('__search:')) {
+  if (isS) {
     const term = encodeURIComponent(q.slice(9));
     const [a,b] = await Promise.all([search(`name=${term}&order=votes&reverse=true`,30,D.offset), search(`tag=${term}&order=votes&reverse=true`,30,D.offset)]);
     d = [...(a||[]),...(b||[])]; D.more = (a||[]).length===30 || (b||[]).length===30;
-  } else {
-    d = await search(q,40,D.offset); D.more = (d||[]).length===40;
-  }
+  } else { d = await search(q,40,D.offset); D.more = (d||[]).length===40; }
   D.loading = false;
   if (q!==D.q) return;
-  D.offset += q.startsWith('__search:') ? 30 : 40;
-  const have = new Set(D.list.map(s=>s.uuid));
-  const n = normList(d, have);
-  D.list.push(...n);
-  if (!D.list.length) { $('#discRes').innerHTML='<div class="ldg"><div class="ldg-kanji">無</div><div>sonuç bulunamadı — başka bir şey dene</div></div>'; return; }
-  $('#discHd').textContent = `${D.label} · ${D.list.length} istasyon`;
-  $('#discRes').innerHTML = grid(D.list,'disc') + (D.more ? `<div class="more-row"><button class="sm-btn" id="discMoreBtn" data-act="disc-more">daha fazla ↓</button></div>` : '');
+  D.offset += isS ? 30 : 40;
+  D.list.push(...normList(d, new Set(D.list.map(s=>s.uuid))));
+  renderDisc();
+}
+function renderDisc(){
+  if (!D.list.length) { $('#discRes').innerHTML=`<div class="ldg"><div class="ldg-kanji">無</div><div>${esc(t('d.none'))}</div></div>`; return; }
+  $('#discHd').textContent = `${D.label} · ${t('c.count',{n:D.list.length})}`;
+  $('#discRes').innerHTML = grid(D.list,'disc') + (D.more ? `<div class="more-row"><button class="sm-btn" id="discMoreBtn" data-act="disc-more">${esc(t('d.more'))}</button></div>` : '');
 }
 function buildDiscover(){
-  $('#sortChips').innerHTML = SORTS.map((s,i)=>`<button class="chip" data-act="disc" data-q="${esc(s.q)}" data-l="${esc(s.l)}">${esc(s.l)}</button>`).join('');
-  $('#tagChips').innerHTML = TAGS.map(([l,t,k])=>`<button class="chip${k?' lang':''}" data-act="disc" data-q="${esc((k?'language=':'tag=')+encodeURIComponent(t)+'&order=votes&reverse=true')}" data-l="${esc(l)}">${esc(l)}</button>`).join('');
-  $('#ccChips').innerHTML = COUNTRIES.map(([cc,n])=>`<button class="chip" data-act="disc" data-q="countrycode=${cc}&order=votes&reverse=true" data-l="${esc(flag(cc)+' '+n)}">${flag(cc)} ${esc(n)}</button>`).join('');
+  const act = $('.chip.active')?.dataset.q;
+  const lbl = I18N[LANG].tag;
+  $('#sortChips').innerHTML = SORTS.map(([k,q])=>`<button class="chip" data-act="disc" data-q="${esc(q)}" data-l="${esc(t(k))}">${esc(t(k))}</button>`).join('');
+  $('#tagChips').innerHTML = TAGS.map(([tg,kind],i)=>`<button class="chip${kind?' lang':''}" data-act="disc" data-q="${esc((kind?'language=':'tag=')+encodeURIComponent(tg)+'&order=votes&reverse=true')}" data-l="${esc(lbl[i])}">${esc(lbl[i])}</button>`).join('');
+  $('#ccChips').innerHTML = COUNTRIES.map(cc=>`<button class="chip" data-act="disc" data-q="countrycode=${cc}&order=votes&reverse=true" data-l="${esc(flag(cc)+' '+regionName(cc))}">${flag(cc)} ${esc(regionName(cc))}</button>`).join('');
+  if (act) $$('.chip').forEach(c=>c.classList.toggle('active', c.dataset.q===act));
+}
+async function similar(){
+  const st = LIB.get(S.cur); if (!st) { toast(t('t.playFirst')); return; }
+  const tags = st.tags.filter(x=>x.length>2).slice(0,3);
+  const label = t('d.similar',{name:st.name});
+  if (!tags.length) { discover(`countrycode=${st.cc}&order=votes&reverse=true`, label); return; }
+  switchView('discover'); $$('.chip').forEach(c=>c.classList.remove('active'));
+  Object.assign(D,{q:'__similar', label, offset:0, list:[], more:false});
+  $('#discHd').textContent = label; $('#discRes').innerHTML = skeleton(6);
+  const qs = [];
+  if (st.cc) qs.push(search(`tag=${encodeURIComponent(tags[0])}&countrycode=${st.cc}&order=votes&reverse=true`,20));
+  for (const tg of tags) qs.push(search(`tag=${encodeURIComponent(tg)}&order=votes&reverse=true`,20));
+  const res = await Promise.allSettled(qs);
+  if (D.q!=='__similar') return;
+  const raw=[]; res.forEach(r=>{ if (r.status==='fulfilled'&&r.value) raw.push(...r.value); });
+  const score = x => x.tags.filter(tg=>st.tags.includes(tg)).length + (x.cc===st.cc?0.5:0);
+  D.list = normList(raw, new Set([st.uuid])).sort((a,b)=>score(b)-score(a)).slice(0,40);
+  if (!D.list.length) { $('#discRes').innerHTML=`<div class="ldg"><div>${esc(t('d.similarNone'))}</div></div>`; return; }
+  renderDisc();
 }
 
-/* ---------- library ---------- */
-function renderLibrary(){
-  renderLog();
-  $('#favSub').textContent = S.favs.length ? `${S.favs.length} istasyon` : '';
-  $('#favRes').innerHTML = S.favs.length ? grid(S.favs,'fav') : '<div class="ldg" style="padding:24px"><div>henüz favori yok — beğendiğin istasyonda ♡’ye bas</div></div>';
-  $('#recRes').innerHTML = S.recents.length ? grid(S.recents,'rec') : '<div class="ldg" style="padding:24px"><div>henüz bir şey dinlemedin</div></div>';
-}
-function slim(s){ return {uuid:s.uuid,name:s.name,url:s.url,favicon:s.favicon,cc:s.cc,country:s.country,tags:s.tags,codec:s.codec,bitrate:s.bitrate,homepage:s.homepage,votes:s.votes,lat:s.lat??null,lon:s.lon??null}; }
-function toggleFav(uuid){
-  const st = LIB.get(uuid); if (!st) return;
-  if (isFav(uuid)) { S.favs = S.favs.filter(f=>f.uuid!==uuid); toast('favorilerden çıkarıldı'); }
-  else { S.favs.unshift(slim(st)); toast(`♥ ${st.name} eklendi`); api(`/json/vote/${uuid}`); }
-  LS.set('favs', S.favs);
-  renderSideLib(); refreshCards(); updateFavBtns();
-  if ($('#view-library').classList.contains('active')) renderLibrary();
-}
-function pushRecent(st){
-  S.recents = [slim(st), ...S.recents.filter(r=>r.uuid!==st.uuid)].slice(0,30);
-  LS.set('recents', S.recents); renderSideLib();
-}
-function exportFavs(){
-  const blob = new Blob([JSON.stringify({app:'rad-io',v:1,favs:S.favs},null,1)],{type:'application/json'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rad-io-favoriler.json'; a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
-}
-async function importFavs(file){
-  try{
-    const d = JSON.parse(await file.text()); const arr = Array.isArray(d) ? d : d.favs;
-    let n=0; for (const f of arr||[]) { if (f && f.uuid && /^https:/.test(f.url||'') && !isFav(f.uuid)) { const s=slim({...f,tags:Array.isArray(f.tags)?f.tags:[]}); S.favs.push(s); LIB.set(s.uuid,s); n++; } }
-    LS.set('favs',S.favs); renderSideLib(); renderLibrary(); toast(`${n} istasyon içe aktarıldı`);
-  }catch(e){ toast('dosya okunamadı'); }
-}
-
-/* ---------- queue ---------- */
-function renderQueue(){
-  if (!S.queue.length) { $('#qItems').innerHTML='<div class="sb-empty" style="padding:20px 0">sıra boş — bir mod seç ya da çevir</div>'; $('#qSub').textContent='—'; return; }
-  $('#qSub').textContent = `${S.queue.length} istasyon`;
-  $('#qItems').innerHTML = S.queue.map((s,i)=>`<button class="q-item${i===S.qi?' active':''}" data-act="play-uid" data-ctx="queue" data-uid="${esc(s.uuid)}"><span class="q-num">${i===S.qi?'▶':i+1}</span><span class="q-name">${esc(s.name)}</span><span class="q-cc">${flag(s.cc)}</span></button>`).join('');
-}
-
-/* ---------- playback ---------- */
-let loadTimer=null;
-function setState(st){
-  S.state = st;
-  document.body.classList.toggle('is-playing', st==='playing');
-  document.body.classList.toggle('is-loading', st==='loading');
-  const icon = st==='playing' ? '⏸' : st==='loading' ? '…' : '▶';
-  $('#playBtn').textContent = icon;
-  $('#stPlay').textContent = st==='playing' ? '⏸ duraklat' : st==='loading' ? '… bağlanıyor' : '▶ dinle';
-  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = st==='playing'?'playing':st==='idle'?'none':'paused';
-  updateKicker();
-}
-function updateKicker(){
-  const st = LIB.get(S.cur);
-  const k = $('#stKicker');
-  if (!st) { k.textContent='binlerce canlı radyo'; return; }
-  k.textContent = S.state==='playing' ? 'şimdi canlı' : S.state==='loading' ? 'frekans aranıyor…' : S.state==='paused' ? 'duraklatıldı' : 'hazır — dinlemek için bas';
-}
-function playFrom(ctx, uuid){
-  const list = listFor(ctx);
-  S.queue = list.slice(); S.queueCtx = ctx;
-  if (!S.queue.some(s=>s.uuid===uuid)) { const s=LIB.get(uuid); if (s) S.queue.unshift(s); }
-  play(uuid);
-}
-function play(uuid){
-  const st = LIB.get(uuid); if (!st) return;
-  ensureCtx();
-  S.cur = uuid; S.qi = S.queue.findIndex(s=>s.uuid===uuid);
-  LS.set('last', slim(st));
-  updateNP(st);
-  setState('loading'); staticOn();
-  audio.src = st.url;
-  audio.play().catch(err=>{
-    if (err.name==='NotAllowedError') { clearTimeout(loadTimer); staticOff(true); setState('idle'); }
-  });
-  clearTimeout(loadTimer);
-  loadTimer = setTimeout(()=>{ if (S.state==='loading' && S.cur===uuid) fail('zaman aşımı'); }, 12000);
-  api(`/json/url/${uuid}`); // radio-browser tıklama sayacı
-  try { history.replaceState(null,'',`#s=${uuid}`); } catch(e){}
-  refreshCards(); renderQueue();
-}
-function playPause(){
-  ensureCtx();
-  if (!S.cur) { zap(); return; }
-  if (S.state==='playing') { audio.pause(); return; }
-  if (S.state==='loading') { audio.pause(); clearTimeout(loadTimer); staticOff(true); setState('paused'); return; }
-  play(S.cur); // canlı yayında yeniden bağlan → gecikmesiz
-}
-function step(dir){
-  if (!S.queue.length) { zap(); return; }
-  if (S.queueCtx==='zap' && dir>0 && S.qi>=S.queue.length-1) { zap(); return; }
-  let i = S.qi;
-  for (let n=0;n<S.queue.length;n++){
-    i = (i+dir+S.queue.length)%S.queue.length;
-    if (!S.bad.has(S.queue[i].uuid)) { play(S.queue[i].uuid); return; }
-  }
-  zap();
-}
-function fail(why){
-  clearTimeout(loadTimer); staticOff(true);
-  if (!S.cur) return;
-  S.bad.add(S.cur); S.errs++;
-  refreshCards();
-  if (S.errs>=6) { S.errs=0; setState('idle'); toast('yayınlara ulaşılamıyor — bağlantını kontrol et'); return; }
-  toast('bu yayın açılmadı → sıradaki');
-  setTimeout(()=>step(1), 700);
-}
-audio.addEventListener('playing', ()=>{
-  clearTimeout(loadTimer); staticOff(); S.errs=0;
-  if (S.state!=='playing') S.startedAt = Date.now();
-  setState('playing');
-  const st=LIB.get(S.cur); if (st) pushRecent(st);
-});
-audio.addEventListener('waiting', ()=>{ if (S.state==='playing') { setState('loading'); } });
-audio.addEventListener('pause', ()=>{ if (S.state==='playing') setState('paused'); });
-audio.addEventListener('error', ()=>{ if (audio.src && S.state!=='idle' && S.state!=='paused') fail('error'); });
-audio.addEventListener('stalled', ()=>{ if (S.state==='loading') {/* timeout halleder */} });
-
-function updateNP(st){
-  $('#npName').textContent = st.name;
-  const where = [flag(st.cc)+' '+(st.country||st.cc||''), st.bitrate?st.bitrate+'k':'', st.codec&&st.codec!=='unknown'?st.codec:''].filter(x=>x.trim()).join(' · ');
-  $('#npSub').textContent = where || 'canlı yayın';
-  setArt($('#npArt'), st); setArt($('#stArt'), st);
-  $('#stName').textContent = st.name;
-  $('#stMeta').innerHTML = [
-    st.cc ? `<span>${flag(st.cc)} ${esc(st.country||st.cc)}</span>` : '',
-    st.bitrate ? `<span>${st.bitrate} kbps</span>` : '',
-    st.codec && st.codec!=='unknown' ? `<span>${esc(st.codec)}</span>` : '',
-    ...st.tags.slice(0,3).map(t=>`<button class="tag" data-act="disc" data-q="tag=${esc(encodeURIComponent(t))}&order=votes&reverse=true" data-l="${esc(t)}" style="cursor:pointer">${esc(t)}</button>`),
-    st.homepage ? `<a href="${esc(st.homepage)}" target="_blank" rel="noopener noreferrer">site ↗</a>` : '',
-    st.lat!=null ? `<span id="stDay">${esc(dayLabel(st))}</span>` : '',
-  ].join('');
-  updateFavBtns(); updateKicker();
-  document.title = `♪ ${st.name} — rad—io`;
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: st.name, artist: [st.country, st.tags[0]].filter(Boolean).join(' · ') || 'canlı radyo', album: 'rad—io',
-      artwork: st.favicon ? [{src:st.favicon, sizes:'512x512'}] : [{src:'icon.svg', sizes:'512x512', type:'image/svg+xml'}],
-    });
-  }
-}
-function updateFavBtns(){
-  const f = S.cur && isFav(S.cur);
-  ['#npFav','#npFavM'].forEach(s=>{ const b=$(s); b.textContent=f?'♥':'♡'; b.classList.toggle('active',!!f); });
-  const sb=$('#stFav'); sb.textContent = f?'♥ favoride':'♡ favori'; sb.classList.toggle('faved',!!f);
-}
-if ('mediaSession' in navigator) {
-  const ms = navigator.mediaSession;
-  const h = (a,f)=>{ try{ ms.setActionHandler(a,f); }catch(e){} };
-  h('play', ()=>playPause()); h('pause', ()=>audio.pause()); h('stop', ()=>audio.pause());
-  h('previoustrack', ()=>step(-1)); h('nexttrack', ()=>step(1));
-}
-// canlı süre
-setInterval(()=>{
-  if (S.state==='playing') $('#liveTxt').textContent = 'canlı · ' + fmtT((Date.now()-S.startedAt)/1000);
-  else if (S.state==='paused') $('#liveTxt').textContent = 'duraklatıldı';
-  else if (S.state==='loading') $('#liveTxt').textContent = 'bağlanıyor…';
-  else $('#liveTxt').textContent = 'canlı';
-}, 1000);
-
-/* ---------- zap: frekansı çevir ---------- */
-let zapping=false;
-async function zap(){
-  if (zapping) return; zapping=true;
-  ensureCtx(); staticOn();
-  setState('loading'); $('#stName').textContent = 'frekans aranıyor…'; $('#stMeta').textContent='';
-  const d = await search('order=random', 20);
-  zapping=false;
-  const list = normList(d, S.bad);
-  if (!list.length) { staticOff(true); setState(S.cur?'paused':'idle'); toast('frekans bulunamadı, tekrar dene'); if (S.cur) updateNP(LIB.get(S.cur)); return; }
-  S.coll = null; refreshCards();
-  S.queue = list; S.queueCtx = 'zap';
-  play(list[0].uuid);
-  toast(`📻 ${flag(list[0].cc)} ${list[0].name}`);
-}
-
-/* ---------- sleep timer ---------- */
-const SLEEP_STEPS=[0,15,30,60,90];
-let sleepIv=null;
-function cycleSleep(){
-  const left = S.sleepEnd ? Math.round((S.sleepEnd-Date.now())/60000) : 0;
-  const idx = SLEEP_STEPS.findIndex(m=>m>left);
-  const next = idx<0 ? 0 : SLEEP_STEPS[idx];
-  S.sleepEnd = next ? Date.now()+next*60000 : 0;
-  toast(next ? `☾ ${next} dk sonra kapanacak` : '☾ uyku zamanlayıcı kapalı');
-  clearInterval(sleepIv); if (next) sleepIv=setInterval(sleepTick,5000);
-  sleepTick();
-}
-function sleepTick(){
-  const b=$('#sleepBtn');
-  if (!S.sleepEnd) { b.textContent='☾'; b.classList.remove('active'); clearInterval(sleepIv); return; }
-  const ms = S.sleepEnd-Date.now();
-  b.textContent = '☾ '+Math.max(1,Math.ceil(ms/60000)); b.classList.add('active');
-  if (ms<=0) {
-    clearInterval(sleepIv); S.sleepEnd=0;
-    const v0 = audio.volume; let i=0;
-    const fade=setInterval(()=>{ i++; audio.volume=Math.max(0,v0*(1-i/20)); if(i>=20){ clearInterval(fade); audio.pause(); audio.volume=v0; sleepTick(); toast('☾ iyi uykular'); } },400);
-  }
-}
-
-/* ---------- share ---------- */
-async function share(){
-  const st = LIB.get(S.cur); if (!st) { toast('önce bir istasyon çal'); return; }
-  const url = location.origin + location.pathname + '#s=' + st.uuid;
-  const data = {title:`${st.name} — rad—io`, text:`${st.name} şimdi rad—io’da canlı`, url};
-  try { if (navigator.share) { await navigator.share(data); return; } } catch(e){ if (e.name==='AbortError') return; }
-  try { await navigator.clipboard.writeText(url); toast('bağlantı kopyalandı'); } catch(e){ prompt('bağlantı:', url); }
-}
-
-/* ---------- view / ui ---------- */
-function switchView(v){
-  $$('.view').forEach(el=>el.classList.toggle('active', el.id==='view-'+v));
-  $$('.top-btn[data-v]').forEach(b=>b.classList.toggle('active', b.dataset.v===v));
-  if (v==='queue') renderQueue();
-  if (v==='library') renderLibrary();
-  $('#main').scrollTop = 0;
-  if (v==='map') openMap(); else MAP.active=false;
-}
-function toast(msg){
-  const el=$('#toast'); el.textContent=msg; el.classList.add('show');
-  clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),2600);
-}
-function setVol(v){
-  v=Math.min(1,Math.max(0,v)); audio.volume=v; audio.muted=false; $('#volSlider').value=v; LS.set('vol',v);
-  $('#muteBtn').textContent = v===0?'∅':'♪';
-}
-function toggleMute(){ audio.muted=!audio.muted; $('#muteBtn').textContent=audio.muted?'∅':'♪'; toast(audio.muted?'sessiz':'ses açık'); }
-async function loadStats(){
-  const d = await api('/json/stats', 6000);
-  if (!d || !d.stations) return;
-  const live = d.stations-(d.stations_broken||0);
-  $('#counter').innerHTML = `<span class="live-dot"></span><span><b>${fmtN(live)}</b><span class="c-word"> canlı radyo</span></span><span class="c-extra">&nbsp;· ${fmtN(d.countries||0)} ülke · son 1 saatte ${fmtN(d.clicks_last_hour||0)} dinlenme</span>`;
-  $('#discSub').textContent = `${fmtN(live)} canlı istasyon arasında ara`;
-}
-
-
-
-/* ---------- güneş: gece / gündüz ---------- */
-function sunPos(d=new Date()){
-  const rad=Math.PI/180, n=(d.getTime()-Date.UTC(2000,0,1,12))/864e5;
-  const L=(280.46+0.9856474*n)%360, g=((357.528+0.9856003*n)%360)*rad;
-  const lam=(L+1.915*Math.sin(g)+0.02*Math.sin(2*g))*rad, eps=(23.439-4e-7*n)*rad;
-  const dec=Math.asin(Math.sin(eps)*Math.sin(lam));
-  const ra=Math.atan2(Math.cos(eps)*Math.sin(lam),Math.cos(lam))/rad;
-  const gmst=((18.697374558+24.06570982441908*n)%24+24)%24;
-  let lon=((ra-gmst*15)%360+540)%360-180;
-  return {lat:dec/rad, lon};
-}
-function sunAlt(lat, lon, sp=sunPos()){
-  const r=Math.PI/180;
-  return Math.asin(Math.sin(lat*r)*Math.sin(sp.lat*r)+Math.cos(lat*r)*Math.cos(sp.lat*r)*Math.cos((lon-sp.lon)*r))/r;
-}
-function dayLabel(st){
-  if (!st || st.lat==null) return '';
-  const a = sunAlt(st.lat, st.lon);
-  return a>6 ? '☀ orada gündüz' : a>-6 ? (sunAlt(st.lat, st.lon+1)>a ? '🌅 orada gün doğuyor' : '🌇 orada gün batıyor') : '☾ orada gece';
-}
-
-/* ---------- radyo günlüğü ---------- */
+/* ---------- library & log ---------- */
 const LOG = Object.assign({total:0, cc:{}, st:{}, days:{}}, LS.get('log', {}));
 const dayKey = (d=new Date()) => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 function logTick(sec){
@@ -1087,8 +1034,8 @@ function logTick(sec){
   LS.set('log', LOG);
 }
 function fmtDur(sec){
-  const m = Math.round(sec/60); if (m<60) return m+' dk';
-  const h = Math.floor(m/60); return h+' sa'+(m%60?' '+(m%60)+' dk':'');
+  const m = Math.round(sec/60); if (m<60) return m+' '+t('u.min');
+  const h = Math.floor(m/60); return h+' '+t('u.h')+(m%60?' '+(m%60)+' '+t('u.min'):'');
 }
 function streak(){
   let n=0; const d=new Date();
@@ -1097,260 +1044,613 @@ function streak(){
   return n;
 }
 function renderLog(){
+  if (!LOG.total || LOG.total<30){ $('#logRes').innerHTML = `<div class="ldg" style="padding:24px"><div>${esc(t('l.logEmpty'))}</div></div>`; return; }
   const ccs = Object.entries(LOG.cc).sort((a,b)=>b[1]-a[1]);
   const sts = Object.values(LOG.st).filter(e=>e.d).sort((a,b)=>b.s-a.s);
-  if (!LOG.total || LOG.total<30){ $('#logRes').innerHTML = '<div class="ldg" style="padding:24px"><div>dinledikçe günlüğün dolacak — kaç saat, kaç ülke, en sevdiğin istasyonlar</div></div>'; return; }
-  const days=[]; const DN=['paz','pzt','sal','çar','per','cum','cmt'];
+  const DN = t('days'), days=[];
   for (let i=6;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); days.push({k:dayKey(d), l:DN[d.getDay()], v:LOG.days[dayKey(d)]||0, today:i===0}); }
   const mx = Math.max(60, ...days.map(d=>d.v));
   $('#logRes').innerHTML = `
     <div class="log-tiles">
-      <div class="log-tile"><div class="log-num">${fmtDur(LOG.total)}</div><div class="log-lbl">toplam dinleme</div></div>
-      <div class="log-tile"><div class="log-num">${ccs.length}</div><div class="log-lbl">ülke gezildi</div></div>
-      <div class="log-tile"><div class="log-num">${Object.keys(LOG.st).length}</div><div class="log-lbl">istasyon</div></div>
-      <div class="log-tile"><div class="log-num">${streak()} <span style="font-size:14px">gün</span></div><div class="log-lbl">üst üste dinleme</div></div>
+      <div class="log-tile"><div class="log-num">${fmtDur(LOG.total)}</div><div class="log-lbl">${esc(t('l.total'))}</div></div>
+      <div class="log-tile"><div class="log-num">${ccs.length}</div><div class="log-lbl">${esc(t('l.countries'))}</div></div>
+      <div class="log-tile"><div class="log-num">${Object.keys(LOG.st).length}</div><div class="log-lbl">${esc(t('l.stations'))}</div></div>
+      <div class="log-tile"><div class="log-num">${streak()} <span style="font-size:14px">${esc(t('l.days'))}</span></div><div class="log-lbl">${esc(t('l.streak'))}</div></div>
     </div>
     <div class="log-grid">
       <div>
-        <div class="log-h">son 7 gün</div>
+        <div class="log-h">${esc(t('l.week'))}</div>
         <div class="week">${days.map(d=>`<div class="week-col${d.today?' today':''}" title="${d.k}: ${fmtDur(d.v)}"><div class="week-bar" style="height:${Math.round(d.v/mx*88)}%"></div><div class="week-d">${d.l}</div></div>`).join('')}</div>
-        <div class="log-h" style="margin-top:22px">en çok dinlediklerin</div>
+        <div class="log-h" style="margin-top:22px">${esc(t('l.top'))}</div>
         ${sts.slice(0,6).map((e,i)=>`<button class="top-row" data-act="play-log" data-uid="${esc(e.d.uuid)}"><span class="t-s">${i+1}</span><span>${flag(e.d.cc)}</span><span class="t-n">${esc(e.d.name)}</span><span class="t-s">${fmtDur(e.s)}</span></button>`).join('')}
       </div>
       <div>
-        <div class="log-h">radyo pasaportun · ${ccs.length} ülke</div>
-        <div class="stamps">${ccs.slice(0,40).map(([cc,v])=>`<div class="stamp" style="--rot:${(hue(cc)%9)-4}deg" title="${esc(cc)}"><b>${flag(cc)||esc(cc)}</b><span>${esc(cc)} · ${fmtDur(v)}</span></div>`).join('')}</div>
+        <div class="log-h">${esc(t('l.passport',{n:ccs.length}))}</div>
+        <div class="stamps">${ccs.slice(0,40).map(([cc,v])=>`<div class="stamp" style="--rot:${(hue(cc)%9)-4}deg" title="${esc(regionName(cc))}"><b>${flag(cc)||esc(cc)}</b><span>${esc(cc)} · ${fmtDur(v)}</span></div>`).join('')}</div>
       </div>
     </div>`;
 }
 function shareLog(){
   const ccs = Object.entries(LOG.cc).sort((a,b)=>b[1]-a[1]);
   const top = Object.values(LOG.st).filter(e=>e.d).sort((a,b)=>b.s-a.s)[0];
-  const txt = `📻 rad—io günlüğüm: ${fmtDur(LOG.total)} canlı radyo, ${ccs.length} ülke ${ccs.slice(0,8).map(c=>flag(c[0])).join('')}${top?` · favorim: ${top.d.name}`:''}`;
+  const txt = t('l.share',{d:fmtDur(LOG.total), n:ccs.length, flags:ccs.slice(0,8).map(c=>flag(c[0])).join(''), top: top ? t('l.shareTop',{name:top.d.name}) : ''});
   const url = location.origin+location.pathname;
   if (navigator.share) navigator.share({text:txt, url}).catch(()=>{});
-  else navigator.clipboard.writeText(txt+' '+url).then(()=>toast('günlük özeti kopyalandı'), ()=>prompt('kopyala:', txt+' '+url));
+  else navigator.clipboard.writeText(txt+' '+url).then(()=>toast(t('t.logCopied')), ()=>prompt('', txt+' '+url));
 }
+function renderLibrary(){
+  renderLog();
+  $('#favSub').textContent = S.favs.length ? t('c.count',{n:S.favs.length}) : '';
+  $('#favRes').innerHTML = S.favs.length ? grid(S.favs,'fav') : `<div class="ldg" style="padding:24px"><div>${esc(t('l.favEmpty'))}</div></div>`;
+  $('#recRes').innerHTML = S.recents.length ? grid(S.recents,'rec') : `<div class="ldg" style="padding:24px"><div>${esc(t('l.recEmpty'))}</div></div>`;
+}
+function toggleFav(uuid){
+  const st = LIB.get(uuid); if (!st) return;
+  if (isFav(uuid)) { S.favs = S.favs.filter(f=>f.uuid!==uuid); toast(t('t.favRm')); }
+  else { S.favs.unshift(slim(st)); toast(t('t.favAdd',{name:st.name})); api(`/json/vote/${uuid}`); }
+  LS.set('favs', S.favs); DATA_VER++;
+  renderSideLib(); refreshCards(); updateFavBtns(); updateCar(); requestDraw();
+  if ($('#view-library').classList.contains('active')) renderLibrary();
+}
+function pushRecent(st){
+  S.recents = [slim(st), ...S.recents.filter(r=>r.uuid!==st.uuid)].slice(0,30);
+  LS.set('recents', S.recents); DATA_VER++; renderSideLib();
+}
+function exportFavs(){
+  const blob = new Blob([JSON.stringify({app:'rad-io',v:1,favs:S.favs},null,1)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rad-io-favorites.json'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+async function importFavs(file){
+  try{
+    const d = JSON.parse(await file.text()); const arr = Array.isArray(d) ? d : d.favs;
+    let n=0; for (const f of arr||[]) { if (f && f.uuid && /^https:/.test(f.url||'') && !isFav(f.uuid)) { const s=slim({...f,tags:Array.isArray(f.tags)?f.tags:[]}); S.favs.push(s); LIB.set(s.uuid,s); n++; } }
+    LS.set('favs',S.favs); DATA_VER++; renderSideLib(); renderLibrary(); toast(t('t.importN',{n}));
+  }catch(e){ toast(t('t.importErr')); }
+}
+
+/* ---------- queue ---------- */
+function renderQueue(){
+  if (!S.queue.length) { $('#qItems').innerHTML=`<div class="sb-empty" style="padding:20px 0">${esc(t('q.empty'))}</div>`; $('#qSub').textContent='—'; return; }
+  $('#qSub').textContent = t('c.count',{n:S.queue.length});
+  $('#qItems').innerHTML = S.queue.map((s,i)=>`<button class="q-item${i===S.qi?' active':''}" data-act="play-uid" data-ctx="queue" data-uid="${esc(s.uuid)}"><span class="q-num">${i===S.qi?'▶':i+1}</span><span class="q-name">${esc(s.name)}</span><span class="q-cc">${flag(s.cc)}</span></button>`).join('');
+}
+
+/* ---------- playback ---------- */
+let loadTimer=null, stallTimer=null, reTries=0;
+function setState(st){
+  S.state = st;
+  document.body.classList.toggle('is-playing', st==='playing');
+  document.body.classList.toggle('is-loading', st==='loading');
+  const icon = st==='playing' ? '⏸' : st==='loading' ? '…' : '▶';
+  $('#playBtn').textContent = icon; $('#carPlay').textContent = icon;
+  $('#stPlay').textContent = t(st==='playing' ? 'b.pause' : st==='loading' ? 'b.connecting' : 'b.listen');
+  if ('mediaSession' in navigator) { try { navigator.mediaSession.playbackState = st==='playing'?'playing':st==='idle'?'none':'paused'; } catch(e){} }
+  updateKicker(); updateCar(); requestDraw();
+}
+function kickerText(){
+  if (!LIB.get(S.cur)) return t('slogan');
+  if (S.state==='loading') return !navigator.onLine ? t('k.offline') : (reTries || S.stalled) ? t('k.reconnect') : t('k.loading');
+  return t(S.state==='playing' ? 'k.live' : S.state==='paused' ? 'k.paused' : 'k.ready');
+}
+function updateKicker(){ $('#stKicker').textContent = kickerText(); }
+function playFrom(ctx, uuid){
+  S.queue = listFor(ctx).slice(); S.queueCtx = ctx;
+  if (!S.queue.some(s=>s.uuid===uuid)) { const s=LIB.get(uuid); if (s) S.queue.unshift(s); }
+  play(uuid);
+}
+function play(uuid){
+  const st = LIB.get(uuid); if (!st) return;
+  ensureCtx();
+  S.cur = uuid; S.qi = S.queue.findIndex(s=>s.uuid===uuid); S.want = true; reTries = 0; S.stalled = false;
+  clearTimeout(stallTimer);
+  LS.set('last', slim(st));
+  updateNP(st);
+  setState('loading'); staticOn();
+  audio.src = st.url;
+  audio.play().catch(err=>{ if (err.name==='NotAllowedError') { clearTimeout(loadTimer); staticOff(true); S.want=false; setState('idle'); } });
+  clearTimeout(loadTimer);
+  loadTimer = setTimeout(()=>{ if (S.state==='loading' && S.cur===uuid && navigator.onLine) fail(); }, 12000);
+  api(`/json/url/${uuid}`);
+  try { history.replaceState(null,'',`#s=${uuid}`); } catch(e){}
+  refreshCards(); if ($('#view-queue').classList.contains('active')) renderQueue();
+}
+function playPause(){
+  ensureCtx();
+  if (!S.cur) { zap(); return; }
+  if (S.state==='playing') { S.want=false; audio.pause(); return; }
+  if (S.state==='loading') { S.want=false; audio.pause(); clearTimeout(loadTimer); clearTimeout(stallTimer); staticOff(true); setState('paused'); return; }
+  play(S.cur); // canlı yayında yeniden bağlan → gecikmesiz
+}
+function step(dir){
+  if (!S.queue.length) { zap(); return; }
+  if (S.queueCtx==='zap' && dir>0 && S.qi>=S.queue.length-1) { zap(); return; }
+  let i = S.qi;
+  for (let n=0;n<S.queue.length;n++){
+    i = (i+dir+S.queue.length)%S.queue.length;
+    if (!S.bad.has(S.queue[i].uuid)) { play(S.queue[i].uuid); return; }
+  }
+  zap();
+}
+function fail(){
+  clearTimeout(loadTimer); clearTimeout(stallTimer); staticOff(true);
+  if (!S.cur) return;
+  S.bad.add(S.cur); S.errs++;
+  refreshCards();
+  if (S.errs>=6) { S.errs=0; S.want=false; setState('idle'); toast(t('t.failAll')); return; }
+  toast(t('t.failNext'));
+  setTimeout(()=>step(1), 700);
+}
+// tünel / zayıf sinyal: önce aynı yayına yeniden bağlan, olmazsa sıradakine geç
+function reconnect(){
+  clearTimeout(stallTimer);
+  if (!S.want || !S.cur || S.state==='playing') return;
+  if (!navigator.onLine) { updateKicker(); return; } // 'online' olayı devam ettirir
+  reTries++;
+  if (reTries>3) { reTries=0; fail(); return; }
+  updateKicker();
+  audio.src = LIB.get(S.cur).url;
+  audio.play().catch(()=>{});
+  stallTimer = setTimeout(reconnect, 9000);
+}
+audio.addEventListener('playing', ()=>{
+  clearTimeout(loadTimer); clearTimeout(stallTimer); staticOff(); S.errs=0; reTries=0; S.stalled=false;
+  if (S.state!=='playing') S.startedAt = Date.now();
+  setState('playing');
+  const st=LIB.get(S.cur); if (st) pushRecent(st);
+});
+const onStall = ()=>{ if (S.state==='playing' && S.want) { S.stalled=true; setState('loading'); clearTimeout(stallTimer); stallTimer=setTimeout(reconnect, 7000); } };
+audio.addEventListener('waiting', onStall);
+audio.addEventListener('stalled', onStall);
+audio.addEventListener('pause', ()=>{ if (S.state==='playing') setState('paused'); });
+audio.addEventListener('error', ()=>{
+  if (!audio.src || !S.want) return;
+  if (!navigator.onLine) { setState('loading'); return; }
+  if (S.state==='playing' || reTries) { clearTimeout(stallTimer); stallTimer=setTimeout(reconnect, 1500); return; }
+  fail();
+});
+window.addEventListener('offline', ()=>{ toast(t('t.offline')); if (S.want) setState('loading'); updateCar(); });
+window.addEventListener('online', ()=>{ toast(t('t.online')); updateCar(); if (S.want && S.cur && S.state!=='playing') { reTries=0; play(S.cur); } });
+
+function updateNP(st){
+  $('#npName').textContent = st.name;
+  const where = [(flag(st.cc)+' '+(regionName(st.cc)||'')).trim(), st.bitrate?st.bitrate+'k':'', st.codec&&st.codec!=='unknown'?st.codec:''].filter(Boolean).join(' · ');
+  $('#npSub').textContent = where || t('p.default');
+  setArt($('#npArt'), st); setArt($('#stArt'), st);
+  $('#stName').textContent = st.name;
+  $('#stMeta').innerHTML = [
+    st.cc ? `<span>${flag(st.cc)} ${esc([st.state, regionName(st.cc)].filter(Boolean).join(', '))}</span>` : '',
+    st.bitrate ? `<span>${st.bitrate} kbps</span>` : '',
+    st.codec && st.codec!=='unknown' ? `<span>${esc(st.codec)}</span>` : '',
+    ...st.tags.slice(0,3).map(tg=>`<button class="tag" data-act="disc" data-q="tag=${esc(encodeURIComponent(tg))}&order=votes&reverse=true" data-l="${esc(tg)}" style="cursor:pointer">${esc(tg)}</button>`),
+    st.homepage ? `<a href="${esc(st.homepage)}" target="_blank" rel="noopener noreferrer">site ↗</a>` : '',
+    st.lat!=null ? `<span id="stDay">${esc(dayLabel(st))}</span>` : '',
+  ].join('');
+  updateFavBtns(); updateKicker(); updateCar();
+  document.title = `♪ ${st.name} — rad—io`;
+  if ('mediaSession' in navigator) {
+    const artwork = [];
+    if (st.favicon) artwork.push({src:st.favicon, sizes:'192x192'});
+    const png = artPNG(st); if (png) artwork.push({src:png, sizes:'512x512', type:'image/png'});
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: st.name,
+        artist: [flag(st.cc)+' '+regionName(st.cc), st.tags[0]].filter(x=>x&&x.trim()).join(' · ') || t('p.default'),
+        album: 'rad—io · '+t('slogan'), artwork,
+      });
+    } catch(e){}
+  }
+}
+function updateFavBtns(){
+  const f = !!S.cur && isFav(S.cur);
+  ['#npFav','#npFavM','#carFav'].forEach(s=>{ const b=$(s); b.textContent=f?'♥':'♡'; b.classList.toggle(s==='#carFav'?'on':'active', f); });
+  const sb=$('#stFav'); sb.textContent = t(f?'b.faved':'b.fav'); sb.classList.toggle('faved', f);
+}
+if ('mediaSession' in navigator) {
+  const h = (a,f)=>{ try{ navigator.mediaSession.setActionHandler(a,f); }catch(e){} };
+  h('play', ()=>{ if (S.state!=='playing') playPause(); }); h('pause', ()=>{ S.want=false; audio.pause(); }); h('stop', ()=>{ S.want=false; audio.pause(); });
+  h('previoustrack', ()=>step(-1)); h('nexttrack', ()=>step(1));
+}
+setInterval(()=>{
+  const lt = $('#liveTxt');
+  lt.textContent = S.state==='playing' ? t('p.liveT',{t:fmtT((Date.now()-S.startedAt)/1000)}) : S.state==='paused' ? t('p.paused') : S.state==='loading' ? t('p.connecting') : t('p.live');
+}, 1000);
 setInterval(()=>{ if (S.state==='playing') logTick(10); }, 10000);
-setInterval(()=>{ const st=LIB.get(S.cur); if (st) updateDayLabel(st); }, 60000);
-function updateDayLabel(st){ const el=$('#stDay'); if (el) el.textContent = dayLabel(st); }
+setInterval(()=>{ const st=LIB.get(S.cur), el=$('#stDay'); if (st && el) el.textContent=dayLabel(st); }, 60000);
 
-/* ---------- benzer yayınlar ---------- */
-async function similar(){
-  const st = LIB.get(S.cur); if (!st) { toast('önce bir istasyon çal'); return; }
-  const tags = st.tags.filter(t=>t.length>2).slice(0,3);
-  if (!tags.length) { discover(`countrycode=${st.cc}&order=votes&reverse=true`, `≈ ${flag(st.cc)} ${st.name} gibi`); return; }
-  switchView('discover'); $$('.chip').forEach(c=>c.classList.remove('active'));
-  Object.assign(D,{q:'__similar', label:`≈ ${st.name} gibi`, offset:0, list:[], more:false});
-  $('#discHd').textContent = D.label; $('#discRes').innerHTML = skeleton(6);
-  const qs = [];
-  if (st.cc) qs.push(search(`tag=${encodeURIComponent(tags[0])}&countrycode=${st.cc}&order=votes&reverse=true`,20));
-  for (const t of tags) qs.push(search(`tag=${encodeURIComponent(t)}&order=votes&reverse=true`,20));
-  const res = await Promise.allSettled(qs);
-  if (D.q!=='__similar') return;
-  const raw=[]; res.forEach(r=>{ if (r.status==='fulfilled'&&r.value) raw.push(...r.value); });
-  const list = normList(raw, new Set([st.uuid]));
-  // ortak etiket sayısına göre sırala
-  list.sort((a,b)=>b.tags.filter(t=>st.tags.includes(t)).length-a.tags.filter(t=>st.tags.includes(t)).length + (b.cc===st.cc)-(a.cc===st.cc));
-  D.list = list.slice(0,40);
-  $('#discHd').textContent = `${D.label} · ${D.list.length} istasyon`;
-  $('#discRes').innerHTML = D.list.length ? grid(D.list,'disc') : '<div class="ldg"><div>benzer yayın bulunamadı</div></div>';
+/* ---------- zap ---------- */
+let zapping=false;
+async function zap(){
+  if (zapping) return; zapping=true;
+  ensureCtx(); staticOn();
+  setState('loading'); $('#stName').textContent = t('k.loading'); $('#stMeta').textContent='';
+  const d = await search('order=random', 20);
+  zapping=false;
+  const list = normList(d, S.bad);
+  if (!list.length) { staticOff(true); setState(S.cur?'paused':'idle'); toast(t('t.zapNone')); if (S.cur) updateNP(LIB.get(S.cur)); return; }
+  S.coll = null; refreshCards();
+  S.queue = list; S.queueCtx = 'zap';
+  play(list[0].uuid);
+  toast(`📻 ${flag(list[0].cc)} ${list[0].name}`);
 }
 
-/* ---------- uygulama olarak yükle ---------- */
-let installEvt = null;
-window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); installEvt=e; $('#installBtn').hidden=false; });
-window.addEventListener('appinstalled', ()=>{ $('#installBtn').hidden=true; toast('📲 rad—io yüklendi'); });
-async function installApp(){ if (!installEvt) return; installEvt.prompt(); await installEvt.userChoice.catch(()=>{}); installEvt=null; $('#installBtn').hidden=true; }
-if ('serviceWorker' in navigator && location.protocol==='https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
+/* ---------- sleep ---------- */
+const SLEEP_STEPS=[0,15,30,60,90];
+let sleepIv=null;
+function cycleSleep(){
+  const left = S.sleepEnd ? Math.round((S.sleepEnd-Date.now())/60000) : 0;
+  const idx = SLEEP_STEPS.findIndex(m=>m>left);
+  const next = idx<0 ? 0 : SLEEP_STEPS[idx];
+  S.sleepEnd = next ? Date.now()+next*60000 : 0;
+  toast(next ? t('t.sleepOn',{n:next}) : t('t.sleepOff'));
+  clearInterval(sleepIv); if (next) sleepIv=setInterval(sleepTick,5000);
+  sleepTick();
+}
+function sleepTick(){
+  const b=$('#sleepBtn');
+  if (!S.sleepEnd) { b.textContent='☾'; b.classList.remove('active'); clearInterval(sleepIv); return; }
+  const ms = S.sleepEnd-Date.now();
+  b.textContent = '☾ '+Math.max(1,Math.ceil(ms/60000)); b.classList.add('active');
+  if (ms<=0) {
+    clearInterval(sleepIv); S.sleepEnd=0;
+    const v0 = audio.volume; let i=0;
+    const fade=setInterval(()=>{ i++; audio.volume=Math.max(0,v0*(1-i/20)); if(i>=20){ clearInterval(fade); S.want=false; audio.pause(); audio.volume=v0; sleepTick(); toast(t('t.night')); } },400);
+  }
+}
 
-/* ---------- dünya haritası ---------- */
-const MAP = {pts:[], loaded:false, loading:false, active:false, k:1, k0:1, cx:0, cy:0, w:0, h:0, dpr:1, hover:null, me:null, raf:0};
+/* ---------- share ---------- */
+const stationUrl = st => location.origin + location.pathname + '#s=' + st.uuid;
+async function share(){
+  const st = LIB.get(S.cur); if (!st) { toast(t('t.playFirst')); return; }
+  const url = stationUrl(st);
+  try { if (navigator.share) { await navigator.share({title:`${st.name} — rad—io`, text:t('t.shareText',{name:st.name}), url}); return; } } catch(e){ if (e.name==='AbortError') return; }
+  try { await navigator.clipboard.writeText(url); toast(t('t.copied')); } catch(e){ prompt('', url); }
+}
+
+/* ---------- views ---------- */
+function switchView(v){
+  $$('.view').forEach(el=>el.classList.toggle('active', el.id==='view-'+v));
+  $$('.top-btn[data-v]').forEach(b=>b.classList.toggle('active', b.dataset.v===v));
+  if (v==='queue') renderQueue();
+  if (v==='library') renderLibrary();
+  $('#main').scrollTop = 0;
+  if (v==='map') openMap(); else { MAP.active=false; }
+}
+function toast(msg){
+  const el=$('#toast'); el.textContent=msg; el.classList.add('show');
+  clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),2600);
+}
+function setVol(v){
+  v=Math.min(1,Math.max(0,v)); audio.volume=v; audio.muted=false; $('#volSlider').value=v; LS.set('vol',v);
+  $('#muteBtn').textContent = v===0?'∅':'♪';
+}
+function toggleMute(){ audio.muted=!audio.muted; $('#muteBtn').textContent=audio.muted?'∅':'♪'; toast(t(audio.muted?'t.mute':'t.unmute')); }
+let STATS=null;
+async function loadStats(){ const d = await api('/json/stats', 6000); if (d && d.stations) { STATS=d; renderStats(); } }
+function renderStats(){
+  if (!STATS) { $('#discSub').textContent = t('d.subIdle'); return; }
+  const live = STATS.stations-(STATS.stations_broken||0);
+  $('#counter').innerHTML = `<span class="live-dot"></span><span><b>${fmtN(live)}</b><span class="c-word"> ${esc(t('cnt.live'))}</span></span><span class="c-extra">&nbsp;· ${esc(t('cnt.countries',{n:fmtN(STATS.countries||0)}))} · ${esc(t('cnt.clicks',{n:fmtN(STATS.clicks_last_hour||0)}))}</span>`;
+  $('#discSub').textContent = t('d.sub',{n:fmtN(live)});
+}
+
+/* =========================================================
+   HARİTA + KÜRE  (performans: statik katman önbelleği,
+   yalnızca gerektiğinde çizim, ~30 fps sınırı)
+   ========================================================= */
+const MAP = {pts:[], loaded:false, loading:false, active:false, globe:LS.get('globe', true),
+  k:1, k0:1, cx:0, cy:0, w:0, h:0, dpr:1, hover:null, me:null, raf:0, last:0, force:true,
+  // küre
+  lat0:25, lon0:20, R:0, R0:0, spin:true, target:null, spinAt:0,
+  layer:null, layerKey:''};
+window.MAP = MAP;
 const cv = $('#mapCv');
+const MAP_CACHE_TTL = 12*3600*1000;
+function prepPt(p){ p.sl=Math.sin(p.lat*D2R); p.cl=Math.cos(p.lat*D2R); p.sL=Math.sin(p.lon*D2R); p.cL=Math.cos(p.lon*D2R); return p; }
+async function loadMapData(){
+  if (MAP.loaded) return;
+  if (MAP.loading) { while (MAP.loading) await new Promise(r=>setTimeout(r,150)); return; }
+  MAP.loading = true;
+  $('#mapSub').textContent = t('map.loading'); requestDraw();
+  // 1) cihaz önbelleği (12 saat) → anında açılış, mobil veriden tasarruf
+  const c = LS.get('mapcache', null);
+  if (c && c.v===2 && Date.now()-c.t < MAP_CACHE_TTL && Array.isArray(c.d)) {
+    for (const r of c.d) {
+      const st = {uuid:r[0],name:r[1],url:r[2],favicon:r[3]||'',cc:r[4]||'',country:'',state:r[9]||'',tags:r[5]?[r[5]]:[],codec:r[6]||'',bitrate:r[7]||0,homepage:'',votes:0,lat:r[8][0],lon:r[8][1]};
+      if (!LIB.has(st.uuid)) LIB.set(st.uuid, st);
+      MAP.pts.push(prepPt(LIB.get(st.uuid).lat!=null ? LIB.get(st.uuid) : st));
+    }
+  } else {
+    const res = await Promise.allSettled([
+      search('has_geo_info=true&order=clickcount&reverse=true', 2500, 0),
+      search('has_geo_info=true&order=votes&reverse=true', 1500, 0),
+      search('has_geo_info=true&order=clicktrend&reverse=true', 600, 0),
+    ]);
+    const seen = new Set();
+    for (const r of res) if (r.status==='fulfilled' && r.value) for (const s of r.value) {
+      const n = norm(s); if (!n || n.lat==null || seen.has(n.uuid)) continue;
+      seen.add(n.uuid); MAP.pts.push(prepPt(n));
+    }
+    if (MAP.pts.length) LS.set('mapcache', {v:2, t:Date.now(), d:MAP.pts.map(p=>[p.uuid,p.name,p.url,p.favicon,p.cc,p.tags[0]||'',p.codec,p.bitrate,[+p.lat.toFixed(3),+p.lon.toFixed(3)],p.state])});
+  }
+  MAP.loading = false; MAP.loaded = MAP.pts.length>0; DATA_VER++;
+  $('#mapSub').textContent = MAP.loaded ? t('map.loaded',{n:fmtN(MAP.pts.length)}) : t('map.fail');
+  requestDraw();
+}
 function resizeMap(){
   const r = $('#mapWrap').getBoundingClientRect();
+  if (!r.width) return;
   const first = !MAP.w;
   MAP.dpr = Math.min(2, window.devicePixelRatio||1);
   const ow=MAP.w, oh=MAP.h;
   MAP.w = r.width; MAP.h = r.height;
   cv.width = Math.round(MAP.w*MAP.dpr); cv.height = Math.round(MAP.h*MAP.dpr);
   MAP.k0 = Math.min(MAP.w/345, MAP.h/135);
+  const nr = Math.min(MAP.w, MAP.h-60)*0.42;
+  MAP.R = MAP.R0 ? MAP.R*nr/MAP.R0 : nr; MAP.R0 = nr;
   if (first) fitMap(); else { MAP.cx += (MAP.w-ow)/2; MAP.cy += (MAP.h-oh)/2; }
+  MAP.layer = null; requestDraw();
 }
-function fitMap(){ const tall = MAP.w < MAP.h; MAP.k = MAP.k0*(tall?2.8:1); const lon = tall?28:12, lat = tall?36:12; MAP.cx = MAP.w/2 - lon*MAP.k; MAP.cy = MAP.h/2 + lat*MAP.k; }
+function fitMap(){
+  const tall = MAP.w < MAP.h;
+  MAP.k = MAP.k0*(tall?2.8:1); const lon = tall?28:12, lat = tall?36:12;
+  MAP.cx = MAP.w/2 - lon*MAP.k; MAP.cy = MAP.h/2 + lat*MAP.k;
+  MAP.R = MAP.R0; requestDraw();
+}
 const sx = lon => lon*MAP.k + MAP.cx;
 const sy = lat => -lat*MAP.k + MAP.cy;
+const gcx = () => MAP.w/2, gcy = () => MAP.h/2 + (MAP.w<760?40:30);
 function zoomAt(x, y, f){
+  if (MAP.globe) { MAP.R = Math.min(MAP.R0*14, Math.max(MAP.R0*0.7, MAP.R*f)); MAP.spin=false; requestDraw(); return; }
   const nk = Math.min(MAP.k0*400, Math.max(MAP.k0*0.8, MAP.k*f));
-  const r = nk/MAP.k; MAP.cx = x-(x-MAP.cx)*r; MAP.cy = y-(y-MAP.cy)*r; MAP.k = nk;
+  const r = nk/MAP.k; MAP.cx = x-(x-MAP.cx)*r; MAP.cy = y-(y-MAP.cy)*r; MAP.k = nk; requestDraw();
 }
 function centerOn(lat, lon, zoom){
+  if (MAP.globe) { MAP.target = {lat:Math.max(-70,Math.min(70,lat)), lon}; MAP.spin=false; if (zoom) MAP.R = Math.max(MAP.R, MAP.R0*Math.min(zoom,4)); requestDraw(); return; }
   if (zoom) MAP.k = Math.max(MAP.k, MAP.k0*zoom);
-  MAP.cx = MAP.w/2 - lon*MAP.k; MAP.cy = MAP.h/2 + lat*MAP.k;
-}
-async function loadMapData(){
-  if (MAP.loaded || MAP.loading) return;
-  MAP.loading = true;
-  $('#mapSub').textContent = 'istasyonlar haritaya yerleşiyor…';
-  const res = await Promise.allSettled([
-    search('has_geo_info=true&order=clickcount&reverse=true', 3000, 0),
-    search('has_geo_info=true&order=votes&reverse=true', 2000, 0),
-    search('has_geo_info=true&order=clicktrend&reverse=true', 1000, 0),
-  ]);
-  const seen = new Set();
-  for (const r of res) if (r.status==='fulfilled' && r.value) for (const s of r.value) {
-    const n = norm(s); if (!n || n.lat==null || seen.has(n.uuid)) continue;
-    seen.add(n.uuid); MAP.pts.push(n);
-  }
-  MAP.loading = false; MAP.loaded = MAP.pts.length>0;
-  $('#mapSub').textContent = MAP.loaded ? `${fmtN(MAP.pts.length)} canlı radyo haritada · bir noktaya dokun` : 'harita yüklenemedi — tekrar dene';
+  MAP.cx = MAP.w/2 - lon*MAP.k; MAP.cy = MAP.h/2 + lat*MAP.k; requestDraw();
 }
 async function openMap(){
-  MAP.active = true;
-  requestAnimationFrame(()=>{ resizeMap(); loop(); });
+  MAP.active = true; MAP.force = true;
+  $$('[data-act="map-mode"]').forEach(b=>b.classList.toggle('on', (b.dataset.m==='globe')===MAP.globe));
+  requestAnimationFrame(()=>{ resizeMap(); requestDraw(); });
   await loadMapData();
   const st = LIB.get(S.cur);
-  if (st && st.lat!=null && MAP.k<=MAP.k0*1.01) centerOn(st.lat, st.lon, 2.5);
+  if (st && st.lat!=null) { if (MAP.globe) centerOn(st.lat, st.lon); else if (MAP.k<=MAP.k0*1.01) centerOn(st.lat, st.lon, 2.5); }
 }
-function loop(t){
-  cancelAnimationFrame(MAP.raf);
+function setMapMode(globe){
+  MAP.globe = globe; LS.set('globe', globe); MAP.layer=null;
+  $$('[data-act="map-mode"]').forEach(b=>b.classList.toggle('on', (b.dataset.m==='globe')===globe));
+  const st = LIB.get(S.cur);
+  if (globe && st && st.lat!=null) { MAP.lat0 = Math.max(-70,Math.min(70,st.lat)); MAP.lon0 = st.lon; }
+  showTip(null); requestDraw();
+}
+// çizim döngüsü: yalnızca animasyon gerekiyorsa sürer
+function animating(){ return MAP.active && !document.hidden && (MAP.target || (MAP.globe && MAP.spin && !MAP.drag) || S.state==='playing' || S.state==='loading' || MAP.loading); }
+function requestDraw(){ MAP.force = true; if (!MAP.raf && MAP.active && !document.hidden) MAP.raf = requestAnimationFrame(frame); }
+function frame(ts){
+  MAP.raf = 0;
   if (!MAP.active || document.hidden) return;
-  drawMap(t||0);
-  MAP.raf = requestAnimationFrame(loop);
+  const dt = Math.min(100, ts-(MAP.last||ts));
+  if (MAP.force || ts-MAP.last >= 33) {
+    MAP.last = ts; MAP.force = false;
+    if (MAP.globe) {
+      if (MAP.target) {
+        let dl = ((MAP.target.lon-MAP.lon0+540)%360)-180, dp = MAP.target.lat-MAP.lat0;
+        MAP.lon0 += dl*0.12; MAP.lat0 += dp*0.12;
+        if (Math.abs(dl)<0.2 && Math.abs(dp)<0.2) MAP.target=null;
+      } else if (MAP.spin && !MAP.drag) MAP.lon0 += dt*0.004;
+      drawGlobeView(ts);
+    } else drawFlat(ts);
+  }
+  if (animating() || MAP.force) MAP.raf = requestAnimationFrame(frame);
 }
-function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
-function drawMap(t){
-  const g = cv.getContext('2d'), {w,h,k} = MAP;
-  g.setTransform(MAP.dpr,0,0,MAP.dpr,0,0); g.clearRect(0,0,w,h);
-  const C = {line:cssVar('--line'), ink3:cssVar('--ink3'), ink:cssVar('--ink'), acc:cssVar('--accent'), sak:cssVar('--sakura')};
-  // graticule
-  g.strokeStyle = C.line; g.lineWidth = 1; g.beginPath();
-  for (let lon=-180; lon<=180; lon+=30){ const x=sx(lon); g.moveTo(x,sy(85)); g.lineTo(x,sy(-85)); }
-  for (let lat=-60; lat<=80; lat+=20){ const y=sy(lat); g.moveTo(sx(-180),y); g.lineTo(sx(180),y); }
-  g.stroke();
-  // gece gölgesi
-  const sp = sunPos();
-  const dec = Math.abs(sp.lat)<0.1 ? 0.1 : sp.lat, r0=Math.PI/180;
+document.addEventListener('visibilitychange', ()=>{ if (MAP.active && !document.hidden) requestDraw(); });
+
+/* --- düz harita: statik katman (gece+nokta+iz) önbellekte, her karede yalnızca blit + dalga --- */
+function nightPolyFlat(g, sp){
+  const dec = Math.abs(sp.lat)<0.1 ? 0.1 : sp.lat;
   g.beginPath();
-  for (let lon=-180; lon<=180; lon+=2){
-    let lat = Math.atan(-Math.cos((lon-sp.lon)*r0)/Math.tan(dec*r0))/r0;
+  for (let lon=-180; lon<=180; lon+=3){
+    let lat = Math.atan(-Math.cos((lon-sp.lon)*D2R)/Math.tan(dec*D2R))/D2R;
     lat = Math.max(-85, Math.min(85, lat));
     lon===-180 ? g.moveTo(sx(lon),sy(lat)) : g.lineTo(sx(lon),sy(lat));
   }
   const pole = dec>0 ? -85 : 85;
   g.lineTo(sx(180),sy(pole)); g.lineTo(sx(-180),sy(pole)); g.closePath();
-  g.fillStyle = document.documentElement.dataset.theme==='dark' ? 'rgba(0,0,0,.38)' : 'rgba(40,40,70,.07)'; g.fill();
-  g.fillStyle = C.acc; g.globalAlpha=.5; g.font='14px serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('☀', sx(sp.lon), sy(sp.lat)); g.globalAlpha=1;
-  g.strokeStyle = C.ink3; g.globalAlpha=.35; g.setLineDash([2,4]); g.beginPath(); g.moveTo(sx(-180),sy(0)); g.lineTo(sx(180),sy(0)); g.stroke(); g.setLineDash([]); g.globalAlpha=1;
-  // dots
-  const r = Math.max(1.1, Math.min(3.4, 1.15*Math.pow(k/MAP.k0, .35)));
-  const fs = favSet();
-  g.fillStyle = C.acc; g.globalAlpha = .55; g.beginPath();
-  for (const p of MAP.pts){
-    const x=sx(p.lon), y=sy(p.lat); if (x<-5||y<-5||x>w+5||y>h+5) continue;
-    if (fs.has(p.uuid)) continue;
-    g.moveTo(x+r,y); g.arc(x,y,r,0,6.2832);
-  }
+}
+function dotR(){ return Math.max(1.1, Math.min(3.4, 1.15*Math.pow(MAP.k/MAP.k0, .35))); }
+function buildFlatLayer(){
+  const key = [MAP.w,MAP.h,MAP.k.toFixed(4),MAP.cx.toFixed(1),MAP.cy.toFixed(1),DATA_VER,Math.floor(Date.now()/60000),MAP.pts.length].join('|');
+  if (MAP.layer && MAP.layerKey===key) return MAP.layer;
+  const L = MAP.layer || document.createElement('canvas');
+  if (L.width!==cv.width || L.height!==cv.height) { L.width=cv.width; L.height=cv.height; }
+  const g = L.getContext('2d'), {w,h} = MAP;
+  g.setTransform(MAP.dpr,0,0,MAP.dpr,0,0); g.clearRect(0,0,w,h);
+  g.strokeStyle = PAL.line; g.lineWidth = 1; g.beginPath();
+  for (let lon=-180; lon<=180; lon+=30){ const x=sx(lon); g.moveTo(x,sy(85)); g.lineTo(x,sy(-85)); }
+  for (let lat=-60; lat<=80; lat+=20){ const y=sy(lat); g.moveTo(sx(-180),y); g.lineTo(sx(180),y); }
+  g.stroke();
+  const sp = sunPos();
+  nightPolyFlat(g, sp); g.fillStyle = PAL.dark ? 'rgba(0,0,0,.38)' : 'rgba(40,40,70,.07)'; g.fill();
+  g.fillStyle = PAL.acc; g.globalAlpha=.5; g.font='14px serif'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('☀', sx(sp.lon), sy(sp.lat)); g.globalAlpha=1;
+  const r = dotR(), fs = favSet();
+  g.fillStyle = PAL.acc; g.globalAlpha = .55; g.beginPath();
+  for (const p of MAP.pts){ const x=sx(p.lon), y=sy(p.lat); if (x<-5||y<-5||x>w+5||y>h+5||fs.has(p.uuid)) continue; g.moveTo(x+r,y); g.arc(x,y,r,0,TAU); }
+  g.fill(); g.globalAlpha = 1;
+  g.fillStyle = PAL.sak; g.beginPath();
+  for (const p of S.favs) if (p.lat!=null) { const x=sx(p.lon), y=sy(p.lat); g.moveTo(x+r+1,y); g.arc(x,y,r+1,0,TAU); }
   g.fill();
-  g.globalAlpha = 1; g.fillStyle = C.sak; g.beginPath();
-  for (const p of MAP.pts) if (fs.has(p.uuid)) { const x=sx(p.lon), y=sy(p.lat); g.moveTo(x+r+1,y); g.arc(x,y,r+1,0,6.2832); }
-  for (const p of S.favs) if (p.lat!=null && !MAP.pts.some(q=>q.uuid===p.uuid)) { const x=sx(p.lon), y=sy(p.lat); g.moveTo(x+r+1,y); g.arc(x,y,r+1,0,6.2832); }
-  g.fill();
-  // kişisel iz: son dinlenenler arasında ince bir çizgi, dinlenen her yer bir halka
+  drawTrail(g, p=>[sx(p.lon), sy(p.lat), true], r);
+  MAP.layer = L; MAP.layerKey = key; return L;
+}
+function drawTrail(g, proj, r){
   const trail = S.recents.filter(x=>x.lat!=null).slice(0,20).reverse();
   if (trail.length>1){
-    g.strokeStyle = C.sak; g.globalAlpha=.55; g.lineWidth=1; g.setLineDash([3,4]); g.beginPath();
-    trail.forEach((x,i)=> i ? g.lineTo(sx(x.lon),sy(x.lat)) : g.moveTo(sx(x.lon),sy(x.lat)));
+    g.strokeStyle = PAL.sak; g.globalAlpha=.55; g.lineWidth=1; g.setLineDash([3,4]); g.beginPath();
+    let pen=false;
+    for (const x of trail){ const [a,b,vis]=proj(x); if (!vis){ pen=false; continue; } pen ? g.lineTo(a,b) : g.moveTo(a,b); pen=true; }
     g.stroke(); g.setLineDash([]); g.globalAlpha=1;
   }
-  g.strokeStyle = C.sak; g.lineWidth=1.2;
-  for (const e of Object.values(LOG.st)) { const x=e.d; if (!x||x.lat==null) continue; g.globalAlpha=Math.min(.9,.3+e.s/3600); g.beginPath(); g.arc(sx(x.lon),sy(x.lat),r+3,0,6.2832); g.stroke(); }
+  g.strokeStyle = PAL.sak; g.lineWidth=1.2;
+  for (const e of Object.values(LOG.st)) { const x=e.d; if (!x||x.lat==null) continue; const [a,b,vis]=proj(x); if (!vis) continue; g.globalAlpha=Math.min(.9,.3+e.s/3600); g.beginPath(); g.arc(a,b,r+3,0,TAU); g.stroke(); }
   g.globalAlpha=1;
-  // hover
-  if (MAP.hover){ const x=sx(MAP.hover.lon), y=sy(MAP.hover.lat); g.strokeStyle=C.ink; g.lineWidth=1.2; g.beginPath(); g.arc(x,y,r+5,0,6.2832); g.stroke(); }
-  // me
-  if (MAP.me){ const x=sx(MAP.me.lon), y=sy(MAP.me.lat); g.fillStyle='#4a8fd0'; g.beginPath(); g.arc(x,y,4.5,0,6.2832); g.fill(); g.strokeStyle='#4a8fd0'; g.globalAlpha=.35; g.beginPath(); g.arc(x,y,11,0,6.2832); g.stroke(); g.globalAlpha=1; }
-  // now playing: radyo dalgası
+}
+function drawRings(g, x, y, r, ts){
+  g.fillStyle = PAL.acc; g.beginPath(); g.arc(x,y,r+2.5,0,TAU); g.fill();
+  if (S.state==='playing' || S.state==='loading'){
+    g.strokeStyle = PAL.acc; g.lineWidth=1.2;
+    for (let i=0;i<3;i++){ const ph=((ts/1800)+i/3)%1; g.globalAlpha=(1-ph)*.7; g.beginPath(); g.arc(x,y,4+ph*34,0,TAU); g.stroke(); }
+    g.globalAlpha = 1;
+  }
+}
+function drawOverlay(g, proj, r, ts){
+  if (MAP.hover){ const [x,y,v]=proj(MAP.hover); if (v){ g.strokeStyle=PAL.ink; g.lineWidth=1.2; g.beginPath(); g.arc(x,y,r+5,0,TAU); g.stroke(); } }
+  if (MAP.me){ const [x,y,v]=proj(MAP.me); if (v){ g.fillStyle='#4a8fd0'; g.beginPath(); g.arc(x,y,4.5,0,TAU); g.fill(); g.strokeStyle='#4a8fd0'; g.globalAlpha=.35; g.beginPath(); g.arc(x,y,11,0,TAU); g.stroke(); g.globalAlpha=1; } }
   const st = LIB.get(S.cur);
-  if (st && st.lat!=null){
-    const x=sx(st.lon), y=sy(st.lat);
-    g.fillStyle = C.acc; g.beginPath(); g.arc(x,y,r+2.5,0,6.2832); g.fill();
-    if (S.state==='playing' || S.state==='loading'){
-      for (let i=0;i<3;i++){
-        const ph = ((t/1800)+i/3)%1;
-        g.strokeStyle = C.acc; g.globalAlpha = (1-ph)*.7; g.lineWidth=1.2;
-        g.beginPath(); g.arc(x,y,4+ph*34,0,6.2832); g.stroke();
-      }
-      g.globalAlpha = 1;
+  if (st && st.lat!=null){ const [x,y,v]=proj(st); if (v) drawRings(g,x,y,r,ts); }
+  if (!MAP.loaded && MAP.loading){ g.fillStyle=PAL.ink3; g.font='11px "DM Mono", monospace'; g.textAlign='center'; g.fillText(t('map.loading'), MAP.w/2, MAP.h/2+ (MAP.globe?MAP.R+30:0)); }
+}
+function drawFlat(ts){
+  const g = cv.getContext('2d');
+  g.setTransform(1,0,0,1,0,0); g.clearRect(0,0,cv.width,cv.height);
+  g.drawImage(buildFlatLayer(),0,0);
+  g.setTransform(MAP.dpr,0,0,MAP.dpr,0,0);
+  drawOverlay(g, p=>[sx(p.lon), sy(p.lat), true], dotR(), ts);
+}
+
+/* --- küre: ortografik izdüşüm, önceden hesaplanmış sin/cos ile ~6.000 nokta < 2 ms --- */
+function globeProj(lat0, lon0, cx, cy, R){
+  const sp0=Math.sin(lat0*D2R), cp0=Math.cos(lat0*D2R), sl0=Math.sin(lon0*D2R), cl0=Math.cos(lon0*D2R);
+  const f = (sl,cl,sL,cL) => { const cd=cL*cl0+sL*sl0, sd=sL*cl0-cL*sl0; return [cx+R*cl*sd, cy-R*(cp0*sl-sp0*cl*cd), sp0*sl+cp0*cl*cd]; };
+  f.ll = (lat,lon) => f(Math.sin(lat*D2R),Math.cos(lat*D2R),Math.sin(lon*D2R),Math.cos(lon*D2R));
+  f.p = p => { const q = p.sl!==undefined ? f(p.sl,p.cl,p.sL,p.cL) : f.ll(p.lat,p.lon); return [q[0],q[1],q[2]>0,q[2]]; };
+  return f;
+}
+// globeProj sabitlerini noktalar için de dışa aç
+const _gp = globeProj;
+function globeProjX(lat0,lon0,cx,cy,R){ const f=_gp(lat0,lon0,cx,cy,R); f.sp0=Math.sin(lat0*D2R); f.cp0=Math.cos(lat0*D2R); f.sl0=Math.sin(lon0*D2R); f.cl0=Math.cos(lon0*D2R); return f; }
+function drawGlobeView(ts){
+  const g = cv.getContext('2d');
+  g.setTransform(MAP.dpr,0,0,MAP.dpr,0,0); g.clearRect(0,0,MAP.w,MAP.h);
+  const cx=gcx(), cy=gcy(), R=MAP.R;
+  const P = globeProjX(MAP.lat0, MAP.lon0, cx, cy, R);
+  const fs = favSet();
+  drawGlobeWith(g, P, {cx,cy,R,pal:PAL,pts:MAP.pts,favs:fs,ts});
+  const r = Math.max(1, Math.min(3.2, R/170));
+  g.fillStyle = PAL.sak; g.beginPath();
+  for (const f of S.favs) if (f.lat!=null){ const [x,y,v]=P.p(f); if (v){ g.moveTo(x+r+1,y); g.arc(x,y,r+1,0,TAU); } }
+  g.fill();
+  drawTrail(g, P.p, r);
+  drawOverlay(g, P.p, r, ts);
+  MAP.P = P;
+}
+function drawGlobeWith(g, P, o){ // drawGlobe'un hızlı projeksiyonlu sürümü
+  const {cx,cy,R,pal,pts,favs} = o;
+  const grd = g.createRadialGradient(cx-R*.35,cy-R*.4,R*.05,cx,cy,R);
+  grd.addColorStop(0, pal.dark ? '#26241f' : '#ffffff'); grd.addColorStop(1, pal.dark ? '#121110' : pal.bg2);
+  g.fillStyle=grd; g.beginPath(); g.arc(cx,cy,R,0,TAU); g.fill();
+  g.strokeStyle = pal.acc; g.globalAlpha=.22; g.lineWidth=1; g.beginPath(); g.arc(cx,cy,R+4,0,TAU); g.stroke(); g.globalAlpha=1;
+  g.strokeStyle = pal.line; g.lineWidth=1; g.beginPath();
+  for (let lon=-180; lon<180; lon+=30){ let pen=false; for (let lat=-80; lat<=80; lat+=5){ const q=P.ll(lat,lon); if (q[2]<=0){pen=false;continue;} pen?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]); pen=true; } }
+  for (let lat=-60; lat<=60; lat+=30){ let pen=false; for (let lon=-180; lon<=180; lon+=5){ const q=P.ll(lat,lon); if (q[2]<=0){pen=false;continue;} pen?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]); pen=true; } }
+  g.stroke();
+  const sp = sunPos(), s = P.ll(sp.lat, sp.lon), sz = s[2];
+  g.save(); g.translate(cx,cy); g.rotate(Math.atan2(s[1]-cy, s[0]-cx));
+  g.beginPath(); g.arc(0,0,R,-Math.PI/2,Math.PI/2,true);
+  const rx = Math.max(0.001, R*Math.abs(sz));
+  if (sz>0) g.ellipse(0,0,rx,R,0,Math.PI/2,Math.PI*1.5,false); else g.ellipse(0,0,rx,R,0,Math.PI/2,-Math.PI/2,true);
+  g.closePath(); g.fillStyle = pal.dark ? 'rgba(0,0,0,.45)' : 'rgba(40,40,70,.10)'; g.fill(); g.restore();
+  if (sz>0){ g.fillStyle=pal.acc; g.globalAlpha=.55; g.font=`${Math.round(R/18)+8}px serif`; g.textAlign='center'; g.textBaseline='middle'; g.fillText('☀', s[0], s[1]); g.globalAlpha=1; }
+  const r = Math.max(1, Math.min(3.2, R/170));
+  const {sp0,cp0,sl0,cl0} = P;
+  g.fillStyle = pal.acc;
+  for (const pass of [0,1]){
+    g.globalAlpha = pass ? .72 : .26; g.beginPath();
+    for (const p of pts){
+      if (favs && favs.has(p.uuid)) continue;
+      const cd=p.cL*cl0+p.sL*sl0, z=sp0*p.sl+cp0*p.cl*cd;
+      if (z<=0 || (pass ? z<0.3 : z>=0.3)) continue;
+      const x=cx+R*p.cl*(p.sL*cl0-p.cL*sl0), y=cy-R*(cp0*p.sl-sp0*p.cl*cd);
+      g.moveTo(x+r,y); g.arc(x,y,r,0,TAU);
     }
+    g.fill();
   }
-  if (!MAP.loaded){
-    g.fillStyle = C.ink3; g.font = '11px "DM Mono", monospace'; g.textAlign='center';
-    g.fillText(MAP.loading ? 'binlerce istasyon haritaya yerleşiyor…' : '', w/2, h/2);
-  }
+  g.globalAlpha=1;
 }
 function nearestPx(x, y, max=16){
   let best=null, bd=max*max;
+  if (MAP.globe) {
+    const P = MAP.P || globeProjX(MAP.lat0,MAP.lon0,gcx(),gcy(),MAP.R);
+    for (const p of MAP.pts){ const [a,b,v]=P.p(p); if (!v) continue; const dx=a-x, dy=b-y, d=dx*dx+dy*dy; if (d<bd){ bd=d; best=p; } }
+    return best;
+  }
   for (const p of MAP.pts){ const dx=sx(p.lon)-x, dy=sy(p.lat)-y, d=dx*dx+dy*dy; if (d<bd){ bd=d; best=p; } }
   return best;
 }
-const geoD = (a,b) => { const dl=(a.lon-b.lon)*Math.cos((a.lat+b.lat)/2*Math.PI/180); const dp=a.lat-b.lat; return dl*dl+dp*dp; };
+const geoD = (a,b) => { const dl=(a.lon-b.lon)*Math.cos((a.lat+b.lat)/2*D2R); const dp=a.lat-b.lat; return dl*dl+dp*dp; };
 function playNear(p, label){
-  const near = MAP.pts.filter(q=>q.lat!=null).map(q=>[geoD(p,q),q]).sort((a,b)=>a[0]-b[0]).slice(0,40).map(x=>x[1]);
-  if (!near.some(q=>q.uuid===p.uuid) && p.uuid) near.unshift(p);
+  const near = MAP.pts.map(q=>[geoD(p,q),q]).sort((a,b)=>a[0]-b[0]).slice(0,40).map(x=>x[1]);
+  if (p.uuid && !near.some(q=>q.uuid===p.uuid)) near.unshift(p);
   S.queue = near; S.queueCtx = 'map'; S.coll = null;
   play(near[0].uuid);
-  toast(label || `${flag(near[0].cc)} ${near[0].name} — ${near[0].country||near[0].cc}`);
+  toast(label || `${flag(near[0].cc)} ${near[0].name} — ${regionName(near[0].cc)}`);
+}
+function screenOf(p){ if (MAP.globe){ const P=MAP.P||globeProjX(MAP.lat0,MAP.lon0,gcx(),gcy(),MAP.R); const [x,y,v]=P.p(p); return v?[x,y]:null; } return [sx(p.lon), sy(p.lat)]; }
+function showTip(p){
+  const tip = $('#mapTip');
+  const pos = p && screenOf(p);
+  if (!pos){ tip.classList.remove('show'); return; }
+  const dl = dayLabel(p);
+  tip.innerHTML = `${flag(p.cc)} ${esc(p.name)}<small>${esc([p.state, regionName(p.cc)].filter(Boolean).join(', '))}${p.tags[0]?' · '+esc(p.tags[0]):''}${dl?' · '+esc(dl):''}</small>`;
+  tip.style.left = pos[0]+'px'; tip.style.top = pos[1]+'px'; tip.classList.add('show');
 }
 (function mapInput(){
-  const ptr = new Map(); let movedPx=0, pinchD=0;
+  const ptr = new Map(); let moved=0, pinchD=0;
   const pos = e => { const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; };
-  cv.addEventListener('pointerdown', e=>{ cv.setPointerCapture(e.pointerId); ptr.set(e.pointerId,pos(e)); movedPx=0; cv.classList.add('grabbing');
+  cv.addEventListener('pointerdown', e=>{ cv.setPointerCapture(e.pointerId); ptr.set(e.pointerId,pos(e)); moved=0; MAP.drag=true; MAP.spin=false; MAP.target=null; cv.classList.add('grabbing');
     if (ptr.size===2){ const [a,b]=[...ptr.values()]; pinchD=Math.hypot(a.x-b.x,a.y-b.y); } });
   cv.addEventListener('pointermove', e=>{
     const p = pos(e);
-    if (!ptr.has(e.pointerId)){
-      if (e.pointerType==='mouse'){ MAP.hover = nearestPx(p.x,p.y,12); showTip(MAP.hover); }
-      return;
-    }
+    if (!ptr.has(e.pointerId)){ if (e.pointerType==='mouse' && MAP.loaded){ const h=nearestPx(p.x,p.y,12); if (h!==MAP.hover){ MAP.hover=h; showTip(h); requestDraw(); } } return; }
     const prev = ptr.get(e.pointerId); ptr.set(e.pointerId,p);
-    if (ptr.size===1){ MAP.cx += p.x-prev.x; MAP.cy += p.y-prev.y; movedPx += Math.abs(p.x-prev.x)+Math.abs(p.y-prev.y); MAP.hover=null; showTip(null); }
-    else if (ptr.size===2){ const [a,b]=[...ptr.values()]; const d=Math.hypot(a.x-b.x,a.y-b.y); if (pinchD) zoomAt((a.x+b.x)/2,(a.y+b.y)/2,d/pinchD); pinchD=d; movedPx+=99; }
+    if (ptr.size===1){
+      const dx=p.x-prev.x, dy=p.y-prev.y; moved += Math.abs(dx)+Math.abs(dy);
+      if (MAP.globe){ MAP.lon0 -= dx/MAP.R/D2R; MAP.lat0 = Math.max(-80, Math.min(80, MAP.lat0 + dy/MAP.R/D2R)); }
+      else { MAP.cx += dx; MAP.cy += dy; }
+      if (MAP.hover){ MAP.hover=null; showTip(null); }
+      requestDraw();
+    } else if (ptr.size===2){ const [a,b]=[...ptr.values()]; const d=Math.hypot(a.x-b.x,a.y-b.y); if (pinchD) zoomAt((a.x+b.x)/2,(a.y+b.y)/2,d/pinchD); pinchD=d; moved+=99; }
   });
   const up = e=>{
     if (!ptr.has(e.pointerId)) return;
     const p = ptr.get(e.pointerId); ptr.delete(e.pointerId); cv.classList.remove('grabbing');
     if (ptr.size<2) pinchD=0;
-    if (e.type==='pointerup' && movedPx<6 && ptr.size===0){
+    if (!ptr.size) MAP.drag=false;
+    if (e.type==='pointerup' && moved<6 && ptr.size===0 && MAP.loaded){
       const hit = nearestPx(p.x,p.y, e.pointerType==='mouse'?12:22);
-      if (hit) playNear(hit); else zoomAt(p.x,p.y,1.8);
+      if (hit) { playNear(hit); if (MAP.globe) centerOn(hit.lat, hit.lon); }
+      else zoomAt(p.x,p.y,1.6);
     }
+    requestDraw();
   };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
-  cv.addEventListener('pointerleave', ()=>{ MAP.hover=null; showTip(null); });
+  cv.addEventListener('pointerleave', ()=>{ if (MAP.hover){ MAP.hover=null; showTip(null); requestDraw(); } });
   cv.addEventListener('wheel', e=>{ e.preventDefault(); const p=pos(e); zoomAt(p.x,p.y,Math.exp(-e.deltaY*0.0016)); }, {passive:false});
-  cv.addEventListener('dblclick', e=>{ const p=pos(e); zoomAt(p.x,p.y,2); });
-  window.addEventListener('resize', ()=>{ if (MAP.active) resizeMap(); });
-  document.addEventListener('visibilitychange', ()=>{ if (MAP.active && !document.hidden) loop(); });
+  let rz; window.addEventListener('resize', ()=>{ clearTimeout(rz); rz=setTimeout(()=>{ if (MAP.active) resizeMap(); }, 120); });
 })();
-function showTip(p){
-  const tip = $('#mapTip');
-  if (!p){ tip.classList.remove('show'); return; }
-  tip.innerHTML = `${flag(p.cc)} ${esc(p.name)}<small>${esc(p.country||p.cc)}${p.tags[0]?' · '+esc(p.tags[0]):''} · ${esc(dayLabel(p).replace(' orada',''))}</small>`;
-  tip.style.left = sx(p.lon)+'px'; tip.style.top = sy(p.lat)+'px'; tip.classList.add('show');
-}
 function nearMe(){
-  if (!navigator.geolocation){ toast('konum desteklenmiyor'); return; }
-  toast('📍 konum alınıyor…');
+  if (!navigator.geolocation){ toast(t('t.noGeo')); return; }
+  toast(t('t.locating'));
   navigator.geolocation.getCurrentPosition(async pos=>{
     const me = {lat:pos.coords.latitude, lon:pos.coords.longitude};
     MAP.me = me;
     if (!$('#view-map').classList.contains('active')) switchView('map');
     await loadMapData();
-    if (!MAP.pts.length){ toast('harita verisi yok'); return; }
-    centerOn(me.lat, me.lon, 14);
-    playNear(me, '📍 sana en yakın istasyonlar çalıyor — ⏭ ile komşulara geç');
-  }, ()=>toast('konum izni verilmedi'), {timeout:10000, maximumAge:600000});
+    if (!MAP.pts.length){ toast(t('t.noMap')); return; }
+    centerOn(me.lat, me.lon, MAP.globe?2.5:14);
+    playNear(me, t('t.near'));
+  }, ()=>toast(t('t.geoDenied')), {timeout:10000, maximumAge:600000});
 }
 
 /* ---------- dünya turu ---------- */
@@ -1359,114 +1659,256 @@ function toggleTour(){
   TOUR.on = !TOUR.on;
   $$('.tour-btn').forEach(b=>b.classList.toggle('active', TOUR.on));
   clearInterval(TOUR.iv);
-  if (TOUR.on){
-    toast(`🌍 dünya turu başladı — her ${TOUR.every} dakikada başka bir ülke`);
-    tourHop();
-    TOUR.iv = setInterval(()=>{ if (S.state==='playing') tourHop(); }, TOUR.every*60000);
-  } else toast('🌍 dünya turu bitti');
+  if (TOUR.on){ toast(t('t.tourOn',{n:TOUR.every})); tourHop(); TOUR.iv = setInterval(()=>{ if (S.state==='playing') tourHop(); }, TOUR.every*60000); }
+  else toast(t('t.tourOff'));
 }
 async function tourHop(){
   const curCC = LIB.get(S.cur)?.cc;
-  let pool;
-  if (MAP.loaded) pool = MAP.pts.filter(p=>p.cc && p.cc!==curCC && !S.bad.has(p.uuid));
-  else pool = normList(await search('order=random', 60), S.bad).filter(p=>p.cc && p.cc!==curCC);
+  let pool = MAP.loaded ? MAP.pts.filter(p=>p.cc && p.cc!==curCC && !S.bad.has(p.uuid)) : normList(await search('order=random', 60), S.bad).filter(p=>p.cc && p.cc!==curCC);
   if (!pool.length){ zap(); return; }
-  // önce ülke seç, sonra istasyon: küçük ülkeler de eşit şans alır
   const byCC = {}; for (const p of pool) (byCC[p.cc] ||= []).push(p);
   const cc = pick(Object.keys(byCC)); const st = pick(byCC[cc]);
-  const sameLand = byCC[cc].filter(x=>x.uuid!==st.uuid);
-  S.queue = [st, ...shuffle(sameLand).slice(0,10)]; S.queueCtx='tour'; S.coll=null;
+  S.queue = [st, ...shuffle(byCC[cc].filter(x=>x.uuid!==st.uuid)).slice(0,10)]; S.queueCtx='tour'; S.coll=null;
   play(st.uuid);
-  toast(`🌍 ${flag(st.cc)} ${st.country||st.cc} — ${st.name}`);
+  toast(`🌍 ${flag(st.cc)} ${regionName(st.cc)} — ${st.name}`);
   if (MAP.active && st.lat!=null) centerOn(st.lat, st.lon, 3);
 }
 
-/* ---------- radyolu çalar saat ---------- */
-function openAlarm(){
-  const a = LS.get('alarm', null);
-  if (a) { $('#alarmTime').value = a.time; $('#alarmSrc').value = a.src; }
-  $('#alarmModal').classList.add('show');
-}
+/* ---------- çalar saat ---------- */
+function openAlarm(){ const a = LS.get('alarm', null); if (a) { $('#alarmTime').value = a.time; $('#alarmSrc').value = a.src; } $('#alarmModal').classList.add('show'); }
 function setAlarm(){
   const time = $('#alarmTime').value; if (!time) return;
-  const src = $('#alarmSrc').value;
   const cur = LIB.get(S.cur) || LS.get('last', null);
-  LS.set('alarm', {time, src, st: cur ? slim(cur) : null, fired:''});
-  $('#alarmModal').classList.remove('show'); updateAlarmBtn();
-  toast(`⏰ ${time}’de radyo seni uyandıracak`);
+  LS.set('alarm', {time, src:$('#alarmSrc').value, st: cur ? slim(cur) : null, fired:''});
+  $('#alarmModal').classList.remove('show'); updateAlarmBtn(); toast(t('t.alarmSet',{t:time}));
 }
-function updateAlarmBtn(){
-  const a = LS.get('alarm', null), b = $('#alarmBtn');
-  b.textContent = a ? '⏰ '+a.time : '⏰'; b.classList.toggle('active', !!a);
-}
+function updateAlarmBtn(){ const a = LS.get('alarm', null), b = $('#alarmBtn'); b.textContent = a ? '⏰ '+a.time : '⏰'; b.classList.toggle('active', !!a); }
 async function fireAlarm(a){
   const target = LS.get('vol', 0.7);
   audio.volume = 0.02;
   if (a.src==='zap') await zap();
   else if (a.src==='kafe') await loadColl('mode','kafe');
   else {
-    const st = a.src==='fav' && S.favs.length ? pick(S.favs) : (a.st || LS.get('last',null) || (S.favs[0]));
+    const st = a.src==='fav' && S.favs.length ? pick(S.favs) : (a.st || LS.get('last',null) || S.favs[0]);
     if (st) { LIB.set(st.uuid, st); S.queue=[st, ...S.favs.filter(f=>f.uuid!==st.uuid)]; S.queueCtx='alarm'; play(st.uuid); } else await zap();
   }
   let i=0; const ramp=setInterval(()=>{ i++; audio.volume=Math.min(target, 0.02+target*i/60); if (i>=60) clearInterval(ramp); }, 1000);
-  toast('⏰ günaydın ☀');
+  toast(t('t.morning'));
 }
 setInterval(()=>{
   const a = LS.get('alarm', null); if (!a) return;
   const now = new Date(), hm = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  const day = now.toDateString();
-  if (hm===a.time && a.fired!==day){ a.fired=day; LS.set('alarm',a); fireAlarm(a); }
+  if (hm===a.time && a.fired!==now.toDateString()){ a.fired=now.toDateString(); LS.set('alarm',a); fireAlarm(a); }
 }, 10000);
+
+/* =========================================================
+   KARTPOSTAL — istasyonun yerel gün ışığına göre renklenir
+   ========================================================= */
+let pcBlob=null, pcName='';
+function wrapLines(g, text, maxW, maxLines){
+  const words = text.split(' '), lines=[]; let line='';
+  for (const w of words){
+    const test = line ? line+' '+w : w;
+    if (g.measureText(test).width>maxW && line){ lines.push(line); line=w; if (lines.length===maxLines) break; }
+    else line = test;
+  }
+  if (lines.length<maxLines && line) lines.push(line);
+  if (lines.length===maxLines && words.join(' ')!==lines.join(' ')){ let l=lines[maxLines-1]; while (g.measureText(l+'…').width>maxW && l.length>1) l=l.slice(0,-1); lines[maxLines-1]=l.replace(/\s+$/,'')+'…'; }
+  return lines;
+}
+async function makePostcard(){
+  const st = LIB.get(S.cur); if (!st) { toast(t('t.playFirst')); return; }
+  $('#pcBody').innerHTML = `<div class="pc-wait"><div class="spin"></div><div>${esc(t('pc.making'))}</div></div>`;
+  $('#pcModal').classList.add('show');
+  loadMapData().catch(()=>{});
+  try { await Promise.race([Promise.all([document.fonts.load('300 72px "Noto Serif JP"'), document.fonts.load('400 26px "DM Mono"')]), new Promise(r=>setTimeout(r,1500))]); } catch(e){}
+  const W=1080, H=1350, c=document.createElement('canvas'); c.width=W; c.height=H; const g=c.getContext('2d');
+  const kind = dayKind(st) || 'day';
+  const night = kind==='night';
+  const pal = night
+    ? {dark:true, bg:'#100f0e', bg2:'#1b1a17', ink:'#efebe2', ink2:'#9a958a', ink3:'#5d5a54', line:'#2c2a26', acc:'#c8a96e', sak:'#c47a8a'}
+    : kind==='day'
+    ? {dark:false, bg:'#f7f4ec', bg2:'#ebe6da', ink:'#1a1915', ink2:'#6b6860', ink3:'#aba89f', line:'#ddd8cc', acc:'#b8935a', sak:'#d998a8'}
+    : {dark:false, bg:'#f6e9df', bg2:'#ecd6c8', ink:'#2a1d18', ink2:'#7a5f55', ink3:'#b39a8e', line:'#e3cbbd', acc:'#c07a4e', sak:'#d48a98'};
+  g.fillStyle = pal.bg; g.fillRect(0,0,W,H);
+  // ince çerçeve
+  g.strokeStyle = pal.line; g.lineWidth = 2; g.strokeRect(36,36,W-72,H-72);
+  // küre: istasyonun üzerinde
+  const lat0 = st.lat!=null ? Math.max(-60,Math.min(60,st.lat)) : 25, lon0 = st.lon!=null ? st.lon : 20;
+  const cx=W/2, cy=450, R=330;
+  const P = globeProjX(lat0, lon0, cx, cy, R);
+  drawGlobeWith(g, P, {cx,cy,R,pal,pts:MAP.pts,favs:null});
+  if (st.lat!=null){
+    const [x,y,v] = P.p(st);
+    if (v){
+      g.strokeStyle=pal.acc; g.lineWidth=2.5;
+      for (let i=0;i<3;i++){ g.globalAlpha=.75-i*.22; g.beginPath(); g.arc(x,y,16+i*22,0,TAU); g.stroke(); }
+      g.globalAlpha=1; g.fillStyle=pal.acc; g.beginPath(); g.arc(x,y,9,0,TAU); g.fill();
+    }
+  }
+  // metin
+  g.textAlign='left'; g.textBaseline='alphabetic';
+  let y = 870;
+  g.fillStyle = pal.acc; g.font = '400 24px "DM Mono", monospace';
+  g.fillText(t('pc.now').split('').join(String.fromCharCode(8202)), 90, y);
+  y += 78;
+  g.fillStyle = pal.ink; g.font = '300 72px "Noto Serif JP", serif';
+  const lines = wrapLines(g, st.name, W-180, 2);
+  for (const l of lines){ g.fillText(l, 90, y); y += 84; }
+  y += 6;
+  g.font = '400 30px "DM Mono", monospace'; g.fillStyle = pal.ink2;
+  const place = [st.state, regionName(st.cc)].filter(Boolean).join(', ');
+  g.font = '34px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+  const fl = flag(st.cc); let x0 = 90;
+  if (fl){ g.fillText(fl, x0, y); x0 += 56; }
+  g.font = '400 30px "DM Mono", monospace'; g.fillText(place || '—', x0, y);
+  y += 50;
+  const dl = dayLabel(st); const extra = [dl, st.tags.slice(0,2).join(' · ')].filter(Boolean).join('   ·   ');
+  g.fillStyle = pal.ink3; g.font = '400 26px "DM Mono", monospace'; if (extra) g.fillText(extra, 90, y);
+  // alt bilgi
+  g.strokeStyle = pal.line; g.lineWidth=2; g.beginPath(); g.moveTo(90,1185); g.lineTo(W-90,1185); g.stroke();
+  g.fillStyle = pal.ink; g.font = '300 46px "Noto Serif JP", serif'; g.fillText('rad', 90, 1262);
+  let w1 = g.measureText('rad').width; g.fillStyle = pal.acc; g.fillText('—', 90+w1, 1262);
+  let w2 = g.measureText('—').width; g.fillStyle = pal.ink; g.fillText('io', 90+w1+w2, 1262);
+  g.textAlign='right'; g.fillStyle = pal.ink2; g.font = '400 24px "DM Mono", monospace';
+  g.fillText(t('slogan'), W-90, 1236);
+  g.fillStyle = pal.acc; g.fillText(((location.host||'hechecik.github.io') + (location.pathname||'/rad-io/')).replace(/index\.html$/,''), W-90, 1272);
+  pcName = 'rad-io-' + (st.name.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-|-$/g,'').slice(0,40) || 'radio') + '.png';
+  pcBlob = await new Promise(r=>c.toBlob(r,'image/png'));
+  if (!pcBlob){ $('#pcModal').classList.remove('show'); return; }
+  const url = URL.createObjectURL(pcBlob);
+  $('#pcBody').innerHTML = `<img class="pc-img" src="${url}" alt="${esc(st.name)}">`;
+}
+function pcDownload(){ if (!pcBlob) return; const a=document.createElement('a'); a.href=URL.createObjectURL(pcBlob); a.download=pcName; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),3000); }
+async function pcShare(){
+  if (!pcBlob) return;
+  const st = LIB.get(S.cur), file = new File([pcBlob], pcName, {type:'image/png'});
+  try {
+    if (navigator.canShare && navigator.canShare({files:[file]})) { await navigator.share({files:[file], text: st ? t('t.shareText',{name:st.name})+' '+stationUrl(st) : ''}); return; }
+  } catch(e){ if (e.name==='AbortError') return; }
+  pcDownload();
+}
+
+/* =========================================================
+   ARAÇ MODU — büyük dokunmatik hedefler, ekran açık kalır,
+   kaydırarak istasyon değiştir, tünelde otomatik yeniden bağlan
+   ========================================================= */
+let wakeLock=null;
+async function wake(on){
+  try {
+    if (on && 'wakeLock' in navigator && !wakeLock) { wakeLock = await navigator.wakeLock.request('screen'); wakeLock.addEventListener('release', ()=>{ wakeLock=null; }); }
+    else if (!on && wakeLock) { await wakeLock.release(); wakeLock=null; }
+  } catch(e){}
+}
+function carOpen(){ return !$('#car').hidden; }
+function openCar(){
+  $('#car').hidden = false; document.body.style.overflow='hidden';
+  wake(true); updateCar(); carClock();
+  try { if (innerWidth<1000 && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen({navigationUI:'hide'}).catch(()=>{}); } catch(e){}
+  if (!LS.get('carHint',false)) { toast(t('t.carHint')); LS.set('carHint',true); }
+}
+function closeCar(){ $('#car').hidden = true; wake(false); try { if (document.fullscreenElement) document.exitFullscreen(); } catch(e){} }
+function carClock(){ const d=new Date(); $('#carClock').textContent = String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
+setInterval(()=>{ if (carOpen()) carClock(); }, 10000);
+document.addEventListener('visibilitychange', ()=>{ if (!document.hidden && carOpen()) wake(true); });
+function updateCar(){
+  if (!carOpen()) return;
+  const st = LIB.get(S.cur);
+  $('#carFlag').textContent = st ? (flag(st.cc)||'📻') : '📻';
+  $('#carName').textContent = st ? st.name : 'rad—io';
+  $('#carSub').textContent = st ? [regionName(st.cc), st.tags[0], dayLabel(st)].filter(Boolean).join(' · ') : t('slogan');
+  $('#carState').textContent = st ? kickerText() : '';
+  const net = $('#carNet'); net.textContent = navigator.onLine ? '' : '● offline'; net.classList.toggle('off', !navigator.onLine);
+  const tiles = [...S.favs, ...S.recents.filter(r=>!isFav(r.uuid))].slice(0,10);
+  $('#carFavs').innerHTML = tiles.map(s=>`<button class="car-fav${s.uuid===S.cur?' on':''}" data-act="play-uid" data-ctx="${isFav(s.uuid)?'fav':'rec'}" data-uid="${esc(s.uuid)}"><span>${flag(s.cc)||'♪'}</span><span>${esc(s.name)}</span></button>`).join('');
+}
+(function carSwipe(){
+  let x0=null, y0=0;
+  const m = $('#carMain');
+  m.addEventListener('pointerdown', e=>{ x0=e.clientX; y0=e.clientY; });
+  m.addEventListener('pointerup', e=>{ if (x0==null) return; const dx=e.clientX-x0, dy=e.clientY-y0; x0=null; if (Math.abs(dx)>70 && Math.abs(dx)>Math.abs(dy)*1.5) step(dx<0?1:-1); });
+})();
+
+/* ---------- cast / AirPlay ---------- */
+(function cast(){
+  const b = $('#castBtn');
+  if (window.WebKitPlaybackTargetAvailabilityEvent) {
+    audio.addEventListener('webkitplaybacktargetavailabilitychanged', e=>{ b.hidden = e.availability!=='available'; });
+  } else if (audio.remote && audio.remote.watchAvailability) {
+    audio.remote.watchAvailability(a=>{ b.hidden=!a; }).catch(()=>{ b.hidden=true; });
+  }
+})();
+function doCast(){
+  try {
+    if (audio.webkitShowPlaybackTargetPicker) audio.webkitShowPlaybackTargetPicker();
+    else if (audio.remote) { if (!audio.src) { toast(t('t.playFirst')); return; } audio.remote.prompt().catch(()=>{}); }
+  } catch(e){}
+}
+
+/* ---------- install / sw ---------- */
+let installEvt = null;
+window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); installEvt=e; $('#installBtn').hidden=false; });
+window.addEventListener('appinstalled', ()=>{ $('#installBtn').hidden=true; toast(t('t.installed')); });
+async function installApp(){ if (!installEvt) return; installEvt.prompt(); await installEvt.userChoice.catch(()=>{}); installEvt=null; $('#installBtn').hidden=true; }
+if ('serviceWorker' in navigator && location.protocol==='https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 
 /* ---------- events ---------- */
 document.addEventListener('click', e=>{
   const a = e.target.closest('[data-act]');
   if (a) {
-    const act=a.dataset.act;
-    switch(act){
-      case 'view': switchView(a.dataset.v); return;
+    const d = a.dataset;
+    switch(d.act){
+      case 'view': switchView(d.v); return;
       case 'theme': toggleTheme(); return;
+      case 'lang': toggleLang(); return;
       case 'home': switchView('stations'); return;
-      case 'coll': loadColl(a.dataset.type, a.dataset.key); return;
+      case 'coll': loadColl(d.type, d.key); return;
       case 'refresh': refreshColl(); return;
       case 'play': playPause(); return;
       case 'next': step(1); return;
       case 'prev': step(-1); return;
       case 'zap': zap(); return;
       case 'fav': { const c=a.closest('[data-uid]'); if (c) toggleFav(c.dataset.uid); return; }
-      case 'fav-cur': if (S.cur) toggleFav(S.cur); else toast('önce bir istasyon çal'); return;
-      case 'play-uid': playFrom(a.dataset.ctx, a.dataset.uid); return;
+      case 'fav-cur': if (S.cur) toggleFav(S.cur); else toast(t('t.playFirst')); return;
+      case 'play-uid': playFrom(d.ctx, d.uid); return;
       case 'share': share(); return;
       case 'sleep': cycleSleep(); return;
       case 'mute': toggleMute(); return;
-      case 'static': S.staticFx=!S.staticFx; LS.set('static',S.staticFx); $('#staticBtn').classList.toggle('active',S.staticFx); toast(S.staticFx?'∿ parazit efekti açık':'∿ parazit efekti kapalı'); return;
+      case 'static': S.staticFx=!S.staticFx; LS.set('static',S.staticFx); $('#staticBtn').classList.toggle('active',S.staticFx); toast(t(S.staticFx?'t.staticOn':'t.staticOff')); return;
       case 'help': $('#helpModal').classList.add('show'); return;
       case 'close-modal': if (e.target===a) a.classList.remove('show'); return;
-      case 'tour': toggleTour(); return;
-      case 'share-log': shareLog(); return;
-      case 'similar': similar(); return;
-      case 'install': installApp(); return;
-      case 'play-log': { const e=LOG.st[a.dataset.uid]; if (e&&e.d){ LIB.set(e.d.uuid,e.d); S.queue=Object.values(LOG.st).filter(x=>x.d).sort((x,y)=>y.s-x.s).map(x=>{LIB.set(x.d.uuid,x.d);return x.d;}); S.queueCtx='log'; play(e.d.uuid);} return; }
-      case 'near': nearMe(); return;
-      case 'map-center': { const st=LIB.get(S.cur); if (st && st.lat!=null) centerOn(st.lat,st.lon,6); else toast('çalan istasyonun konumu yok'); return; }
-      case 'map-reset': fitMap(); return;
-      case 'zoom-in': zoomAt(MAP.w/2,MAP.h/2,1.6); return;
-      case 'zoom-out': zoomAt(MAP.w/2,MAP.h/2,1/1.6); return;
-      case 'alarm': openAlarm(); return;
-      case 'alarm-set': setAlarm(); return;
-      case 'alarm-off': LS.set('alarm',null); updateAlarmBtn(); $('#alarmModal').classList.remove('show'); toast('⏰ alarm kapalı'); return;
-      case 'disc': $$('.chip').forEach(c=>c.classList.toggle('active', c===a)); discover(a.dataset.q, a.dataset.l); return;
+      case 'disc': $$('.chip').forEach(c=>c.classList.toggle('active', c===a)); discover(d.q, d.l); return;
       case 'disc-more': discMore(); return;
       case 'export': exportFavs(); return;
       case 'import': $('#importIn').click(); return;
-      case 'clear-recent': S.recents=[]; LS.set('recents',[]); renderSideLib(); renderLibrary(); return;
+      case 'clear-recent': S.recents=[]; LS.set('recents',[]); DATA_VER++; renderSideLib(); renderLibrary(); return;
+      case 'tour': toggleTour(); return;
+      case 'near': nearMe(); return;
+      case 'map-mode': setMapMode(d.m==='globe'); return;
+      case 'map-center': { const st=LIB.get(S.cur); if (st && st.lat!=null) centerOn(st.lat,st.lon,MAP.globe?0:6); else toast(t('t.noPos')); return; }
+      case 'map-reset': if (MAP.globe){ MAP.R=MAP.R0; MAP.lat0=25; requestDraw(); } else fitMap(); return;
+      case 'zoom-in': zoomAt(MAP.globe?gcx():MAP.w/2, MAP.globe?gcy():MAP.h/2, 1.6); return;
+      case 'zoom-out': zoomAt(MAP.globe?gcx():MAP.w/2, MAP.globe?gcy():MAP.h/2, 1/1.6); return;
+      case 'alarm': openAlarm(); return;
+      case 'alarm-set': setAlarm(); return;
+      case 'alarm-off': LS.set('alarm',null); updateAlarmBtn(); $('#alarmModal').classList.remove('show'); toast(t('t.alarmOff')); return;
+      case 'share-log': shareLog(); return;
+      case 'similar': similar(); return;
+      case 'install': installApp(); return;
+      case 'postcard': makePostcard(); return;
+      case 'pc-download': pcDownload(); return;
+      case 'pc-share': pcShare(); return;
+      case 'car': openCar(); return;
+      case 'car-exit': closeCar(); return;
+      case 'cast': doCast(); return;
+      case 'play-log': { const en=LOG.st[d.uid]; if (en&&en.d){ S.queue=Object.values(LOG.st).filter(x=>x.d).sort((x,y)=>y.s-x.s).map(x=>{ if(!LIB.has(x.d.uuid)) LIB.set(x.d.uuid,x.d); return LIB.get(x.d.uuid); }); S.queueCtx='log'; play(en.d.uuid);} return; }
     }
   }
   const c = e.target.closest('.st-card');
   if (c) playFrom(c.dataset.ctx, c.dataset.uid);
 });
 document.addEventListener('keydown', e=>{
-  if (e.target.closest('input,textarea')) { if (e.key==='Escape') e.target.blur(); return; }
+  if (e.target.closest('input,textarea,select')) { if (e.key==='Escape') e.target.blur(); return; }
   if (e.key==='Enter' && e.target.classList?.contains('st-card')) { e.target.click(); return; }
   if (e.metaKey||e.ctrlKey||e.altKey) return;
   const k=e.key.toLowerCase();
@@ -1478,6 +1920,8 @@ document.addEventListener('keydown', e=>{
   else if (k==='r') zap();
   else if (k==='g') switchView('map');
   else if (k==='w') toggleTour();
+  else if (k==='c') carOpen() ? closeCar() : openCar();
+  else if (k==='p') makePostcard();
   else if (k==='f') { if (S.cur) toggleFav(S.cur); }
   else if (k==='m') toggleMute();
   else if (k==='t') toggleTheme();
@@ -1485,14 +1929,15 @@ document.addEventListener('keydown', e=>{
   else if (k==='l') switchView('library');
   else if (k==='q') switchView('queue');
   else if (e.key==='/') { e.preventDefault(); switchView('discover'); $('#searchIn').focus(); }
-  else if (e.key==='?' || (e.shiftKey && e.code==='Slash')) $('#helpModal').classList.toggle('show');
-  else if (e.key==='Escape') $$('.modal').forEach(m=>m.classList.remove('show'));
+  else if (e.key==='?') $('#helpModal').classList.toggle('show');
+  else if (e.key==='Escape') { $$('.modal').forEach(m=>m.classList.remove('show')); if (carOpen()) closeCar(); }
 });
 ['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev, ensureCtx, {once:true, passive:true}));
 $('#volSlider').addEventListener('input', e=>setVol(parseFloat(e.target.value)));
 $('#searchForm').addEventListener('submit', e=>{
-  e.preventDefault(); const q=$('#searchIn').value.trim(); if (!q){ toast('arama terimi gir'); return; }
+  e.preventDefault(); const q=$('#searchIn').value.trim(); if (!q){ toast(t('t.searchEmpty')); return; }
   $$('.chip').forEach(c=>c.classList.remove('active'));
+  $('#searchIn').blur();
   discover('__search:'+q, `“${q}”`);
 });
 $('#importIn').addEventListener('change', e=>{ const f=e.target.files[0]; if (f) importFavs(f); e.target.value=''; });
@@ -1502,7 +1947,7 @@ window.addEventListener('hashchange', ()=>{ const m=location.hash.match(/s=([\w-
 async function openShared(uuid){
   let st = LIB.get(uuid);
   if (!st) { const d = await api(`/json/stations/byuuid/${encodeURIComponent(uuid)}`); st = normList(d)[0]; }
-  if (!st) { toast('paylaşılan istasyon bulunamadı'); return false; }
+  if (!st) { toast(t('t.shared404')); return false; }
   S.queue=[st]; S.queueCtx='shared';
   play(st.uuid); toast(`🔗 ${st.name}`);
   return true;
@@ -1515,18 +1960,14 @@ function timeMode(){
   return pick(set);
 }
 (async function init(){
-  buildSidebar(); buildDiscover(); renderSideLib(); setVol(audio.volume); updateAlarmBtn();
+  applyLang(); setVol(audio.volume); updateAlarmBtn();
   $('#staticBtn').classList.toggle('active', S.staticFx);
   loadStats();
   const m = location.hash.match(/s=([\w-]+)/);
   if (m && await openShared(m[1])) { loadColl('mode', timeMode(), {autoplay:false}); return; }
-  // her açılışta farklı: günün saatine göre rastgele bir mod + o moddan rastgele istasyon
   await loadColl('mode', timeMode());
   const last = LS.get('last', null);
-  if (last && last.uuid !== S.cur) {
-    LIB.set(last.uuid, last);
-    setTimeout(()=>toast(`↩ en son: ${last.name} — kitaplıkta`), 3200);
-  }
+  if (last && last.uuid !== S.cur) { if (!LIB.has(last.uuid)) LIB.set(last.uuid, last); setTimeout(()=>toast(t('t.last',{name:last.name})), 3200); }
 })();
 </script>
 </body>
